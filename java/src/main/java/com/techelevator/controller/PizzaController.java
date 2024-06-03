@@ -1,6 +1,7 @@
 package com.techelevator.controller;
 
 import com.techelevator.model.Pizza;
+import com.techelevator.model.Topping;
 import com.techelevator.service.PizzaService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,5 +19,10 @@ public class PizzaController {
     @GetMapping(path = "/pizzas")
     public List<Pizza> listPizzas() {
         return pizzaService.listPizzas();
+    }
+
+    @GetMapping(path = "/toppings")
+    public List<Topping> listToppings() {
+        return pizzaService.listToppings();
     }
 }
