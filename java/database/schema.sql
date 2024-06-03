@@ -44,13 +44,13 @@ CREATE TABLE crusts (
 	type_price_modifier NUMERIC(3, 2),
 	CONSTRAINT PK_crust_type PRIMARY KEY (crust_type)
 );
-CREATE TYPE sauce_type_t AS ENUM ('Tomato', 'Pesto', 'Alfredo', 'BBQ')
+CREATE TYPE sauce_type_t AS ENUM ('Tomato', 'Pesto', 'Alfredo', 'BBQ');
 CREATE TABLE specialty_pizzas (
 	pizza_id SERIAL,
 	pizza_name varchar(50) NOT NULL,
 	pizza_size varchar(50),
 	crust_type varchar(50),
-	sauce_type sauce_type_t DEFAULT 'Tomato';
+	sauce_type sauce_type_t DEFAULT 'Tomato',
 	CONSTRAINT PK_pizza_id PRIMARY KEY (pizza_id)	
 );
 CREATE TABLE specialty_toppings (
