@@ -1,10 +1,9 @@
 <template>
-  <NavBar />
-  <div class="home">
-    <h1>Home</h1>
-    <p>You are authenticated if you see this.</p>
-  </div>
+    <NavBar />
 </template>
+
+
+
 
 <script>
 import NavBar from '../components/NavBar.vue'
@@ -14,5 +13,9 @@ export default {
     NavBar
   }
 }
-
 </script>
+
+
+
+
+<style></style>

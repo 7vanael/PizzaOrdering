@@ -3,6 +3,7 @@ import CapstoneApp from './App.vue'
 import { createStore } from './store'
 import router from './router'
 import axios from 'axios'
+import NavBar from './components/NavBar.vue'
 
 
 /* sets the base url for server API communication with axios */
@@ -26,6 +27,7 @@ if (currentToken) {
 const store = createStore(currentToken, currentUser);
 
 const app = createApp(CapstoneApp);
+app.component('nav-bar', NavBar);
 app.use(store);
 app.use(router);
 app.mount('#app');
