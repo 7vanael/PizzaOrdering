@@ -6,7 +6,6 @@ import HomeView from '../views/HomeView.vue';
 import LoginView from '../views/LoginView.vue';
 import LogoutView from '../views/LogoutView.vue';
 import RegisterView from '../views/RegisterView.vue';
-import NavBarView from '../views/NavBarView.vue';
 
 
 /**
@@ -50,14 +49,6 @@ const routes = [
       requiresAuth: false
     }
   },
-  {
-    path: "/navbar",
-    name: "navbar",
-    component: NavBarView,
-    meta: {
-      requiresAuth: false
-    }
-  }
 ];
 
 // Create the router
