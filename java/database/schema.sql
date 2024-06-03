@@ -11,6 +11,7 @@ DROP TABLE IF EXISTS orders;
 DROP TYPE IF EXISTS pizza_sizes_t;
 DROP TYPE IF EXISTS order_status_t;
 DROP TYPE IF EXISTS order_type_t;
+DROP TYPE IF EXISTS sauce_type_t;
 
 CREATE TABLE users (
 	user_id SERIAL,
@@ -22,7 +23,7 @@ CREATE TABLE users (
 CREATE TABLE topping_tiers (
 	topping_tier int NOT NULL UNIQUE DEFAULT 0,
 	tier_description varchar(50),
-	tier_price_modifyer NUMERIC(5, 2),
+	tier_price_modifier NUMERIC(5, 2),
 	CONSTRAINT PK_topping_tier PRIMARY KEY (topping_tier)
 );
 CREATE TABLE toppings (
@@ -40,15 +41,16 @@ CREATE TABLE pizza_sizes (
 );
 CREATE TABLE crusts (
 	crust_type varchar(50) NOT NULL UNIQUE DEFAULT 'Regular',
-	type_price_modifyer NUMERIC(3, 2),
+	type_price_modifier NUMERIC(3, 2),
 	CONSTRAINT PK_crust_type PRIMARY KEY (crust_type)
 );
+CREATE TYPE sauce_type_t AS ENUM ('Tomato', 'Pesto', 'Alfredo', 'BBQ')
 CREATE TABLE specialty_pizzas (
 	pizza_id SERIAL,
 	pizza_name varchar(50) NOT NULL,
 	pizza_size varchar(50),
 	crust_type varchar(50),
-	specialty_toippings varchar(50),
+	sauce_type sauce_type_t DEFAULT 'Tomato';
 	CONSTRAINT PK_pizza_id PRIMARY KEY (pizza_id)	
 );
 CREATE TABLE specialty_toppings (
@@ -59,11 +61,11 @@ CREATE TABLE specialty_toppings (
 	CONSTRAINT FK_pizza_topping FOREIGN KEY(topping) REFERENCES toppings (topping)
 );
 CREATE TYPE order_type_t AS ENUM ('Pick-up', 'Delivery');
-CREATE TYPE order_status_t AS ENUM ('Recieved', 'Ready', 'Out for Delivery', 'Completed', 'Canceled');
+CREATE TYPE order_status_t AS ENUM ('Received', 'Ready', 'Out for Delivery', 'Completed', 'Canceled');
 CREATE TABLE orders (
 	order_id SERIAL,
 	order_total NUMERIC(6, 2),
-	order_status order_status_t DEFAULT 'Recieved',
+	order_status order_status_t DEFAULT 'Received',
 	order_type order_type_t DEFAULT 'Pick-up',
 	delivery_address varchar(50) DEFAULT 'In-store',
 	CONSTRAINT PK_order_id PRIMARY KEY (order_id)
