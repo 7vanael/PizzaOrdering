@@ -12,6 +12,7 @@ DROP TYPE IF EXISTS pizza_sizes_t;
 DROP TYPE IF EXISTS order_status_t;
 DROP TYPE IF EXISTS order_type_t;
 DROP TYPE IF EXISTS sauce_type_t;
+DROP TYPE IF EXISTS topping_type_t;
 
 CREATE TABLE users (
 	user_id SERIAL,
@@ -26,10 +27,12 @@ CREATE TABLE topping_tiers (
 	tier_price_modifier NUMERIC(5, 2),
 	CONSTRAINT PK_topping_tier PRIMARY KEY (topping_tier)
 );
+CREATE TYPE topping_type_t AS ENUM ('Cheese', 'Meat', 'Veggie')
 CREATE TABLE toppings (
 	topping varchar(50) NOT NULL UNIQUE,
 	topping_tier int NOT NULL DEFAULT 0,
 	topping_available BOOL DEFAULT TRUE,
+	topping_type topping_type_t,
 	CONSTRAINT PK_topping PRIMARY KEY (topping),	
 	CONSTRAINT FK_topping_tier FOREIGN KEY (topping_tier) REFERENCES topping_tiers (topping_tier)
 );
