@@ -1,5 +1,6 @@
 <template>
-  {{ pizzas }}
+  <!-- {{ pizzas }} -->
+  <!-- {{ pizzaToppings[0].name }} -->
   <NavBar />
   <div class="home">
     <h1>Home</h1>

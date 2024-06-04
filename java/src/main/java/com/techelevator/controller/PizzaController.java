@@ -4,11 +4,8 @@ import com.techelevator.exception.DaoException;
 import com.techelevator.model.Pizza;
 import com.techelevator.model.Topping;
 import com.techelevator.service.PizzaService;
-<<<<<<< HEAD
 import org.springframework.web.bind.annotation.CrossOrigin;
-=======
 import org.springframework.http.HttpStatus;
->>>>>>> 5864968eb9cc7d7ee7083e338d8ef1a233b0ba70
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
