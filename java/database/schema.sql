@@ -27,7 +27,7 @@ CREATE TABLE topping_tiers (
 	tier_price_modifier NUMERIC(5, 2),
 	CONSTRAINT PK_topping_tier PRIMARY KEY (topping_tier)
 );
-CREATE TYPE topping_type_t AS ENUM ('Cheese', 'Meat', 'Veggie')
+CREATE TYPE topping_type_t AS ENUM ('Cheese', 'Meat', 'Veggie');
 CREATE TABLE toppings (
 	topping varchar(50) NOT NULL UNIQUE,
 	topping_tier int NOT NULL DEFAULT 0,
