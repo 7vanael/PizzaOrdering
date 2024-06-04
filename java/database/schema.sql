@@ -46,7 +46,6 @@ CREATE TABLE crusts (
 	type_price_modifier NUMERIC(3, 2),
 	CONSTRAINT PK_crust_type PRIMARY KEY (crust_type)
 );
-CREATE TYPE sauce_type_t AS ENUM ('Tomato', 'Pesto', 'Alfredo', 'BBQ');
 CREATE TABLE specialty_pizzas (
 	pizza_id SERIAL,
 	pizza_name varchar(50) NOT NULL,
