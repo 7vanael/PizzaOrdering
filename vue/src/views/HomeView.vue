@@ -4,12 +4,16 @@
     <h1>Home</h1>
     <!-- <p>You are authenticated if you see this.</p> -->
   </div>
-  <CustomPizzaMenu/>
+  <CustomPizzaMenu />
 </template>
 
 <script>
-import NavBar from '../components/NavBar.vue';
-import CustomPizzaMenu from '../components/CustomPizzaMenu.vue';
+
+  import NavBar from '../components/NavBar.vue';
+  import CustomPizzaMenu from '../components/CustomPizzaMenu.vue';
+
+  
+
 export default {
   components: {
     NavBar,
