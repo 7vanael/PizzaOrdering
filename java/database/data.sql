@@ -21,7 +21,7 @@ INSERT INTO pizza_sizes (pizza_size, pizza_base_price) VALUES ('Small', 6.75), (
 INSERT INTO crusts (crust_type, type_price_modifier) VALUES ('Regular', 0), ('Deep Dish', 4), ('Thin', 0), ('Cauliflower', 3.5);
 
 INSERT INTO specialty_pizzas  (pizza_name, pizza_size, crust_type) VALUES ('Margarita', 'Large', 'Regular'),
-('Pepperoni', 'Large', 'Regular'), ('Supreme', 'Large', 'Thin'), ('Create Your Own', 'Large', 'Regular');
+('Pepperoni', 'Large', 'Regular'), ('Supreme', 'Large', 'Regular'), ('Create Your Own', 'Large', 'Regular');
 
 INSERT INTO specialty_toppings (pizza_id, topping) VALUES (1, 'Basil'), (1, 'Tomato slices'), (2, 'Pepperoni'),
 (3, 'Green Peppers'), (3, 'Black Olives'), 	(3, 'Bacon'), (3, 'Mushrooms'), (3, 'Italian Sausage'), (3, 'Onions'),
