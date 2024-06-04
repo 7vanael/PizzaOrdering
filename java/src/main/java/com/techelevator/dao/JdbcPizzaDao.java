@@ -1,5 +1,6 @@
 package com.techelevator.dao;
 
+import com.techelevator.exception.DaoException;
 import com.techelevator.model.Pizza;
 import com.techelevator.model.Topping;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -23,7 +24,7 @@ public class JdbcPizzaDao implements PizzaDao {
 
         List<Pizza> pizzaList = new ArrayList<>();
         String sql = "SELECT pizza_id, pizza_name, pizza_size, crust_type FROM specialty_pizzas";
-
+    try {
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
         while (results.next()) {
             Pizza pizza = new Pizza();
@@ -35,13 +36,16 @@ public class JdbcPizzaDao implements PizzaDao {
             pizzaList.add(pizza);
         }
         return pizzaList;
+    }catch(Exception e) {
+        throw new DaoException(e.getMessage(), e);
+    }
     }
 
     @Override
     public List<Topping> listToppingsByPizzaId(int id) {
         List<Topping> toppingList = new ArrayList<>();
         String sql = "SELECT t.topping, t.topping_tier, t.topping_available, t.topping_type FROM toppings AS t JOIN specialty_toppings AS st ON t.topping = st.topping WHERE st.pizza_id = ?";
-
+    try {
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, id);
         while (results.next()) {
             Topping topping = new Topping();
@@ -52,6 +56,9 @@ public class JdbcPizzaDao implements PizzaDao {
             toppingList.add(topping);
         }
         return toppingList;
+    }catch(Exception e) {
+        throw new DaoException(e.getMessage(), e);
+    }
     }
 
     @Override
@@ -59,7 +66,7 @@ public class JdbcPizzaDao implements PizzaDao {
 
         List<Topping> toppingList = new ArrayList<>();
         String sql = "SELECT topping, topping_tier, topping_available, topping_type FROM toppings";
-
+    try {
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
         while (results.next()) {
             Topping topping = new Topping();
@@ -70,15 +77,18 @@ public class JdbcPizzaDao implements PizzaDao {
             toppingList.add(topping);
         }
         return toppingList;
+    }catch(Exception e){
+        throw new DaoException(e.getMessage(), e);
+    }
     }
 
     @Override
     public List<Topping> listToppingsByType(String type) {
         List<Topping> toppingList = new ArrayList<>();
         String sql = "SELECT topping, topping_tier, topping_available, topping_type FROM toppings WHERE topping_type::text = ?";
-
+    try {
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, type);
-        while(results.next()) {
+        while (results.next()) {
             Topping topping = new Topping();
             topping.setName(results.getString("topping"));
             topping.setToppingTier(results.getInt("topping_tier"));
@@ -87,5 +97,8 @@ public class JdbcPizzaDao implements PizzaDao {
             toppingList.add(topping);
         }
         return toppingList;
+    }catch(Exception e) {
+        throw new DaoException(e.getMessage(), e);
+    }
     }
 }
