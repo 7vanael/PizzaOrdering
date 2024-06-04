@@ -11,9 +11,9 @@ INSERT INTO toppings (topping, topping_tier, topping_type)
 VALUES ('Pepperoni', 1, 'Meat'), ('Basil', 1, 'Veggie'), ('Italian Sausage', 2, 'Meat'), ('Mushrooms', 0, 'Veggie'),
  ('Onions', 0, 'Veggie'), ('Green Peppers', 0, 'Veggie'), ('Black Olives', 0, 'Veggie'), ('Green Olives', 0, 'Veggie'),
  ('Tomato slices', 1, 'Veggie'), ('Jalapenos', 1, 'Veggie'), ('Bacon', 2, 'Meat'), ('House Cheese Blend', 0, 'Cheese'),
- ('Fresh Mozzarella cheese', 2, 'Cheese'), ('BBQ chicken', 2, 'Meat'), ('Regular', 0, 'Crust'), ('Deep Dish', 2, 'Crust'),
- ('Thin', 0, 'Crust'), ('Cauliflower', 1, 'Crust'), ('Tomato', 0, 'Sauce'), ('Pesto', 1, 'Sauce'),
- ('Alfredo', 1, 'Sauce'), ('BBQ', 0, 'Sauce'), ('Small', 0, 'Size'), ('Medium', 0, 'Size'), ('Large', 0, 'Size');
+ ('Fresh Mozzarella cheese', 2, 'Cheese'), ('BBQ chicken', 2, 'Meat'), ('Regular', 0, 'Crust'), ('Deep Dish', 0, 'Crust'),
+ ('Thin', 0, 'Crust'), ('Cauliflower', 0, 'Crust'), ('Tomato', 0, 'Sauce'), ('Pesto', 0, 'Sauce'),
+ ('Alfredo', 0, 'Sauce'), ('BBQ', 0, 'Sauce'), ('Small', 0, 'Size'), ('Medium', 0, 'Size'), ('Large', 0, 'Size');
 
 INSERT INTO pizza_sizes (pizza_size, pizza_base_price) VALUES ('Small', 6.75), ('Medium', 9.75), ('Large', 12.25);
 
