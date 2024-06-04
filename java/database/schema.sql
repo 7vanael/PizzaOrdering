@@ -96,9 +96,8 @@ CREATE TABLE order_items(
 );
 
 CREATE TABLE order_item_options(
-    item_id SERIAL,
-    item_option varchar(50),
-    CONSTRAINT PK_order_options_item_id PRIMARY KEY (item_id)
+    item_id int,
+    item_option varchar(50)
 );
 
 COMMIT TRANSACTION;
