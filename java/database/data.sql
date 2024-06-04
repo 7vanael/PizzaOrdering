@@ -7,7 +7,7 @@ INSERT INTO topping_tiers (topping_tier, tier_description, tier_price_modifier)
 VALUES (0, 'Essentials', 0), (1, 'Need to haves', 1.25), (2, 'Premium', 2.25);
 
 
-INSERT INTO toppings (topping, topping_tier, topping_category, topping_type)
+INSERT INTO toppings (topping, topping_tier, topping_type)
 VALUES ('Pepperoni', 1, 'Meat'), ('Basil', 1, 'Veggie'), ('Italian Sausage', 2, 'Meat'), ('Mushrooms', 0, 'Veggie'),
  ('Onions', 0, 'Veggie'), ('Green Peppers', 0, 'Veggie'), ('Black Olives', 0, 'Veggie'), ('Green Olives', 0, 'Veggie'),
  ('Tomato slices', 1, 'Veggie'), ('Jalapenos', 1, 'Veggie'), ('Bacon', 2, 'Meat'), ('House Cheese Blend', 0, 'Cheese'),
