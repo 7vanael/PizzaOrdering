@@ -27,20 +27,38 @@ public class JdbcPizzaDao implements PizzaDao {
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
         while (results.next()) {
             Pizza pizza = new Pizza();
-            pizza.setId(results.getString("pizza_id"));
+            pizza.setId(results.getInt("pizza_id"));
             pizza.setName(results.getString("pizza_name"));
             pizza.setSize(results.getString("pizza_size"));
             pizza.setCrust(results.getString("crust_type"));
+            pizza.setToppings(listToppingsByPizzaId(pizza.getId()));
             pizzaList.add(pizza);
         }
         return pizzaList;
     }
 
     @Override
+    public List<Topping> listToppingsByPizzaId(int id) {
+        List<Topping> toppingList = new ArrayList<>();
+        String sql = "SELECT t.topping, t.topping_tier, t.topping_available, t.topping_type FROM toppings AS t JOIN specialty_toppings AS st ON t.topping = st.topping WHERE st.pizza_id = ?";
+
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, id);
+        while (results.next()) {
+            Topping topping = new Topping();
+            topping.setName(results.getString("topping"));
+            topping.setToppingTier(results.getInt("topping_tier"));
+            topping.setAvailable(results.getBoolean("topping_available"));
+            topping.setType(results.getString("topping_type"));
+            toppingList.add(topping);
+        }
+        return toppingList;
+    }
+
+    @Override
     public List<Topping> listToppings() {
 
         List<Topping> toppingList = new ArrayList<>();
-        String sql = "SELECT topping, topping_tier, topping_available FROM toppings";
+        String sql = "SELECT topping, topping_tier, topping_available, topping_type FROM toppings";
 
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
         while (results.next()) {
@@ -48,6 +66,24 @@ public class JdbcPizzaDao implements PizzaDao {
             topping.setName(results.getString("topping"));
             topping.setToppingTier(results.getInt("topping_tier"));
             topping.setAvailable(results.getBoolean("topping_available"));
+            topping.setType(results.getString("topping_type"));
+            toppingList.add(topping);
+        }
+        return toppingList;
+    }
+
+    @Override
+    public List<Topping> listToppingsByType(String type) {
+        List<Topping> toppingList = new ArrayList<>();
+        String sql = "SELECT topping, topping_tier, topping_available, topping_type FROM toppings WHERE topping_type::text = ?";
+
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, type);
+        while(results.next()) {
+            Topping topping = new Topping();
+            topping.setName(results.getString("topping"));
+            topping.setToppingTier(results.getInt("topping_tier"));
+            topping.setAvailable(results.getBoolean("topping_available"));
+            topping.setType(results.getString("topping_type"));
             toppingList.add(topping);
         }
         return toppingList;

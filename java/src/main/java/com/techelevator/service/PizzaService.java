@@ -21,8 +21,12 @@ public class PizzaService {
         return pizzaList;
     }
 
-    public List<Topping> listToppings(){
-        List<Topping> toppingList = pizzaDao.listToppings();
-        return toppingList;
+    public List<Topping> listToppingsByType(String type){
+        if (type == null || type.equals("")){
+            return pizzaDao.listToppings();
+        } else {
+            List<Topping> toppingList = pizzaDao.listToppingsByType(type);
+            return toppingList;
+        }
     }
 }
