@@ -9,4 +9,8 @@ public interface PizzaDao {
     List<Pizza> listPizzas();
 
     List<Topping> listToppings();
+
+    List<Topping> listToppingsByPizzaId(int id);
+
+    List<Topping> listToppingsByType(String type);
 }
