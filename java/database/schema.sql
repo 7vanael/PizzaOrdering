@@ -8,11 +8,8 @@ DROP TABLE IF EXISTS crusts;
 DROP TABLE IF EXISTS specialty_pizzas;
 DROP TABLE IF EXISTS specialty_toppings;
 DROP TABLE IF EXISTS orders;
-DROP TYPE IF EXISTS pizza_sizes_t;
 DROP TYPE IF EXISTS order_status_t;
 DROP TYPE IF EXISTS order_type_t;
-DROP TYPE IF EXISTS sauce_type_t;
-DROP TYPE IF EXISTS topping_type_t;
 
 CREATE TABLE users (
 	user_id SERIAL,
@@ -53,8 +50,24 @@ CREATE TABLE specialty_pizzas (
 	crust_type varchar(50),
 	sauce_type varchar(50) DEFAULT 'Tomato',
 	pizza_available BOOL DEFAULT TRUE,
+	pizza_type varchar(50) DEFAULT 'Pizza',
 	CONSTRAINT PK_pizza_id PRIMARY KEY (pizza_id)	
 );
+
+CREATE TABLE side_items (
+    side_items SERIAL PRIMARY KEY,
+    side_item_name varchar(50),
+    side_item_price NUMERIC(6, 2),
+    side_item_type varchar(50) DEFAULT 'Side'
+);
+ALTER SEQUENCE side_items_side_items_seq RESTART WITH 400;
+
+--CREATE TABLE aggregate_items(
+--    unnecessary_id SERIAL PRIMARY KEY,
+--    combined_item_id int,
+--    generic_item_type varchar(50)
+----    CONSTRAINT PK_aggregate_items PRIMARY KEY (combined_item_id, generic_item_type)
+--);
 CREATE TABLE specialty_toppings (
 	pizza_id int,
 	topping varchar(50),
@@ -71,9 +84,21 @@ CREATE TABLE orders (
 	order_status order_status_t DEFAULT 'Received',
 	order_type order_type_t DEFAULT 'Pick-up',
 	delivery_address varchar(50) DEFAULT 'In-store',
-
 	CONSTRAINT PK_order_id PRIMARY KEY (order_id)
 );
+--
+CREATE TABLE order_items(
+    unique_item_id SERIAL,
+    order_id int REFERENCES orders (order_id),
+    item_id int,
+--REFERENCES aggregate_items (combined_item_id),
+    CONSTRAINT PK_item_id PRIMARY KEY (unique_item_id)
+);
 
+CREATE TABLE order_item_options(
+    item_id SERIAL,
+    item_option varchar(50),
+    CONSTRAINT PK_order_options_item_id PRIMARY KEY (item_id)
+);
 
 COMMIT TRANSACTION;
