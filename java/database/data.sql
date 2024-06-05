@@ -18,6 +18,9 @@ VALUES ('Pepperoni', 1, 'Meat', ''), ('Basil', 1, 'Veggie', ''), ('Italian Sausa
  ('Alfredo', 0, 'Sauce', ''), ('BBQ', 0, 'Sauce', ''), ('Small', 0, 'Size', ''), ('Medium', 0, 'Size', ''), ('Large', 0, 'Size', ''),
  ('Banana Peppers', 1, 'Veggie', ''), ('Olive Oil Drizzle', 0, 'Veggie',''), ('Garlic', 0, 'Veggie', '');
 
+ INSERT INTO toppings (topping, topping_tier, topping_type, topping_available)
+ VALUES ('Goat cheese', 0, 'Cheese', FALSE);
+
 INSERT INTO pizza_sizes (pizza_size, pizza_base_price) VALUES ('Small', 6.75), ('Medium', 9.75), ('Large', 12.25);
 
 INSERT INTO crusts (crust_type, type_price_modifier, crust_description) VALUES ('Regular', 0, 'Garlic seasoned crust with a rich, buttery taste'),

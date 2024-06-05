@@ -3,7 +3,7 @@
   <!-- {{ pizzaToppings[0].name }} -->
   <NavBar />
   <div class="home">
-    <h1>Home</h1>
+    <h1>Syntax Slices</h1>
     <Menu />
     <CustomPizzaMenu />
     <!-- <p>You are authenticated if you see this.</p> -->
