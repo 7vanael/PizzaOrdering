@@ -30,6 +30,7 @@ CREATE TABLE toppings (
 	topping_tier int NOT NULL DEFAULT 0,
 	topping_available BOOL DEFAULT TRUE,
 	topping_type topping_type_t,
+	topping_description varchar(100),
 	CONSTRAINT PK_topping PRIMARY KEY (topping),	
 	CONSTRAINT FK_topping_tier FOREIGN KEY (topping_tier) REFERENCES topping_tiers (topping_tier)
 );
@@ -41,6 +42,7 @@ CREATE TABLE pizza_sizes (
 CREATE TABLE crusts (
 	crust_type varchar(50) NOT NULL UNIQUE DEFAULT 'Regular',
 	type_price_modifier NUMERIC(3, 2),
+	crust_description varchar(100) DEFAULT '',
 	CONSTRAINT PK_crust_type PRIMARY KEY (crust_type)
 );
 CREATE TABLE specialty_pizzas (
