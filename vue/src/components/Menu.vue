@@ -28,7 +28,7 @@
                     </div>
                 </div>
             </div>
-
+            
             <div class="col-10">
                 <div id="carouselExampleCaptions" class="carousel slide">
                     <div class="carousel-indicators">
