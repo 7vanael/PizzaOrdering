@@ -1,6 +1,7 @@
 package com.techelevator.controller;
 
 import com.techelevator.exception.DaoException;
+import com.techelevator.model.Pizza;
 import com.techelevator.model.Topping;
 import com.techelevator.service.UserAccessService;
 import org.springframework.http.HttpStatus;
@@ -25,6 +26,17 @@ public class UserAccessController {
         try {
             return userAccessService.updateTopping(name, topping);
         } catch (DaoException e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
+        }
+    }
+
+    @PostMapping(path = "/pizzas")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    @PreAuthorize("hasRole('ROLE_USER')")
+    public Pizza addPizza(@RequestBody Pizza pizza) {
+        try {
+            return userAccessService.addPizza(pizza);
+        }catch (DaoException e) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
         }
     }

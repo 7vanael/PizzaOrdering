@@ -20,4 +20,9 @@ public class UserAccessService {
         userAccessDao.updateTopping(name, topping);
         return pizzaDao.getTopping(topping.getName());
     }
+
+    public Pizza addPizza(Pizza pizza) {
+        int id = userAccessDao.addPizza(pizza);
+        return pizzaDao.getPizzaById(id);
+    }
 }
