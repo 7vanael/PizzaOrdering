@@ -30,7 +30,7 @@ CREATE TABLE toppings (
 	topping_tier int NOT NULL DEFAULT 0,
 	topping_available BOOL DEFAULT TRUE,
 	topping_type topping_type_t,
-	topping_description varchar(100),
+	topping_description varchar(100) DEFAULT '',
 	CONSTRAINT PK_topping PRIMARY KEY (topping),	
 	CONSTRAINT FK_topping_tier FOREIGN KEY (topping_tier) REFERENCES topping_tiers (topping_tier)
 );

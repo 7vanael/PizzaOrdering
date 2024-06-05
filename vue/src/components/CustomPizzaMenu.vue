@@ -26,25 +26,32 @@
           <ul class="list-group">
             <li class="list-group-item size-crust">Choose Your Crust and Size</li>
             <li class="list-group-item">
-              <div class="card-radio" style="width: 100%;">
+
+
+              <div class=" card-radio" style="width: 100%;">
                 <ul class="list-group list-group">
-                  <li v-for="crust in crustTypes" :key="crust.name" class="list-group-item">
+
+                  <li v-for="crust in crustTypes" v-bind:key="crust.name" class="list-group-item">
                     <label>
-                      <input type="radio" name="pizza-crust-type" :value="crust.name">
-                    </label> {{ crust.name }} - {{ crustDescriptions[crust.name] }}
+                      <input type="radio" name="pizza-crust-type" value={{crust.name}}>
+                    </label> {{ crust.name }} - <!--{{ crustDescriptions[crust.name] }}--> {{ crust.description }}
                   </li>
+
                 </ul>
               </div>
               <br>
-              <div class="card-radio" style="width: 100%;">
+
+              <div class=" card-radio" style="width: 100%;">
                 <ul class="list-group list-group">
-                  <li v-for="crust in crustSizes" :key="crust.name" class="list-group-item">
+                  <li v-for="crust in crustSizes" v-bind:key="crust.name" class="list-group-item">
                     <label>
-                      <input type="radio" name="pizza-crust-size" :value="crust.name">
+                      <input type="radio" name="pizza-crust-size" value={{crust.name}}>
+
                     </label> {{ crust.name }}
                   </li>
                 </ul>
               </div>
+
             </li>
           </ul>
           <div class="card-footer d-flex justify-content-end">
@@ -155,6 +162,7 @@
           {{ tab.content }}
           <div class="card-footer d-flex justify-content-between mt-3">
             <button class="btn btn-secondary" @click="goToPreviousTab" v-if="index > 0">Previous</button>
+
           </div>
         </div>
 
@@ -186,16 +194,16 @@ export default {
       crustTypes: [],
       sauces: [],
       crustSizes: [],
-      crustDescriptions: {
+      // crustDescriptions: {
 
-        'Regular': 'Garlic seasoned crust with a rich, buttery taste.',
+      //   'Regular': 'Garlic seasoned crust with a rich, buttery taste.',
 
-        'Deep Dish': 'Chicago-style deep dish crust with a buttery, flaky exterior.',
+      //   'Deep Dish': 'Chicago-style deep dish crust with a buttery, flaky exterior.',
 
-        'Thin': 'Thin enough for optimum crispy to crunchy ratio.',
+      //   'Thin': 'Thin enough for optimum crispy to crunchy ratio.',
 
-        'Cauliflower': 'Gluten-free cauliflower crust with a buttery, flaky exterior.',
-      },
+      //   'Cauliflower': 'Gluten-free cauliflower crust with a buttery, flaky exterior.',
+      // },
     }
   },
   methods: {
@@ -234,27 +242,75 @@ export default {
       });
     ToppingsService.getCheese().then(
       (response) => {
-        this.cheeseToppings = response.data;
+        let cheeseList;
+        cheeseList = response.data;
+        //console.log(cheeseList);
+        cheeseList.forEach(
+          (cheeseLoop) => {
+            if (cheeseLoop.available /* && cheeseLoop.toppingTier == 2*/) {
+              this.cheeseToppings.push(cheeseLoop);
+              //console.log(cheeseLoop);
+            }
+          });
       });
     ToppingsService.getMeat().then(
       (response) => {
-        this.meatToppings = response.data;
+        let meatList;
+        meatList = response.data;
+        meatList.forEach(
+          (toppingLoop) => {
+            if (toppingLoop.available) {
+              this.meatToppings.push(toppingLoop);
+            }
+          });
       });
     ToppingsService.getSauce().then(
       (response) => {
-        this.sauces = response.data;
+        //this.sauces = response.data;
+        let sauceList;
+        sauceList = response.data;
+        sauceList.forEach(
+          (toppingLoop) => {
+            if (toppingLoop.available) {
+              this.sauces.push(toppingLoop);
+            }
+          });
       });
     ToppingsService.getCrust().then(
       (response) => {
-        this.crustTypes = response.data;
+        //this.crustTypes = response.data;
+        let crustList;
+        crustList = response.data;
+        crustList.forEach(
+          (typesLoop) => {
+            if (typesLoop.available) {
+              this.crustTypes.push(typesLoop);
+            }
+          });
       });
     ToppingsService.getVeggie().then(
       (response) => {
-        this.veggieToppings = response.data;
+        //this.veggieToppings = response.data;
+        let veggieList;
+        veggieList = response.data;
+        veggieList.forEach(
+          (toppingLoop) => {
+            if (toppingLoop.available) {
+              this.veggieToppings.push(toppingLoop);
+            }
+          });
       });
     ToppingsService.getSize().then(
       (response) => {
-        this.crustSizes = response.data;
+        //this.crustSizes = response.data;
+        let sizesList;
+        sizesList = response.data;
+        sizesList.forEach(
+          (sizeLoop) => {
+            if (sizeLoop.available) {
+              this.crustSizes.push(sizeLoop);
+            }
+          });
       });
     ToppingsService.getPizzas().then(
       (response) => {
