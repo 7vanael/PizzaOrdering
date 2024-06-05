@@ -18,12 +18,11 @@ public class JdbcPizzaDao implements PizzaDao {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-
     @Override
     public List<Pizza> listPizzas() {
 
         List<Pizza> pizzaList = new ArrayList<>();
-        String sql = "SELECT pizza_id, pizza_name, pizza_size, crust_type FROM specialty_pizzas";
+        String sql = "SELECT pizza_id, pizza_name, pizza_size, crust_type, sauce_type, pizza_available, pizza_description FROM specialty_pizzas";
     try {
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
         while (results.next()) {
@@ -32,6 +31,9 @@ public class JdbcPizzaDao implements PizzaDao {
             pizza.setName(results.getString("pizza_name"));
             pizza.setSize(results.getString("pizza_size"));
             pizza.setCrust(results.getString("crust_type"));
+            pizza.setSauce(results.getString("sauce_type"));
+            pizza.setAvailable(results.getBoolean("pizza_available"));
+            pizza.setDescription(results.getString("pizza_description"));
             pizza.setToppings(listToppingsByPizzaId(pizza.getId()));
             pizzaList.add(pizza);
         }
@@ -103,5 +105,48 @@ public class JdbcPizzaDao implements PizzaDao {
     }catch(Exception e) {
         throw new DaoException(e.getMessage(), e);
     }
+    }
+
+    @Override
+    public Topping getTopping(String name) {
+        String sql = "SELECT topping, topping_tier, topping_available, topping_type, topping_description FROM toppings WHERE topping = ?";
+        try {
+            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, name);
+            if (results.next()) {
+                Topping topping = new Topping();
+                topping.setName(results.getString("topping"));
+                topping.setToppingTier(results.getInt("topping_tier"));
+                topping.setAvailable(results.getBoolean("topping_available"));
+                topping.setType(results.getString("topping_type"));
+                topping.setDescription(results.getString("topping_description"));
+                return topping;
+            }
+        }catch(Exception e) {
+            throw new DaoException(e.getMessage(), e);
+        }
+        return null;
+    }
+
+    @Override
+    public Pizza getPizzaById(int id){
+        String sql = "SELECT pizza_id, pizza_name, pizza_size, crust_type, sauce_type, pizza_available, pizza_description FROM specialty_pizzas WHERE pizza_id = ?";
+        try {
+            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, id);
+            if (results.next()) {
+                Pizza pizza = new Pizza();
+                pizza.setId(results.getInt("pizza_id"));
+                pizza.setName(results.getString("pizza_name"));
+                pizza.setSize(results.getString("pizza_size"));
+                pizza.setCrust(results.getString("crust_type"));
+                pizza.setSauce(results.getString("sauce_type"));
+                pizza.setAvailable(results.getBoolean("pizza_available"));
+                pizza.setDescription(results.getString("pizza_description"));
+                pizza.setToppings(listToppingsByPizzaId(pizza.getId()));
+                return pizza;
+            }
+        }catch(Exception e) {
+            throw new DaoException(e.getMessage(), e);
+        }
+        return null;
     }
 }

@@ -7,8 +7,34 @@ public class Pizza {
     String name;
     String size;
     String crust;
-    Double price;
+    String sauce;
+    Boolean available;
+    String description;
     List<Topping> toppings;
+
+    public String getSauce() {
+        return sauce;
+    }
+
+    public void setSauce(String sauce) {
+        this.sauce = sauce;
+    }
+
+    public Boolean getAvailable() {
+        return available;
+    }
+
+    public void setAvailable(Boolean available) {
+        this.available = available;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
     public int getId() {
         return id;
@@ -40,14 +66,6 @@ public class Pizza {
 
     public void setCrust(String crust) {
         this.crust = crust;
-    }
-
-    public Double getPrice() {
-        return price;
-    }
-
-    public void setPrice(Double price) {
-        this.price = price;
     }
 
     public List<Topping> getToppings() {

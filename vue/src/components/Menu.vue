@@ -5,25 +5,25 @@
                 <div class="menu">
                     <div class="menu-items">
                         <div class="menu-item">
-                            <h3>Pizzas</h3>
+                            <a href="#pizzas"><h3>Pizzas</h3></a>
                         </div>
                         <div class="menu-item">
-                            <h3>Salads</h3>
+                            <a href="#pizzas"><h3>Salads</h3></a>
                         </div>
                         <div class="menu-item">
-                            <h3>Sides</h3>
+                            <a href="#pizzas"><h3>Sides</h3></a>
                         </div>
                         <div class="menu-item">
-                            <h3>Kid's Meal</h3>
+                            <a href="#pizzas"><h3>Kid's Meal</h3></a>
                         </div>
                         <div class="menu-item">
-                            <h3>Beverages</h3>
+                            <a href="#pizzas"><h3>Beverages</h3></a>
                         </div>
                         <div class="menu-item">
-                            <h3>Desserts</h3>
+                            <a href="#pizzas"><h3>Desserts</h3></a>
                         </div>
                         <div class="menu-item">
-                            <h3>Deals</h3>
+                            <a href="#pizzas"><h3>Deals</h3></a>
                         </div>
                     </div>
                 </div>
