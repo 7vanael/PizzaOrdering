@@ -113,6 +113,8 @@
                 </div>
 
             </div>
+            <CustomPizzaMenu />
+            
         </div>
         
     </section>
@@ -121,6 +123,7 @@
 
 <script>
 import CustomPizzaMenu from './CustomPizzaMenu.vue';
+
 
 
 </script>
@@ -133,11 +136,11 @@ import CustomPizzaMenu from './CustomPizzaMenu.vue';
     border: 2px solid #2892C4;
     border-radius: 5px;
     padding: 20px;
-    
+    min-height: 40dvh;
 }
 .row {
     display: flex;
-    /* flex-wrap: wrap; */
+    min-height: 100%;
     background-color: #2892C4;
 }
 
@@ -152,10 +155,11 @@ import CustomPizzaMenu from './CustomPizzaMenu.vue';
     align-items: center;
     height: 70px;
     width: 100%;
-    background-color: #F2DC9C;
+    background-color: #F7C516;
     border: 2px solid #2892C4;
     border-radius: 5px;
     color: #A4200B;
+    text-transform: capitalize;
 }
 
 img {
@@ -182,13 +186,13 @@ img {
 
 h5,
 p {
-    color: #F2DC9C;
+    color: #F7C516;
 }
 
 .carousel-caption {
     background-color: #A4200B;
     border: 2px solid #A4200B;
     border-radius: 5px;
-    opacity: .8;
+    opacity: .9;
 }
 </style>

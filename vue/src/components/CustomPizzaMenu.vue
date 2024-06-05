@@ -30,12 +30,11 @@
       <div class="tab-pane show active" id="pills-crust" role="tabpanel" aria-labelledby="pills-crust-tab">
         <div class="card" style="width: 100%;">
           <ul class="list-group">
-            <li class="list-group-item size-crust">Choose Size and Crust</li>
+            <li class="list-group-item size-crust">Choose Your Crust and Size</li>
             <li class="list-group-item">
 
         <div class=" card-radio" style="width: 100%;">
           <ul class="list-group list-group">
-                <li class="list-group-item pg-1-card-header">Pick Your Crust</li>
           <li v-for="crust in crustTypes" v-bind:key="crust.name" class="list-group-item">
             <label>
               <input type="radio" name="pizza-crust-type" value={{crust.name}}>
@@ -46,9 +45,7 @@
         <br>
         
         <div class=" card-radio" style="width: 100%;">
-        <ul class="list-group list-group">
-                <li class="list-group-item pg-1-card-header">Pick Your Size</li>
-          
+        <ul class="list-group list-group">          
           <li v-for="crust in crustSizes" v-bind:key="crust.name" class="list-group-item">
             <label>
               <input type="radio" name="pizza-crust-size" value={{crust.name}}>
@@ -71,13 +68,11 @@
     <div class="tab-pane" id="pills-sauce-cheese" role="tabpanel" aria-labelledby="pills-sauce-cheese-tab">
       <div class="card" style="width: 100%;">
         <ul class="list-group list-group">
-          <li class="list-group-item cheese-sauce">Choose Sauce and Cheese</li>
+          <li class="list-group-item cheese-sauce">Choose Your Sauce and Cheese</li>
           <li class="list-group-item">
             <!--Sauce-->
             <div class="card card-radio" style="width: 100%;">
               <ul class="list-group list-group">
-                <li class="list-group-item pg-2-card-header">Pick Your Sauce</li>
-
                 <li v-for="sauce in sauces" v-bind:key="sauce.name" class="list-group-item">
                   <label>
                     <input type="radio" name="pizza-sauce" value={{sauce.name}}>
@@ -89,17 +84,6 @@
             <!--Cheese-->
             <div class="card card-radio my-20" style="width: 100%;">
               <ul class="list-group list-group">
-                <li class="list-group-item pg-2-card-header">Pick Your Cheese</li>
-                <!-- <li class="list-group-item">
-                  <label>
-                    <input type="checkbox" name="pizza-cheese" value="house-blend">
-                  </label> House Blend
-                </li>
-                <li class="list-group-item">
-                  <label>
-                    <input type="checkbox" name="pizza-cheese" value="mozzarella">
-                  </label> Fresh Mozzarella
-                </li> -->
                 <li v-for="cheese in cheeseToppings" v-bind:key="cheese.name" class="list-group-item">
                   <label>
                     <input type="radio" name="pizza-cheese" value={{cheese.name}}>
@@ -173,7 +157,7 @@
     <div class="tab-pane" id="pills-veggies" role="tabpanel" aria-labelledby="pills-veggies-tab">
       <div class="card" style="width: 100%;">
         <ul class="list-group">
-          <li class="list-group-item toppings">Choose Veggies</li>
+          <li class="list-group-item toppings">Choose Your Veggies</li>
           <li class="list-group-item">
             <!--Non-Meats-->
             <div class="card card-radio" style="width: 100%;">
@@ -307,10 +291,10 @@ export default {
 }
 
 .nav-pills .nav-link.active {
-  color: #F7C516;
+  color: #A4200B;
   font-weight: bold;
   font-size: large;
-  background-color: #2892C4;
+  background-color: #F7C516;
   border: 2px solid #2892C4;
   text-transform: uppercase;
   align-content: center;
