@@ -53,6 +53,7 @@ CREATE TABLE specialty_pizzas (
 	sauce_type varchar(50) DEFAULT 'Tomato',
 	pizza_available BOOL DEFAULT TRUE,
 	pizza_type varchar(50) DEFAULT 'Pizza',
+	pizza_description varchar(200) DEFAULT '',
 	CONSTRAINT PK_pizza_id PRIMARY KEY (pizza_id)	
 );
 
