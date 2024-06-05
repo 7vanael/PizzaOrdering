@@ -1,14 +1,14 @@
 <template>
   <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
-      <router-link class="navbar-brand" to="/home">Syntax Slices</router-link>
+      <router-link class="navbar-brand" v-bind:to=" { name: 'home'}">Syntax Slices</router-link>
       <button class="navbar-toggler" type="button" @click="toggleNavbar" :aria-expanded="isNavbarExpanded" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div :class="['collapse navbar-collapse', { show: isNavbarExpanded }]" id="navbarNavAltMarkup">
         <div class="navbar-nav">
           <router-link class="nav-link" to="/location">Location</router-link>
-          <router-link class="nav-link active" to="/order">Order</router-link>
+          <router-link class="nav-link active" to="/checkout">Order</router-link>
           <router-link class="nav-link" to="/register">Sign Up</router-link>
           <router-link class="nav-link" to="/login">Log In</router-link>
         </div>

@@ -1,7 +1,4 @@
 <template>
-  <!-- {{ meatToppings }} -->
-  <!-- {{ cheeseToppings }} -->
-  <!-- {{ pizzaToppings }} -->
   <section class="container-fluid">
 
     <!-- Nav tabs -->
@@ -170,16 +167,7 @@ export default {
       crustTypes: [],
       sauces: [],
       crustSizes: [],
-      // crustDescriptions: {
 
-      //   'Regular': 'Garlic seasoned crust with a rich, buttery taste.',
-
-      //   'Deep Dish': 'Chicago-style deep dish crust with a buttery, flaky exterior.',
-
-      //   'Thin': 'Thin enough for optimum crispy to crunchy ratio.',
-
-      //   'Cauliflower': 'Gluten-free cauliflower crust with a buttery, flaky exterior.',
-      // },
     }
   },
   methods: {
