@@ -7,4 +7,6 @@ public interface UserAccessDao {
     public void updateTopping(String name, Topping topping);
 
     public int addPizza(Pizza pizza);
+
+    public void editPizza(int id, Pizza pizza);
 }

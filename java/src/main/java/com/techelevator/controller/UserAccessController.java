@@ -40,4 +40,15 @@ public class UserAccessController {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
         }
     }
+
+    @PutMapping(path = "/pizzas/{id}")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    @PreAuthorize("hasRole('ROLE_USER')")
+    public Pizza editPizza(@PathVariable int id, @RequestBody Pizza pizza) {
+        try {
+            return userAccessService.editPizza(id, pizza);
+        }catch (DaoException e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
+        }
+    }
 }
