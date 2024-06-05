@@ -1,49 +1,40 @@
-<template>  
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">Syntax Slices</a>
-      <img src="../images/prototype-logo.png" alt="logo">
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav">
-        <a class="nav-link" aria-current="page" href="#">Location</a>
-        <a class="nav-link active" href="#">Order</a>
-        <a class="nav-link" href="#">Sign Up</a>
+<template>
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Syntax Slices</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+        aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <a class="nav-link" aria-current="page" href="#">Location</a>
+          <a class="nav-link active" href="#">Order</a>
+          <a class="nav-link" href="#">Sign Up</a>
+        </div>
       </div>
     </div>
-  </div>
-</nav>
+  </nav>
 </template>
 
 <script></script>
 
 <style scoped>
-
 .navbar {
-    background-color: #F2DC9C;
-    border: 2px solid #2892C4;
-    border-radius: 5px;
-    padding: 20px;
+  background-color: #F2DC9C;
+  border: 2px solid #2892C4;
+  border-radius: 5px;
+  padding: 20px;
 }
 
 .navbar-brand {
-    color: #F2DC9C;
+  color: #F2DC9C;
 }
-
-.navbar-brand > img {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-}
-
 .nav-link {
-    color: #FA8A0D;
+  color: #FA8A0D;
 }
 
 .nav-link.active {
-    color: #F2DC9C;
+  color: #F2DC9C;
 }
-
 </style>
