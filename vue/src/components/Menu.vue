@@ -114,17 +114,30 @@
 
             </div>
         </div>
+        
     </section>
 </template>
 
 
-<script></script>
+<script>
+import CustomPizzaMenu from './CustomPizzaMenu.vue';
+
+
+</script>
 
 
 <style scoped>
+.container-fluid {
+    margin-top: 20px;
+    background-color: #2892C4;
+    border: 2px solid #2892C4;
+    border-radius: 5px;
+    padding: 20px;
+    
+}
 .row {
     display: flex;
-    flex-wrap: wrap;
+    /* flex-wrap: wrap; */
     background-color: #2892C4;
 }
 

@@ -1,12 +1,12 @@
 
-<template>
+<!-- <template>
   <div id="app">
     <custom-pizza-menu v-for="crust in crusts" :key="crust.name" :crust="crust"></custom-pizza-menu>
   </div>
 </template>
 
 <script type="module">
-import Vue from 'vue'
+import {Vue} from 'vue'
 import PizzaCrusts from './PizzaCrusts.vue'
 
 Vue.component('pizza-crust', PizzaCrusts);
@@ -54,5 +54,5 @@ new Vue({
     ]
   }
 });
-</script>
+</script> -->
 

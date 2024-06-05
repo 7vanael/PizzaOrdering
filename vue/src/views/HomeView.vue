@@ -5,9 +5,10 @@
   <div class="home">
     <h1>Home</h1>
     <Menu />
+    <CustomPizzaMenu />
     <!-- <p>You are authenticated if you see this.</p> -->
   </div>
-  <CustomPizzaMenu />
+  
 </template>
 
 <script>
