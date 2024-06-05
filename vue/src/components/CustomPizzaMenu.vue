@@ -14,59 +14,50 @@
         </a>
       </li>
     </ul>
-
     <!-- Tab panes -->
     <div class="tab-content" id="pills-tabContent">
       <div v-for="(tab, index) in tabs" :key="tab.id" :id="tab.id" class="tab-pane fade"
         :class="{ show: activeTabIndex === index, active: activeTabIndex === index }" role="tabpanel"
         :aria-labelledby="tab.id + '-tab'">
-
         <!-- Crust and Size-->
-        <div v-if="tab.id === 'pills-crust'" class="card" style="width: 100%;">
+        <div v-if="tab.id === 'pills-crust'" class="card">
           <ul class="list-group">
             <li class="list-group-item size-crust">Choose Your Crust and Size</li>
             <li class="list-group-item">
-
-
-              <div class=" card-radio" style="width: 100%;">
+              <div class=" card-radio">
                 <ul class="list-group list-group">
-
                   <li v-for="crust in crustTypes" v-bind:key="crust.name" class="list-group-item">
                     <label>
                       <input type="radio" name="pizza-crust-type" value={{crust.name}}>
-                    </label> {{ crust.name }} - <!--{{ crustDescriptions[crust.name] }}--> {{ crust.description }}
+                    </label> {{ crust.name }} - {{ crustDescriptions[crust.name] }}
                   </li>
-
                 </ul>
               </div>
               <br>
-
-              <div class=" card-radio" style="width: 100%;">
+              <div class=" card-radio">
                 <ul class="list-group list-group">
                   <li v-for="crust in crustSizes" v-bind:key="crust.name" class="list-group-item">
                     <label>
                       <input type="radio" name="pizza-crust-size" value={{crust.name}}>
-
                     </label> {{ crust.name }}
                   </li>
                 </ul>
               </div>
-
             </li>
           </ul>
           <div class="card-footer d-flex justify-content-end">
-            <button class="btn btn-primary" @click="goToNextTab">Next Step ></button>
+            <button class="btn btn-primary" @click="goToNextTab">Sauce & Cheese ></button>
           </div>
         </div>
         <!-- Sauce and Cheese-->
         <div v-else-if="tab.id === 'pills-sauce-cheese'" class="card">
           <div class="tab-pane" id="pills-sauce-cheese" role="tabpanel" aria-labelledby="pills-sauce-cheese-tab">
-            <div class="card" style="width: 100%;">
+            <div class="card">
               <ul class="list-group">
                 <li class="list-group-item cheese-sauce">Choose Your Sauce and Cheese</li>
                 <li class="list-group-item">
                   <!--Sauces-->
-                  <div class="card card-radio" style="width: 100%;">
+                  <div class="card card-radio">
                     <ul class="list-group-item">
                       <li v-for="sauce in sauces" v-bind:key="sauce.name" class="list-group-item">
                         <label>
@@ -78,7 +69,7 @@
                   </div>
                   <br>
                   <!--Cheeses-->
-                  <div class="card card-radio" style="width: 100%;">
+                  <div class="card card-radio">
                     <ul class="list-group-item">
                       <li v-for="cheese in cheeseToppings" v-bind:key="cheese.name" class="list-group-item">
                         <label>
@@ -92,80 +83,65 @@
               </ul>
             </div>
             <div class="card-footer d-flex justify-content-between mt-3">
-              <button class="btn btn-secondary" @click="goToPreviousTab" v-if="index > 0">Previous</button>
-              <button class="btn btn-primary" @click="goToNextTab" v-if="index < tabs.length - 1">Next</button>
+              <button class="btn btn-secondary" @click="goToPreviousTab" v-if="index > 0">Crust & Size</button>
+              <button class="btn btn-primary" @click="goToNextTab" v-if="index < tabs.length - 1">Meat Toppings</button>
             </div>
           </div>
         </div>
         <!-- Meats-->
         <div v-else-if="tab.id === 'pills-meat'" class="card">
           <div class="tab-pane" id="pills-meat" role="tabpanel" aria-labelledby="pills-meat-tab">
-            <div class="card" style="width: 100%;">
+            <div class="card">
               <ul class="list-group list-group">
                 <li class="list-group-item toppings">Choose Your Meat</li>
                 <li class="list-group-item">
                   <!--Meats-->
-                  <div class="card card-radio my-20" style="width: 100%;">
+                  <div class="card card-radio my-20">
                     <ul class="list-group list-group">
-
                       <li v-for="meat in meatToppings" v-bind:key="meat.name" class="list-group-item">
                         <label>
                           <input type="checkbox" name="meat-toppings" value={{meat.name}}>
                         </label>
                         {{ meat.name }}
                       </li>
-
                     </ul>
                   </div>
                 </li>
               </ul>
             </div>
             <div class="card-footer d-flex justify-content-between mt-3">
-              <button class="btn btn-secondary" @click="goToPreviousTab" v-if="index > 0">Previous</button>
-              <button class="btn btn-primary" @click="goToNextTab" v-if="index < tabs.length - 1">Next</button>
+              <button class="btn btn-secondary" @click="goToPreviousTab" v-if="index > 0">Sauce & Cheese</button>
+              <button class="btn btn-primary" @click="goToNextTab" v-if="index < tabs.length - 1">Veggie Toppings</button>
             </div>
           </div>
         </div>
         <!-- Veggies-->
         <div v-else="tab.id === 'pills-veggies'" class="card">
           <div class="tab-pane" id="pills-veggies" role="tabpanel" aria-labelledby="pills-veggies-tab">
-            <div class="card" style="width: 100%;">
+            <div class="card">
               <ul class="list-group">
                 <li class="list-group-item toppings">Choose Your Veggies</li>
                 <li class="list-group-item">
                   <!--Non-Meats-->
-                  <div class="card card-radio" style="width: 100%;">
+                  <div class="card card-radio">
                     <ul class="list-group">
-
                       <li v-for="veggie in veggieToppings" v-bind:key="veggie.name" class="list-group-item">
                         <label>
                           <input type="checkbox" name="non-meat-toppings" value={{veggie.name}}>
                         </label>
                         {{ veggie.name }}
                       </li>
-
                     </ul>
                   </div>
                 </li>
               </ul>
-              <div class="card-footer d-flex justify-content-end">
-                <button class="next-step">Checkout
-                  <svg xmlns="http://www.w3.org/2000/svg" height="1em"
-                    viewBox="0 0 576 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
-                    <path
-                      d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z" />
-                  </svg>
-                </button>
-              </div>
             </div>
           </div>
-          {{ tab.content }}
           <div class="card-footer d-flex justify-content-between mt-3">
-            <button class="btn btn-secondary" @click="goToPreviousTab" v-if="index > 0">Previous</button>
-
+            <button class="btn btn-secondary" @click="goToPreviousTab" v-if="index > 0">Meat Toppings</button>
+            <button class="btn btn-danger" @click="goToOrderReview">Review Order</button>
           </div>
         </div>
-
       </div>
     </div>
   </section>
@@ -194,16 +170,16 @@ export default {
       crustTypes: [],
       sauces: [],
       crustSizes: [],
-      // crustDescriptions: {
+      crustDescriptions: {
 
-      //   'Regular': 'Garlic seasoned crust with a rich, buttery taste.',
+        'Regular': 'Garlic seasoned crust with a rich, buttery taste.',
 
-      //   'Deep Dish': 'Chicago-style deep dish crust with a buttery, flaky exterior.',
+        'Deep Dish': 'Chicago-style deep dish crust with a buttery, flaky exterior.',
 
-      //   'Thin': 'Thin enough for optimum crispy to crunchy ratio.',
+        'Thin': 'Thin enough for optimum crispy to crunchy ratio.',
 
-      //   'Cauliflower': 'Gluten-free cauliflower crust with a buttery, flaky exterior.',
-      // },
+        'Cauliflower': 'Gluten-free cauliflower crust with a buttery, flaky exterior.',
+      },
     }
   },
   methods: {
@@ -219,6 +195,10 @@ export default {
       if (this.activeTabIndex > 0) {
         this.activeTabIndex--;
       }
+    },
+    //need to create an order review page to go to?
+    goToOrderReview() {
+      this.$router.push({ name: 'OrderReview' });
     },
   },
   created() {
