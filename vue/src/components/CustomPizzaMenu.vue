@@ -29,7 +29,7 @@
                   <li v-for="crust in crustTypes" v-bind:key="crust.name" class="list-group-item">
                     <label>
                       <input type="radio" name="pizza-crust-type" value={{crust.name}}>
-                    </label> {{ crust.name }} - {{ crustDescriptions[crust.name] }}
+                    </label> {{ crust.name }} - {{ crust.description}}
                   </li>
                 </ul>
               </div>
@@ -170,16 +170,16 @@ export default {
       crustTypes: [],
       sauces: [],
       crustSizes: [],
-      crustDescriptions: {
+      // crustDescriptions: {
 
-        'Regular': 'Garlic seasoned crust with a rich, buttery taste.',
+      //   'Regular': 'Garlic seasoned crust with a rich, buttery taste.',
 
-        'Deep Dish': 'Chicago-style deep dish crust with a buttery, flaky exterior.',
+      //   'Deep Dish': 'Chicago-style deep dish crust with a buttery, flaky exterior.',
 
-        'Thin': 'Thin enough for optimum crispy to crunchy ratio.',
+      //   'Thin': 'Thin enough for optimum crispy to crunchy ratio.',
 
-        'Cauliflower': 'Gluten-free cauliflower crust with a buttery, flaky exterior.',
-      },
+      //   'Cauliflower': 'Gluten-free cauliflower crust with a buttery, flaky exterior.',
+      // },
     }
   },
   methods: {
