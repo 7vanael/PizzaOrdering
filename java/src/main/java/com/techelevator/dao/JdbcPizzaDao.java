@@ -44,7 +44,7 @@ public class JdbcPizzaDao implements PizzaDao {
     @Override
     public List<Topping> listToppingsByPizzaId(int id) {
         List<Topping> toppingList = new ArrayList<>();
-        String sql = "SELECT t.topping, t.topping_tier, t.topping_available, t.topping_type FROM toppings AS t JOIN specialty_toppings AS st ON t.topping = st.topping WHERE st.pizza_id = ?";
+        String sql = "SELECT t.topping, t.topping_tier, t.topping_available, t.topping_type, t.topping_description FROM toppings AS t JOIN specialty_toppings AS st ON t.topping = st.topping WHERE st.pizza_id = ?";
     try {
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, id);
         while (results.next()) {
@@ -53,6 +53,7 @@ public class JdbcPizzaDao implements PizzaDao {
             topping.setToppingTier(results.getInt("topping_tier"));
             topping.setAvailable(results.getBoolean("topping_available"));
             topping.setType(results.getString("topping_type"));
+            topping.setDescription(results.getString("topping_description"));
             toppingList.add(topping);
         }
         return toppingList;
@@ -65,7 +66,7 @@ public class JdbcPizzaDao implements PizzaDao {
     public List<Topping> listToppings() {
 
         List<Topping> toppingList = new ArrayList<>();
-        String sql = "SELECT topping, topping_tier, topping_available, topping_type FROM toppings";
+        String sql = "SELECT topping, topping_tier, topping_available, topping_type, topping_description FROM toppings";
     try {
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
         while (results.next()) {
@@ -74,6 +75,7 @@ public class JdbcPizzaDao implements PizzaDao {
             topping.setToppingTier(results.getInt("topping_tier"));
             topping.setAvailable(results.getBoolean("topping_available"));
             topping.setType(results.getString("topping_type"));
+            topping.setDescription(results.getString("topping_description"));
             toppingList.add(topping);
         }
         return toppingList;
@@ -85,7 +87,7 @@ public class JdbcPizzaDao implements PizzaDao {
     @Override
     public List<Topping> listToppingsByType(String type) {
         List<Topping> toppingList = new ArrayList<>();
-        String sql = "SELECT topping, topping_tier, topping_available, topping_type FROM toppings WHERE topping_type::text = ?";
+        String sql = "SELECT topping, topping_tier, topping_available, topping_type, topping_description FROM toppings WHERE topping_type::text = ?";
     try {
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, type);
         while (results.next()) {
@@ -94,6 +96,7 @@ public class JdbcPizzaDao implements PizzaDao {
             topping.setToppingTier(results.getInt("topping_tier"));
             topping.setAvailable(results.getBoolean("topping_available"));
             topping.setType(results.getString("topping_type"));
+            topping.setDescription(results.getString("topping_description"));
             toppingList.add(topping);
         }
         return toppingList;
