@@ -18,7 +18,6 @@ public class JdbcPizzaDao implements PizzaDao {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-
     @Override
     public List<Pizza> listPizzas() {
 
@@ -103,5 +102,25 @@ public class JdbcPizzaDao implements PizzaDao {
     }catch(Exception e) {
         throw new DaoException(e.getMessage(), e);
     }
+    }
+
+    @Override
+    public Topping getTopping(String name) {
+        String sql = "SELECT topping, topping_tier, topping_available, topping_type, topping_description FROM toppings WHERE topping = ?";
+        try {
+            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, name);
+            if (results.next()) {
+                Topping topping = new Topping();
+                topping.setName(results.getString("topping"));
+                topping.setToppingTier(results.getInt("topping_tier"));
+                topping.setAvailable(results.getBoolean("topping_available"));
+                topping.setType(results.getString("topping_type"));
+                topping.setDescription(results.getString("topping_description"));
+                return topping;
+            }
+        }catch(Exception e) {
+            throw new DaoException(e.getMessage(), e);
+        }
+        return null;
     }
 }

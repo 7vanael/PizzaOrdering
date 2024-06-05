@@ -13,4 +13,7 @@ public interface PizzaDao {
     List<Topping> listToppingsByPizzaId(int id);
 
     List<Topping> listToppingsByType(String type);
+
+    Topping getTopping(String name);
+
 }

@@ -4,11 +4,8 @@ import com.techelevator.exception.DaoException;
 import com.techelevator.model.Pizza;
 import com.techelevator.model.Topping;
 import com.techelevator.service.PizzaService;
-import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
@@ -23,6 +20,7 @@ public class PizzaController {
         this.pizzaService = pizzaService;
     }
     @GetMapping(path = "/pizzas")
+    @ResponseStatus(HttpStatus.OK)
     public List<Pizza> listPizzas() {
         try {
             return pizzaService.listPizzas();
@@ -32,6 +30,7 @@ public class PizzaController {
     }
 
     @GetMapping(path = "/toppings")
+    @ResponseStatus(HttpStatus.OK)
     public List<Topping> listToppingsByType(@RequestParam(required = false) String type) {
         try {
             return pizzaService.listToppingsByType(type);
