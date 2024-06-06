@@ -52,7 +52,7 @@ CREATE TABLE specialty_pizzas (
 	crust_type varchar(50),
 	sauce_type varchar(50) DEFAULT 'Tomato',
 	pizza_available BOOL DEFAULT TRUE,
-	pizza_type varchar(50) DEFAULT 'Pizza',
+--	pizza_type varchar(50) DEFAULT 'Pizza',
 	pizza_description varchar(200) DEFAULT '',
 	CONSTRAINT PK_pizza_id PRIMARY KEY (pizza_id)	
 );
@@ -60,8 +60,8 @@ CREATE TABLE specialty_pizzas (
 CREATE TABLE side_items (
     side_items SERIAL PRIMARY KEY,
     side_item_name varchar(50),
-    side_item_price NUMERIC(6, 2),
-    side_item_type varchar(50) DEFAULT 'Side'
+    side_item_price NUMERIC(6, 2)
+--    side_item_type varchar(50) DEFAULT 'Side'
 );
 ALTER SEQUENCE side_items_side_items_seq RESTART WITH 400;
 
@@ -111,9 +111,6 @@ CREATE TABLE customers (
     customer_city varchar(50),
     customer_state varchar(50),
     customer_zip varchar(50),
-    customer_ccNumber varchar(50),
-    customer_ccExp varchar(50),
-    customer_ccCode int,
     CONSTRAINT PK_customer_id PRIMARY KEY (customer_id)
 );
 
