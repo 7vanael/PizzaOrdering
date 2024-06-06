@@ -116,7 +116,8 @@
           </div>
         </div>
         <!-- Veggies-->
-        <div v-else="tab.id === 'pills-veggies'" class="card">
+        <!--="tab.id === 'pills-veggies'"-->
+        <div v-else class="card">
           <div class="tab-pane" id="pills-veggies" role="tabpanel" aria-labelledby="pills-veggies-tab">
             <div class="card">
               <ul class="list-group">
@@ -163,23 +164,20 @@ export default {
         { id: 'pills-veggies', label: 'Veggies' },
       ],
       pizzaToppings: [],
-      pizzas: [],
+      specialtyPizzas: [],
+      activePizza: [],
       meatToppings: [],
       veggieToppings: [],
       cheeseToppings: [],
       crustTypes: [],
       sauces: [],
       crustSizes: [],
-      crustDescriptions: {
-
-        'Regular': 'Garlic seasoned crust with a rich, buttery taste.',
-
-        'Deep Dish': 'Chicago-style deep dish crust with a buttery, flaky exterior.',
-
-        'Thin': 'Thin enough for optimum crispy to crunchy ratio.',
-
-        'Cauliflower': 'Gluten-free cauliflower crust with a buttery, flaky exterior.',
-      },
+      // crustDescriptions: {
+      //   'Regular': 'Garlic seasoned crust with a rich, buttery taste.',
+      //   'Deep Dish': 'Chicago-style deep dish crust with a buttery, flaky exterior.',
+      //   'Thin': 'Thin enough for optimum crispy to crunchy ratio.',
+      //   'Cauliflower': 'Gluten-free cauliflower crust with a buttery, flaky exterior.',
+      // },
     }
   },
   methods: {
@@ -294,14 +292,11 @@ export default {
       });
     ToppingsService.getPizzas().then(
       (response) => {
-        this.pizzas = response.data;
+        this.specialtyPizzas = response.data;
 
       });
 
 
-  },
-  methods(){
-    
   },
 }
 </script>
