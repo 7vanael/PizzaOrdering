@@ -53,7 +53,7 @@
                     </div>
 
                     <div class="carousel-inner">
-                        <div v-for="(pizza, index) in pizzas" :key="pizza.name"
+                        <div v-for="(pizza, index) in pizzas" :key="pizza.name" v-on:click="setActivePizza(pizza)"
                             :class="['carousel-item', { active: index === 0 }]">
                     <img :src="images[pizza.name]" class="d-block w-100" alt="pizza image">
                             <!-- <img src="../images/BBQ chicken pizza.jpg" class="d-block w-100" alt="..."> -->
@@ -117,6 +117,11 @@ export default {
         ToppingsService.getPizzas().then(response => {
             this.pizzas = response.data;
         });
+    },
+    methods:{
+        setActivePizza(pizza){
+            this.$store.commit("SET_ACTIVE_PIZZA", pizza);
+        }
     }
 }
 

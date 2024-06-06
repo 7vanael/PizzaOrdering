@@ -25,7 +25,7 @@
                 <ul class="list-group list-group">
                   <li v-for="crust in crustTypes" v-bind:key="crust.name" class="list-group-item">
                     <label>
-                      <input type="radio" name="pizza-crust-type" value={{crust.name}}>
+                      <input type="radio" name="pizza-crust-type" v-bind:value="crust.name" v-model="$store.state.activePizza.crust">
                     </label> {{ crust.name }} - {{ crust.description}}
                   </li>
                 </ul>
@@ -35,7 +35,7 @@
                 <ul class="list-group list-group">
                   <li v-for="crust in crustSizes" v-bind:key="crust.name" class="list-group-item">
                     <label>
-                      <input type="radio" name="pizza-crust-size" value={{crust.name}}>
+                      <input type="radio" name="pizza-crust-size" v-bind:value="crust.name" v-model="$store.state.activePizza.size">
                     </label> {{ crust.name }}
                   </li>
                 </ul>
@@ -63,7 +63,7 @@
                     <ul class="list-group-item">
                       <li v-for="sauce in sauces" v-bind:key="sauce.name" class="list-group-item">
                         <label>
-                          <input type="radio" name="pizza-sauce" value={{sauce.name}}>
+                          <input type="radio" name="pizza-sauce" v-bind:value="sauce.name" v-model="$store.state.activePizza.sauce" >
                         </label>
                         {{ sauce.name }}
                       </li>
@@ -104,9 +104,9 @@
                   <!--Meats-->
                   <div class="card card-radio my-20">
                     <ul class="list-group list-group">
-                      <li v-for="meat in meatToppings" v-bind:key="meat.name" class="list-group-item">
+                      <li v-for="meat in meatToppings" v-bind:key="meat.name" class="list-group-item" >
                         <label>
-                          <input type="checkbox" name="meat-toppings" value={{meat.name}}>
+                          <input type="checkbox" name="meat-toppings" v-bind:value="meat.name" v-model="$store.state.activePizza.toppings[0].name">
                         </label>
                         {{ meat.name }}
                       </li>
@@ -180,7 +180,7 @@ export default {
       ],
       pizzaToppings: [],
       specialtyPizzas: [],
-      activePizza: [],
+      activePizza :{},
       meatToppings: [],
       veggieToppings: [],
       cheeseToppings: [],
@@ -311,7 +311,14 @@ export default {
     ToppingsService.getPizzas().then(
       (response) => {
         this.specialtyPizzas = response.data;
-
+        let pizzaList;
+        pizzaList = this.specialtyPizzas;
+        pizzaList.forEach(
+          (pizzaLoop) => {
+            if (pizzaLoop.name === "The Polymorph") {
+              this.$store.commit("SET_ACTIVE_PIZZA", pizzaLoop);
+            }
+          });
       });
 
 
