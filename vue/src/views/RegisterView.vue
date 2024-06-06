@@ -1,4 +1,5 @@
 <template>
+  <NavBar />
   <div id="register" class="text-center">
     <form v-on:submit.prevent="register">
       <h1>Create Account</h1>
@@ -25,10 +26,16 @@
 
 <script>
 import authService from '../services/AuthService';
+import NavBar from '../components/NavBar.vue';
+
 
 export default {
+  components: {
+        NavBar
+    },
   data() {
     return {
+      
       user: {
         username: '',
         password: '',

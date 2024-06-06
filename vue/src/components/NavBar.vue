@@ -50,4 +50,10 @@ export default {
 .nav-link.active {
   color: #F2DC9C;
 }
+
+.navbar-toggler {
+  background-color: #F7C516;
+  border: 2px solid #2892C4;
+  color: #A4200B;
+}
 </style>

@@ -211,7 +211,6 @@ export default {
         this.activeTabIndex--;
       }
     },
-    // need to create an order review page to go to?
     goToCheckout() {
       if (this.activeTabIndex === this.tabs.length - 1) {
         this.$router.push('/checkout');
