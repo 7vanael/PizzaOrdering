@@ -30,8 +30,7 @@
                     <p class="col">Price</p>
                 </div>
             </div>
-            <!-- Most of the contents of these need to actually have data in the fields, will
-            likely need to import prop? Not sure how you'd like to handle -->
+            
             <form>
                 <div class="container">
                     <div class="row">
@@ -147,7 +146,6 @@
             </form>
 
         </div>
-        <!-- <Checkout /> -->
     </div>
 </template>
 
@@ -155,13 +153,11 @@
 
 import NavBar from '../components/NavBar.vue';
 import ToppingsService from '../services/ToppingsService.js';
-// import Checkout from '../components/Checkout.vue';
 
 
 export default {
     components: {
         NavBar,
-        // Checkout
     },
     data() {
         return {
