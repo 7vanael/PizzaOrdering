@@ -97,7 +97,7 @@ export default {
             images: [
                 { 
                     name: 'AI margherita pizza',
-                    image: '../images/AI margherita pizza.webp'
+                    image: '../images/AI_margherita_pizza.webp'
                 },
                 { 
                     name: 'BBQ chicken pizza',
