@@ -1,6 +1,4 @@
 <template>
-  <!-- {{ pizzas }} -->
-  <!-- {{ pizzaToppings[0].name }} -->
   <NavBar />
   <div class="home">
     <h1>Syntax Slices</h1>
