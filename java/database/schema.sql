@@ -103,4 +103,24 @@ CREATE TABLE order_item_options(
     item_option varchar(50)
 );
 
+CREATE TABLE customers (
+    customer_id SERIAL,
+    customer_name varchar(50),
+    customer_email varchar(50),
+    customer_street_address varchar(50),
+    customer_city varchar(50),
+    customer_state varchar(50),
+    customer_zip varchar(50),
+    customer_ccNumber varchar(50),
+    customer_ccExp varchar(50),
+    customer_ccCode int,
+    CONSTRAINT PK_customer_id PRIMARY KEY (customer_id)
+);
+
+CREATE TABLE customer_order (
+    customer_id int REFERENCES customers (customer_id),
+    order_id int REFERENCES orders (order_id),
+    CONSTRAINT PK_customer_order PRIMARY KEY (customer_id, order_id)
+);
+
 COMMIT TRANSACTION;
