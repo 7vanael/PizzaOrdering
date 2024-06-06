@@ -1,7 +1,4 @@
 <template>
-  <!-- {{ meatToppings }} -->
-  <!-- {{ cheeseToppings }} -->
-  <!-- {{ pizzaToppings }} -->
   <section class="container-fluid">
 
     <!-- Nav tabs -->
@@ -29,7 +26,7 @@
                   <li v-for="crust in crustTypes" v-bind:key="crust.name" class="list-group-item">
                     <label>
                       <input type="radio" name="pizza-crust-type" value={{crust.name}}>
-                    </label> {{ crust.name }} - {{ crustDescriptions[crust.name] }}
+                    </label> {{ crust.name }} - {{ crust.description}}
                   </li>
                 </ul>
               </div>
@@ -45,9 +42,14 @@
               </div>
             </li>
           </ul>
+
+
+ <!--Button Start-->
           <div class="card-footer d-flex justify-content-end">
             <button class="btn btn-primary" @click="goToNextTab">Sauce & Cheese ></button>
           </div>
+
+
         </div>
         <!-- Sauce and Cheese-->
         <div v-else-if="tab.id === 'pills-sauce-cheese'" class="card">
@@ -82,10 +84,14 @@
                 </li>
               </ul>
             </div>
+
+<!--Button Start-->
             <div class="card-footer d-flex justify-content-between mt-3">
               <button class="btn btn-secondary" @click="goToPreviousTab" v-if="index > 0">Crust & Size</button>
               <button class="btn btn-primary" @click="goToNextTab" v-if="index < tabs.length - 1">Meat Toppings</button>
             </div>
+
+
           </div>
         </div>
         <!-- Meats-->
@@ -109,10 +115,14 @@
                 </li>
               </ul>
             </div>
+
+<!--Button Start-->
             <div class="card-footer d-flex justify-content-between mt-3">
               <button class="btn btn-secondary" @click="goToPreviousTab" v-if="index > 0">Sauce & Cheese</button>
               <button class="btn btn-primary" @click="goToNextTab" v-if="index < tabs.length - 1">Veggie Toppings</button>
             </div>
+
+
           </div>
         </div>
         <!-- Veggies-->
@@ -138,10 +148,15 @@
               </ul>
             </div>
           </div>
+
+
+ <!--Button Start-->
           <div class="card-footer d-flex justify-content-between mt-3">
             <button class="btn btn-secondary" @click="goToPreviousTab" v-if="index > 0">Meat Toppings</button>
-            <button class="btn btn-danger" @click="goToOrderReview">Review Order</button>
+            <button class="btn btn-danger" @click="goToCheckout">Review Order</button>
           </div>
+
+
         </div>
       </div>
     </div>
@@ -172,12 +187,14 @@ export default {
       crustTypes: [],
       sauces: [],
       crustSizes: [],
+
       // crustDescriptions: {
       //   'Regular': 'Garlic seasoned crust with a rich, buttery taste.',
       //   'Deep Dish': 'Chicago-style deep dish crust with a buttery, flaky exterior.',
       //   'Thin': 'Thin enough for optimum crispy to crunchy ratio.',
       //   'Cauliflower': 'Gluten-free cauliflower crust with a buttery, flaky exterior.',
       // },
+
     }
   },
   methods: {
@@ -194,9 +211,11 @@ export default {
         this.activeTabIndex--;
       }
     },
-    //need to create an order review page to go to?
-    goToOrderReview() {
-      this.$router.push({ name: 'OrderReview' });
+    // need to create an order review page to go to?
+    goToCheckout() {
+      if (this.activeTabIndex === this.tabs.length - 1) {
+        this.$router.push('/checkout');
+      }
     },
   },
   created() {

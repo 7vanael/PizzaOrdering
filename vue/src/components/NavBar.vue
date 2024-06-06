@@ -1,23 +1,36 @@
 <template>
   <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#home">Syntax Slices</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
-        aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <router-link class="navbar-brand" v-bind:to=" { name: 'home'}">Syntax Slices</router-link>
+      <button class="navbar-toggler" type="button" @click="toggleNavbar" :aria-expanded="isNavbarExpanded" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div :class="['collapse navbar-collapse', { show: isNavbarExpanded }]" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-          <a class="nav-link" aria-current="page" href="#location">Location</a>
-          <a class="nav-link active" href="#">Order</a>
-          <a class="nav-link" href="#">Sign Up</a>
+          <router-link class="nav-link" to="/location">Location</router-link>
+          <router-link class="nav-link active" to="/checkout">Order</router-link>
+          <router-link class="nav-link" to="/register">Sign Up</router-link>
+          <router-link class="nav-link" to="/login">Log In</router-link>
         </div>
       </div>
     </div>
   </nav>
 </template>
 
-<script></script>
+<script>
+export default {
+  data() {
+    return {
+      isNavbarExpanded: false,
+    };
+  },
+  methods: {
+    toggleNavbar() {
+      this.isNavbarExpanded = !this.isNavbarExpanded;
+    },
+  },
+};
+</script>
 
 <style scoped>
 .navbar {
