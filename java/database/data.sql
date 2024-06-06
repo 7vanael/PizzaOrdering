@@ -28,9 +28,9 @@ INSERT INTO crusts (crust_type, type_price_modifier, crust_description) VALUES (
  ('Cauliflower', 3.5, 'Gluten-free cauliflower crust with a buttery flaky exterior');
 
 INSERT INTO specialty_pizzas  (pizza_name, pizza_size, crust_type, pizza_description) VALUES
-('Margarita', 'Large', 'Regular', 'Fresh Mozzarella, fresh basil, fresh tomato slices.. The cutting edge in classic Pizza-ing'),
-('Pepperoni', 'Large', 'Regular', 'If there is no pepperoni, then it might as well be flat bread!'),
-('Supreme', 'Large', 'Regular', 'The works! It has it all! Maybe even too much. Customize to your delight!'),
+('The API', 'Large', 'Regular', 'Fresh Mozzarella, fresh basil, fresh tomato slices.. The cutting edge in classic Pizza-ing'),
+('The Default', 'Large', 'Regular', 'If there is no pepperoni, then it might as well be flat bread!'),
+('The Compiler', 'Large', 'Regular', 'The works! It has it all! Maybe even too much. Customize to your delight!'),
 ('The Polymorph', 'Large', 'Regular', 'Design your pizza YOUR way!'),
 ('The Constructor', 'Large', 'Regular', 'A Classic cheese pizza. Add some Jalapenos to spicy up your night!'),
 ('The Back-End', 'Large', 'Regular', 'BBQ sauce, BBQ chicken, onions, and tons of cheese'),

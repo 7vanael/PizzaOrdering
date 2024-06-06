@@ -55,7 +55,7 @@
                     <div class="carousel-inner">
                         <div v-for="(pizza, index) in pizzas" :key="pizza.name"
                             :class="['carousel-item', { active: index === 0 }]">
-                    <img :src="images.image" class="d-block w-100" alt="pizza image">
+                    <img :src="images[pizza.name]" class="d-block w-100" alt="pizza image">
                             <!-- <img src="../images/BBQ chicken pizza.jpg" class="d-block w-100" alt="..."> -->
                             <div class="carousel-caption d-none d-md-block">
                                 <h5>{{ pizza.name }}</h5>
@@ -94,41 +94,22 @@ import CustomPizzaMenu from './CustomPizzaMenu.vue';
 export default {
     data() {
         return {
-            images: [
+            images: 
                 { 
-                    name: 'AI margherita pizza',
-                    image: '../images/AI_margherita_pizza.webp'
-                },
-                { 
-                    name: 'BBQ chicken pizza',
-                    image: '../images/BBQ chicken pizza.jpg'
-                },
-                { 
-                    name: 'Classic Cheese',
-                    image: '../images/classic cheese pizza.jpg'
-                },
-                { 
-                    name: 'Custom Pizza',
-                    image: '../images/custom pizza.jpg'
-                },
-                { 
-                    name: 'Meat Lovers',
-                    image: '../images/Meat Lovers.jpg'
-                },
-                { 
-                    name: 'Supreme pizza',
-                    image: '../images/supreme pizza.webp'
-                },
-                { 
-                    name: 'Tomato Basil pizza',
-                    image: '../images/tomato basil pizza.jpeg'
-                },
-                { 
-                    name: 'Veggie Pizza',
-                    image: '../images/veggie pizza.webp'
+
+                'The Front-End': '../images/AI_margherita_pizza.webp',
+                'The Default': '../images/pepperoni_pizza.jpg',
+                'The Back-End': '../images/BBQ_chicken_pizza.jpg', 
+                'The Constructor': '../images/classic_cheese_pizza.jpg',
+                'The Polymorph': '../images/custom_pizza.jpeg',
+                'The Framework': '../images/Meat_Lovers.jpg',
+                'The Compiler': '../images/supreme_pizza.webp',
+                'The API': '../images/tomato_basil_pizza.jpeg',
+                'The Debugger': '../images/veggie_pizza.webp',
+                'The Full-Stack': '../images/full_stack_pizza.jpg'
                 }
                 
-        ],
+        ,
         pizzas: [],
         };
     },

@@ -16,4 +16,8 @@ public class OrderService {
     public int placeOrder(Order order){
         return orderDao.placeOrder(order);
     }
+
+    public Order getOrderById(int id){
+        return orderDao.getOrderById(id);
+    }
 }

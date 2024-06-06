@@ -1,10 +1,10 @@
 package com.techelevator.dao;
 
 import com.techelevator.exception.DaoException;
-import com.techelevator.model.Item;
-import com.techelevator.model.Order;
-import com.techelevator.model.Topping;
+import com.techelevator.model.*;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.support.rowset.SqlRowSet;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -38,5 +38,52 @@ public class JdbcOrderDao implements OrderDao{
         } catch(Exception e) {
             throw new DaoException(e.getMessage(), e);
         }
+    }
+
+    @Transactional
+    public Order getOrderById(int id){
+        String sql = "SELECT order_total, customer_id, order_status, order_type FROM orders WHERE order_id = ?";
+        try {
+            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, id);
+            Order order = new Order();
+            Customer customer = new Customer();
+            Item item = new Item();
+            Pizza pizza = new Pizza();
+            int itemId = 0;
+            int uniqueItemId = 0;
+
+            if (results.next()){
+                order.setTotal(results.getDouble("order_total"));
+                order.setStatus(results.getString("order_status"));
+                order.setType(results.getString("order_type"));
+                customer.setId(results.getInt("customer_id"));
+                order.setCustomer(customer);
+
+                String sql2 = "SELECT unique_item_id, item_id FROM order_items WHERE order_id = ?";
+                SqlRowSet results2 = jdbcTemplate.queryForRowSet(sql2, id);
+                while(results2.next()){
+                    itemId = results2.getInt("item_id");
+                    uniqueItemId = results2.getInt("unique_item_id");
+                    item.setPizza(pizza);
+                    pizza.setId(results2.getInt("item_id"));
+
+                }
+                String sql3 = "SELECT pizza_name, pizza_size, crust_type, sauce_type FROM specialty_pizzas WHERE pizza_id = ?";
+                SqlRowSet results3 = jdbcTemplate.queryForRowSet(sql3, itemId);
+                while(results3.next()) {
+                    pizza.setName(results.getString("pizza_name"));
+                    pizza.setSize(results.getString("default" + "pizza_size"));
+                    pizza.setCrust(results.getString("default" + "crust_type"));
+                    pizza.setSauce(results.getString("default" + "sauce_type"));
+                }
+                String sql4 = "SELECT topping FROM specialty_toppings WHERE "
+            }
+
+        }catch(Exception e) {
+            throw new DaoException(e.getMessage(), e);
+        }
+
+
+        return null;
     }
 }
