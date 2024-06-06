@@ -42,9 +42,14 @@
               </div>
             </li>
           </ul>
+
+
+ <!--Button Start-->
           <div class="card-footer d-flex justify-content-end">
             <button class="btn btn-primary" @click="goToNextTab">Sauce & Cheese ></button>
           </div>
+
+
         </div>
         <!-- Sauce and Cheese-->
         <div v-else-if="tab.id === 'pills-sauce-cheese'" class="card">
@@ -79,10 +84,14 @@
                 </li>
               </ul>
             </div>
+
+<!--Button Start-->
             <div class="card-footer d-flex justify-content-between mt-3">
               <button class="btn btn-secondary" @click="goToPreviousTab" v-if="index > 0">Crust & Size</button>
               <button class="btn btn-primary" @click="goToNextTab" v-if="index < tabs.length - 1">Meat Toppings</button>
             </div>
+
+
           </div>
         </div>
         <!-- Meats-->
@@ -106,10 +115,14 @@
                 </li>
               </ul>
             </div>
+
+<!--Button Start-->
             <div class="card-footer d-flex justify-content-between mt-3">
               <button class="btn btn-secondary" @click="goToPreviousTab" v-if="index > 0">Sauce & Cheese</button>
               <button class="btn btn-primary" @click="goToNextTab" v-if="index < tabs.length - 1">Veggie Toppings</button>
             </div>
+
+
           </div>
         </div>
         <!-- Veggies-->
@@ -134,10 +147,15 @@
               </ul>
             </div>
           </div>
+
+
+ <!--Button Start-->
           <div class="card-footer d-flex justify-content-between mt-3">
             <button class="btn btn-secondary" @click="goToPreviousTab" v-if="index > 0">Meat Toppings</button>
-            <button class="btn btn-danger" @click="goToOrderReview">Review Order</button>
+            <button class="btn btn-danger" @click="goToCheckout">Review Order</button>
           </div>
+
+
         </div>
       </div>
     </div>
@@ -184,9 +202,11 @@ export default {
         this.activeTabIndex--;
       }
     },
-    //need to create an order review page to go to?
-    goToOrderReview() {
-      this.$router.push({ name: 'OrderReview' });
+    // need to create an order review page to go to?
+    goToCheckout() {
+      if (this.activeTabIndex === this.tabs.length - 1) {
+        this.$router.push('/checkout');
+      }
     },
   },
   created() {
@@ -287,9 +307,6 @@ export default {
       });
 
 
-  },
-  methods(){
-    
   },
 }
 </script>

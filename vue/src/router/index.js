@@ -6,7 +6,7 @@ import HomeView from '../views/HomeView.vue';
 import LoginView from '../views/LoginView.vue';
 import LogoutView from '../views/LogoutView.vue';
 import RegisterView from '../views/RegisterView.vue';
-import ReviewOrderView from '../views/ReviewOrderView.vue';
+import CheckoutView from '../views/CheckoutView.vue';
 import LocationView from '../views/LocationView.vue';
 /**
  * The Vue Router is used to "direct" the browser to render a specific view component
@@ -52,7 +52,7 @@ const routes = [
   {
     path: "/checkout",
     name: "checkout",
-    component: ReviewOrderView,
+    component: CheckoutView,
     meta: {
       requiresAuth: false
     }
