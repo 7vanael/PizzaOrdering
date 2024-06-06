@@ -18,17 +18,18 @@ public class JdbcOrderDao implements OrderDao{
 
     @Transactional
     public int placeOrder(Order order) {
-        String sql = "INSERT INTO orders (order_total, order_type, delivery_address) VALUES (?,?::order_type_t,?) returning order_id";
 
+        String sql = "INSERT INTO customers (customer_name, customer_email, customer_street_address, customer_city, customer_state, customer_zip) VALUES (?,?,?,?,?,?) returning customer_id";
         try {
-            int orderNumber = jdbcTemplate.queryForObject(sql, Integer.class, order.getTotal(), order.getType(), order.getAddress());
-
+            int customerId = jdbcTemplate.queryForObject(sql, Integer.class, order.getCustomer().getName(), order.getCustomer().getEmail(), order.getCustomer().getAddress(), order.getCustomer().getCity(), order.getCustomer().getState(), order.getCustomer().getZip());
+            String sql2 = "INSERT INTO orders (order_total, customer_id, order_type) VALUES (?,?,?::order_type_t) returning order_id";
+            int orderNumber = jdbcTemplate.queryForObject(sql2, Integer.class, order.getTotal(), customerId, order.getType());
             sql = "INSERT INTO order_items (order_id, item_id) VALUES (?,?) returning unique_item_id";
             for(Item item: order.getItems()){
                 int itemId = jdbcTemplate.queryForObject(sql, Integer.class, orderNumber, item.getPizza().getId());
                 for(Topping topping: item.getPizza().getToppings()) {
-                    String sql2 = "INSERT INTO order_item_options (item_id, item_option) VALUES (?,?)";
-                    jdbcTemplate.update(sql2, itemId, topping.getName());
+                    String sql3 = "INSERT INTO order_item_options (item_id, item_option) VALUES (?,?)";
+                    jdbcTemplate.update(sql3, itemId, topping.getName());
                 }
             }
 

@@ -7,8 +7,16 @@ public class Order {
     double total;
     String status;
     String type;
-    String address;
     List<Item> items;
+    Customer customer;
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
 
     public List<Item> getItems() {
         return items;
@@ -48,13 +56,5 @@ public class Order {
 
     public void setType(String type) {
         this.type = type;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
     }
 }
