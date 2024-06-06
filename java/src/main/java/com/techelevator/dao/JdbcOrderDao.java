@@ -76,7 +76,7 @@ public class JdbcOrderDao implements OrderDao{
                     pizza.setCrust(results.getString("default" + "crust_type"));
                     pizza.setSauce(results.getString("default" + "sauce_type"));
                 }
-                String sql4 = "SELECT FROM specialty_toppings WHERE "
+                String sql4 = "SELECT topping FROM specialty_toppings WHERE "
             }
 
         }catch(Exception e) {
