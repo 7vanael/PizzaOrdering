@@ -78,16 +78,27 @@ CREATE TABLE specialty_toppings (
 	CONSTRAINT FK_pizza_id FOREIGN KEY(pizza_id) REFERENCES specialty_pizzas (pizza_id),
 	CONSTRAINT FK_pizza_topping FOREIGN KEY(topping) REFERENCES toppings (topping)
 );
+CREATE TABLE customers (
+    customer_id SERIAL,
+    customer_name varchar(50),
+    customer_email varchar(50),
+    customer_street_address varchar(50),
+    customer_city varchar(50),
+    customer_state varchar(50),
+    customer_zip varchar(50),
+    CONSTRAINT PK_customer_id PRIMARY KEY (customer_id)
+);
 
 CREATE TYPE order_type_t AS ENUM ('Pick-up', 'Delivery');
 CREATE TYPE order_status_t AS ENUM ('Received', 'Ready', 'Out for Delivery', 'Completed', 'Canceled');
 CREATE TABLE orders (
 	order_id SERIAL,
+	customer_id int REFERENCES customers (customer_id),
 	order_total NUMERIC(6, 2),
 	order_status order_status_t DEFAULT 'Received',
 	order_type order_type_t DEFAULT 'Pick-up',
-	delivery_address varchar(50) DEFAULT 'In-store',
 	CONSTRAINT PK_order_id PRIMARY KEY (order_id)
+--	CONSTRAINT FK_customer_id_for_order FOREIGN KEY customers (customer_id)
 );
 --
 CREATE TABLE order_items(
@@ -103,21 +114,7 @@ CREATE TABLE order_item_options(
     item_option varchar(50)
 );
 
-CREATE TABLE customers (
-    customer_id SERIAL,
-    customer_name varchar(50),
-    customer_email varchar(50),
-    customer_street_address varchar(50),
-    customer_city varchar(50),
-    customer_state varchar(50),
-    customer_zip varchar(50),
-    CONSTRAINT PK_customer_id PRIMARY KEY (customer_id)
-);
 
-CREATE TABLE customer_order (
-    customer_id int REFERENCES customers (customer_id),
-    order_id int REFERENCES orders (order_id),
-    CONSTRAINT PK_customer_order PRIMARY KEY (customer_id, order_id)
-);
+
 
 COMMIT TRANSACTION;

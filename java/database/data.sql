@@ -51,8 +51,8 @@ INSERT INTO specialty_toppings (pizza_id, topping) VALUES
 (9, 'House Cheese Blend'), (9, 'Pepperoni'), (9, 'Italian Sausage'), (9, 'Onions'), (9, 'Mushrooms'), (9, 'Green Olives'), (9, 'Banana Peppers')
 ;
 
-INSERT INTO orders (order_total, order_status, order_type, delivery_address) 
-VALUES (12.25, 'Received', 'Pick-up', 'In-Store');
+INSERT INTO orders (order_total, order_status, order_type)
+VALUES (12.25, 'Received', 'Pick-up');
 
 --INSERT INTO aggregate_items SELECT pizza_id, pizza_type FROM specialty_pizzas;
 --INSERT INTO aggregate_items SELECT side_items, side_item_type FROM side_items;
