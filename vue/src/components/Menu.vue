@@ -96,14 +96,17 @@ export default {
         return {
             images: 
                 { 
-                'AI margherita pizza': '../images/AI_margherita_pizza.webp',
-                'BBQ chicken pizza': '../images/BBQ_chicken_pizza.jpg', 
-                'Classic Cheese': '../images/classic_cheese_pizza.jpg',
+
+                'The Front-End': '../images/AI_margherita_pizza.webp',
+                'The Default': '../images/pepperoni_pizza.jpg',
+                'The Back-End': '../images/BBQ_chicken_pizza.jpg', 
+                'The Constructor': '../images/classic_cheese_pizza.jpg',
                 'The Polymorph': '../images/custom_pizza.jpeg',
-                'Meat Lovers': '../images/Meat_Lovers.jpg',
-                'Supreme pizza': '../images/supreme_pizza.webp',
-                'Tomato Basil pizza': '../images/tomato_basil_pizza.jpeg',
-                'Veggie Pizza': '../images/veggie_pizza.webp'
+                'The Framework': '../images/Meat_Lovers.jpg',
+                'The Compiler': '../images/supreme_pizza.webp',
+                'The API': '../images/tomato_basil_pizza.jpeg',
+                'The Debugger': '../images/veggie_pizza.webp',
+                'The Full-Stack': '../images/full_stack_pizza.jpg'
                 }
                 
         ,
