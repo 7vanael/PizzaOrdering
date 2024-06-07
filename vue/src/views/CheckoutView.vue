@@ -12,8 +12,8 @@
                 <div class="row price">
                     <h3 class="col">Pizza Name</h3>
                     <p class="col">Price</p>
-                </div>
-                <h5>Description of Customer Pizza Preferences</h5>
+                </div >
+                <p class="pizzaDescription">Description of Customer Pizza Preferences</p>
                 <hr />
                 <div class="row price">
                     <h4 class="col">Subtotal</h4>
@@ -47,7 +47,7 @@
                     <hr />
                     <div class="row">
                         <div class="form-element">
-                            <label for="streetAddress">Street Address: 1234 Pizza Place, Pizza City, PZ 91224</label>
+                            <label class="pickup address" for="streetAddress">Street Address: 1234 Pizza Place, Pizza City, PZ 91224</label>
                         </div>
                     </div>
 
@@ -55,12 +55,12 @@
                 <div class="container delivery" v-show="isDelivery">
                     <div class="row">
                         <h5 class="col">Delivery Address</h5>
-                        <p class="col, toggle" v-on:click="toggleDelivery"> Change to pickup</p>
+                        <p class="col toggle" v-on:click="toggleDelivery"> Change to Pickup</p>
                     </div>
                     <hr />
                     <div class="row">
                         <div class="form-element">
-                            <label for="streetAddress">Street Address: </label>
+                            <label class="delivery address" for="streetAddress">Street Address: </label>
                         </div>
                     </div>
                     <div class="row">
@@ -92,13 +92,13 @@
                     </div>
                 </div>
 
-                <div class="container">
+                <div class="container tip">
                     <div class="row">
-                        <h4> Add Tip:</h4>
+                        <h2> Add Tip:</h2>
                     </div>
                     <hr />
                     <div class="row">
-                        <p class="col"> Tip amount: </p>
+                        <p class="col"> Tip Amount: </p>
                     </div>
                     <div class="row tip">
                         <div class="col-2">
@@ -123,7 +123,7 @@
                     </div>
 
                 </div>
-                <div class="container" v-show="isDelivery">
+                <div class="container payment" v-show="isDelivery">
                     <div class="row">
                         <h2> Payment Info: </h2>
                     </div>
@@ -244,10 +244,8 @@ h1 {
     text-decoration: underline;
     color: #2892C4;
 }
-.row > img {
-    display: flex;
-    /* max-height: 700px; */
-    /* width: 100%; */
+img {
+width: 50%;
 }
 .changeOrder {
     display: flex;
@@ -274,6 +272,12 @@ form {
     font-size: 20pt;
     justify-content: center;
 }
+.pickup.address {
+    font-size: 26pt;
+    color: #2892C4;
+    font-weight: bold;
+}
+
 button.tip {
     background-color: #A4200B;
     color: #F7C516;
@@ -292,9 +296,16 @@ button.tip {
     text-decoration: underline;
     color: #A4200B;
 }
+.col.toggle {
+    display: flex;
+    justify-content: flex-end;
+    font-size: 20pt;
+    font-weight: bold;
+    text-decoration: underline;
+    color: #A4200B;
+}
 label {
     font-size: 20pt;
-    /* color: #A4200B; */
 }
 input {
     padding: 10px;
@@ -322,6 +333,10 @@ input {
     border-radius: 5px;
     margin: none;
 }
+h5 {
+    font-size: 40pt;
+    color: #A4200B;
+}
 p {
     font-size: 24pt;
     color: #A4200B;
@@ -344,4 +359,9 @@ p {
     text-align: left;
     font-size: 28pt;
 }
+.pizzaDescription {
+    font-size: 20pt;
+    color: #2892C4;
+}
+
 </style>
