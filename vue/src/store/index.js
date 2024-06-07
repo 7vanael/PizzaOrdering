@@ -10,6 +10,7 @@ export function createStore(currentToken, currentUser) {
       activeToppingsMeats:[],
       activeToppingsCheese:{},
       activeToppingsVeggies:[],
+      currentOrder:{},
     },
     mutations: {
       SET_AUTH_TOKEN(state, token) {
