@@ -10,10 +10,10 @@
                 </div>
                 <router-link class="changeOrder" to="/">Change Order</router-link>
                 <div class="row price">
-                    <h3 class="col">Pizza Name</h3>
+                    <h3 class="col"> {{ this.$store.state.activePizza.name }}</h3>
                     <p class="col">Price</p>
                 </div>
-                <h5>Description of Customer Pizza Preferences</h5>
+                <h5>{{ this.$store.state.activePizza.description }}</h5>
                 <hr />
                 <div class="row price">
                     <h4 class="col">Subtotal</h4>
@@ -32,7 +32,7 @@
                     <h3 class="col">Total</h3>
                     <p class="col">Price</p>
                 </div>
-                
+
                 <button class="submitButton" type="submit">Confirm and Place Order</button>
 
             </div>
@@ -175,7 +175,7 @@
 // import axios from 'axios';
 import NavBar from '../components/NavBar.vue';
 // import ToppingsService from '../services/ToppingsService.js';
-
+import OrderService from '../services/OrderService.js';
 
 export default {
     components: {
@@ -185,6 +185,7 @@ export default {
     data() {
         return {
             pizzas: [],
+            currentPizza: {},
             isDelivery: false,
             customerInfo: {
                 name: '',
@@ -199,11 +200,14 @@ export default {
                 ccExp: '',
                 ccCode: '',
             },
-            currentOrder:{
-                "total":0,
-                "status":'',
+            currentOrder: {
+                "total": 0,
+                "status": '',
                 "type": "",
+                "items": [],
+                "customer": {},
             },
+            ordersList: {},
         }
     },
     // created() {
@@ -223,18 +227,34 @@ export default {
             }).catch((error) => {
                 console.log('Error fetching orders', error);
             });*/
+            OrderService.getAllOrders().then(
+                (response) => {
+                    this.ordersList = response.data;
+                }).catch((error) => {
+                console.log('Error fetching orders', error);
+            });
         },
         sendOrder() {
 
             //  (maybe?) Really great code to actually POST to the DB here
 
-            //this.$store.commit("SET_CURRENT_ORDER", currentOrder);
             /*axios.post('/order', {
                 customerInfo: this.customerInfo,
                 pizzas: this.pizzas
             }).then((response) => {
                 console.log(response);
             });*/
+
+            this.currentOrder.customer = this.customerInfo;
+            this.currentOrder.items.push(this.$store.state.activePizza);
+
+            OrderService.placeOrder(this.currentOrder).then(
+                (response)=>{
+                    console.log('Order placed Successfully, order number: ' + response.data.id);
+                    
+                }).catch((error) => {
+                console.log('Error placing order', error);
+            });
         },
         goToCustomPizzaMenu() {
             this.$router.push('/');
@@ -251,11 +271,13 @@ h1 {
     text-decoration: underline;
     color: #2892C4;
 }
-.row > img {
+
+.row>img {
     display: flex;
     /* max-height: 700px; */
     /* width: 100%; */
 }
+
 .changeOrder {
     display: flex;
     justify-content: flex-end;
@@ -266,11 +288,13 @@ h1 {
     margin-top: 20px;
     margin-bottom: 20px;
 }
+
 form {
     display: flex;
     flex-direction: column;
     height: 100%;
 }
+
 .submitButton {
     display: flex;
     background-color: #A4200B;
@@ -281,6 +305,7 @@ form {
     font-size: 20pt;
     justify-content: center;
 }
+
 button.tip {
     background-color: #A4200B;
     color: #F7C516;
@@ -289,20 +314,24 @@ button.tip {
     margin-top: 1rem;
     font-size: 24pt;
 }
+
 .row.tip {
     display: flex;
     flex-direction: row;
     padding: none;
     margin: none;
 }
+
 .toggle {
     text-decoration: underline;
     color: #A4200B;
 }
+
 label {
     font-size: 20pt;
     /* color: #A4200B; */
 }
+
 input {
     padding: 10px;
     margin-top: 1rem;
@@ -310,6 +339,7 @@ input {
     border: 1px solid #A4200B;
     width: 100%;
 }
+
 .container {
     margin-top: 2rem;
     padding: 1rem;
@@ -317,34 +347,40 @@ input {
     background-color: #F2DC9C;
     border-radius: 5px;
 }
+
 .container.delivery {
     background-color: #F2DC9C;
     border: 2px solid #2892C4;
     border-radius: 5px;
     padding: 20px;
 }
+
 .container.pickup {
     background-color: #F2DC9C;
     border: 2px solid #2892C4;
     border-radius: 5px;
     margin: none;
 }
+
 p {
     font-size: 24pt;
     color: #A4200B;
 }
+
 .row.price>p.col {
     font-size: 26pt;
     color: #A4200B;
     text-align: right;
     padding-right: 1.5em;
 }
+
 .row.price>h4 {
     font-weight: bold;
     color: #A4200B;
     text-align: left;
     padding-left: 1.5em;
 }
+
 .row.price>h3 {
     font-weight: bold;
     color: #2892C4;
