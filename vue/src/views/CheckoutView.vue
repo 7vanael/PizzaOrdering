@@ -1,11 +1,12 @@
 <template>
     <NavBar />
-    <div class="review-order">
+    <div class="review-order row">
         <h1>Review Your Order and Checkout</h1>
-        <div class="order">
+        <div class="order col">
+
             <div class="container">
                 <img src="../../public/images/tomato_basil_pizza.jpeg" alt="pizza image" />
-                <p>Change Order</p>
+                <router-link @click="goToCustomPizzaMenu">Change Order</router-link>
                 <div class="row">
                     <h3 class="col">Pizza Name</h3>
                     <p class="col">Price</p>
@@ -30,13 +31,13 @@
                     <p class="col">Price</p>
                 </div>
             </div>
-            
-            
+        </div>    
+        <div class="col">   
             <form v-on:submit.prevent="sendOrder">
-                <div class="container" v-show="!isDelivery">
+                <div class="container pickup" v-show="!isDelivery">
                     <div class="row">
                         <h5 class="col">Pick-up In Store</h5>
-                        <p class="col, toggle" v-on:click="toggleDelivery"> Change to Delivery</p>
+                        <p class="col toggle" v-on:click="toggleDelivery"> Change to Delivery</p>
                     </div>                    
                     <hr />
                     <div class="row">
@@ -46,7 +47,7 @@
                     </div>                  
                     
                 </div>          
-                <div class="container" v-show="isDelivery">
+                <div class="container delivery" v-show="isDelivery">
                     <div class="row">
                         <h5 class="col">Delivery Address</h5>
                         <p class="col, toggle" v-on:click="toggleDelivery"> Change to pickup</p>
@@ -54,7 +55,7 @@
                     <hr />
                     <div class="row">
                         <div class="form-element">
-                            <label for="streetAddress">Street Address: </label>
+                            <label for="streetAddress">Street Address: 1234 Pizza Place, Pizza City, PZ 91224</label>
                         </div>
                     </div>
                     <div class="row">
@@ -94,22 +95,22 @@
                     <div class="row">
                         <p class="col"> Tip amount: </p>
                     </div>
-                    <div class="row">
-                        <div class="col">
+                    <div class="row tip">
+                        <div class="col-2">
                             <button class="tip" name="tip" id="1">None</button>
                         </div>
-                        <div class="col">
+                        <div class="col-2">
                             <button class="tip" name="tip" id="1.1">10%</button>
                         </div>
-                        <div class="col">
+                        <div class="col-2">
                             <button class="tip" name="tip" id="1.15">15%</button>
                         </div>
-                        <div class="col">
+                        <div class="col-2">
                             <button class="tip" name="tip" id="1.2">20%</button>
                         </div>
-                        <div class="col">
+                        <div class="col-4">
                             <div class="row">
-                                <button class="tip, col" name="tip" id="custom">Custom</button>
+                                <button class="tip col" name="tip" id="custom">Custom</button>
                                 <input class="col" type="number" id="custom_tip">
                             </div>
                         </div>
@@ -159,8 +160,9 @@
                 </div>
                 <button class="submitButton" type="submit">Confirm and Place Order</button>
             </form>
+        </div> 
 
-        </div>
+        
     </div>
 </template>
 
@@ -205,8 +207,12 @@ export default {
         },
         sendOrder() {
             // Really great code to actually POST to the DB here
-        }
-    }
+        },
+        goToCustomPizzaMenu() {
+        this.$router.push('/home');
+      }
+    },
+    
 }
 
 </script>
@@ -217,13 +223,37 @@ h1 {
     text-decoration: underline;
     color: #2892C4;
 }
+img {
+    
+}
+form {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
 .submitButton {
+    display: flex;
     background-color: #A4200B;    
     color: #F7C516;
     border-radius: 5px;
     padding: 10px;
     margin-top: 2rem;
     font-size: 20pt;
+    justify-content: center;
+}
+button.tip {
+    background-color: #A4200B;
+    color: #F7C516;
+    border-radius: 5px;
+    padding: 10px;
+    margin-top: 1rem;
+    font-size: 24pt;
+}
+.row.tip {
+    display: flex;
+    flex-direction: row;
+    padding: none;
+    margin: none;
 }
 .toggle {
     text-decoration: underline;
@@ -242,9 +272,28 @@ input {
   width: 100%;
 }
 .container {
+    margin-top: 2rem;
+    padding: 1rem;
+    border: 2px solid #2892C4;
+    background-color: #F2DC9C;
+    border-radius: 5px;
+}
+.container.delivery {
   background-color: #F2DC9C;
   border: 2px solid #2892C4;
   border-radius: 5px;
   padding: 20px;
 }
+
+.container.pickup {
+  background-color: #F2DC9C;
+  border: 2px solid #2892C4;
+  border-radius: 5px;
+  margin: none;
+}
+p {
+    font-size: 20pt;
+    color: #A4200B;
+}
+
 </style>
