@@ -10,5 +10,5 @@ export default {
     },
     placeOrder(order){
         return axios.post('/topics', order);
-    }
+    },
 }

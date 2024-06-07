@@ -11,7 +11,7 @@
                 <router-link class="changeOrder" to="/">Change Order</router-link>
                 <div class="row price">
                     <h3 class="col"> {{ this.$store.state.activePizza.name }}</h3>
-                    <p class="col">Price</p>
+                    <p class="col"> {{ this.crustCost }}</p>
                 </div>
                 <h5>{{ this.$store.state.activePizza.description }}</h5>
                 <hr />
@@ -144,10 +144,10 @@
                     </div>
                     <div class="row">
                         <div class="form-element, col">
-                            <input type="text" id="ccNumber" v-model="customerInfo.ccNumber" />
+                            <input type="text" id="ccNumber" v-model="ccInfo.ccNumber" />
                         </div>
                         <div class="form-element, col">
-                            <input type="text" id="ccExp" v-model="customerInfo.ccExp" />
+                            <input type="text" id="ccExp" v-model="ccInfo.ccExp" />
                         </div>
                     </div>
                     <div class="row">
@@ -156,7 +156,7 @@
                     </div>
                     <div class="row">
                         <div class="form-element, col">
-                            <input type="text" id="ccCode" v-model="customerInfo.ccCode" />
+                            <input type="text" id="ccCode" v-model="ccInfo.ccCode" />
                         </div>
                         <div class="form-element, col">
                             <input type="text" id="zip" v-model="customerInfo.zip" />
@@ -174,7 +174,7 @@
 
 // import axios from 'axios';
 import NavBar from '../components/NavBar.vue';
-// import ToppingsService from '../services/ToppingsService.js';
+import ToppingsService from '../services/ToppingsService.js';
 import OrderService from '../services/OrderService.js';
 
 export default {
@@ -187,6 +187,9 @@ export default {
             pizzas: [],
             currentPizza: {},
             isDelivery: false,
+            totalCost:0.0,
+            crustCost: 0.0,
+            crustSize: '',
             customerInfo: {
                 name: '',
                 email: '',
@@ -196,6 +199,8 @@ export default {
                 state: '',
                 zip: '',
                 paymentType: '',
+            },
+            ccInfo:{
                 ccNumber: '',
                 ccExp: '',
                 ccCode: '',
@@ -210,13 +215,17 @@ export default {
             ordersList: {},
         }
     },
-    // created() {
-    //     ToppingsService.getPizzas().then(
-    //         (response) => {
-    //             this.pizzas = response.data;
-    //         });
-    // },
+    created() {
+        ToppingsService.getCrustPriceBySize(this.crustSize).then(
+                (response)=>{
+                    this.crustCost = response.data;
+                    console.log("current crust price: " + this.crustCost);
+            });
+    },
     methods: {
+        setCrustSize(){
+           this.crustSize = this.$store.state.activePizza.crust.size;
+        },
         toggleDelivery() {
             this.isDelivery = !this.isDelivery;
         },
@@ -258,9 +267,17 @@ export default {
         },
         goToCustomPizzaMenu() {
             this.$router.push('/');
-        }
+        },
     },
-
+    computed:{
+        getTotalPrice(){
+            let total = 0.0;
+            total += this.crustCost; 
+            //this.totalCost = total;
+            return total;
+        }
+    }
+    
 }
 
 </script>

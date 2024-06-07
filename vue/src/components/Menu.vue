@@ -93,7 +93,7 @@
 
 <script>
 import ToppingsService from '../services/ToppingsService';
-import CustomPizzaMenu from './CustomPizzaMenu.vue';
+// import CustomPizzaMenu from './CustomPizzaMenu.vue';
 
 export default {
     data() {
