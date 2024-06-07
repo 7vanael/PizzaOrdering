@@ -43,6 +43,18 @@
                 </div>
             <!-- </div> -->
 
+<<<<<<< HEAD
+=======
+                    <div class="carousel-inner">
+                        <div v-for="(pizza, index) in pizzas" :key="pizza.name" v-on:click="setActivePizza(pizza)"
+                            :class="['carousel-item', { active: index === 0 }]">
+                    <img :src="images[pizza.name]" class="d-block w-100" alt="pizza image">
+                            <!-- <img src="../images/BBQ chicken pizza.jpg" class="d-block w-100" alt="..."> -->
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>{{ pizza.name }}</h5>
+                                <p>{{ pizza.description }}</p>
+                            </div>
+>>>>>>> 702d164c8322e8b4b59704fe3903b021fa3c25a5
 
             <!-- <div class="col-10"> -->
 
@@ -175,6 +187,7 @@ export default {
         ToppingsService.getPizzas().then(response => {
             this.pizzas = response.data;
         });
+<<<<<<< HEAD
         // ToppingsService.getSalads().then(response => {
         // this.salads = response.data;
         // });
@@ -182,6 +195,12 @@ export default {
     methods: {
         showCarousel(type) {
             this.selectedCarousel = type;
+=======
+    },
+    methods:{
+        setActivePizza(pizza){
+            this.$store.commit("SET_ACTIVE_PIZZA", pizza);
+>>>>>>> 702d164c8322e8b4b59704fe3903b021fa3c25a5
         }
     }
     

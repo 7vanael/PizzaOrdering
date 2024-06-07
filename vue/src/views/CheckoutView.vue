@@ -4,7 +4,7 @@
         <h1>Review Your Order and Checkout</h1>
         <div class="order">
             <div class="container">
-                <img src="../images/tomato basil pizza.jpeg" alt="pizza image" />
+                <img src="../../public/images/tomato_basil_pizza.jpeg" alt="pizza image" />
                 <p>Change Order</p>
                 <div class="row">
                     <h3 class="col">Pizza Name</h3>
@@ -30,89 +30,122 @@
                     <p class="col">Price</p>
                 </div>
             </div>
-            <!-- Most of the contents of these need to actually have data in the fields, will
-            likely need to import prop? Not sure how you'd like to handle -->
-            <div class="container">
-                <div class="row">
-                    <h4 class="col">Delivery Address</h4>
-                    <p class="col"> Change to pickup</p>
-                </div>
-                <hr />
-                <div class="row">
-                    <p class="col"> Street Address</p>
-                    <p class="col"> Change Address </p>
-                </div>
-                <div class="row">
-                    <p class="col"> City, State Zip</p>
-                </div>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <h4> Add tip:</h4>
-                </div>
-                <hr />
-                <div class="row">
-                    <p class="col"> Tip amount: </p>
-                </div>           
-            </div>
-            <div class="container">
-                <div class="row">
-                    <h4> Add Tip:</h4>
-                </div>
-                <hr />
-                <div class="row">
-                    <p class="col"> Tip amount: </p>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <button class="tip" name="tip" id="1">None</button>
-                    </div>
-                    <div class="col">
-                        <button class="tip" name="tip" id="1.1">10%</button>
-                    </div>
-                    <div class="col">
-                        <button class="tip" name="tip" id="1.15">15%</button>
-                    </div>
-                    <div class="col">
-                        <button class="tip" name="tip" id="1.2">20%</button>
-                    </div>
-                    <div class="col">
-                        <div class="row">
-                            <button class="tip, col" name="tip" id="custom">Custom</button>
-                            <input class="col" type="number" id="custom_tip">
+            
+            <form>
+                <div class="container">
+                    <div class="row">
+                        <h5 class="col">Delivery Address</h5>
+                        <p class="col"> Change to pickup</p>
+                    </div>                    
+                    <hr />
+                    <div class="row">
+                        <div class="form-element">
+                            <label for="streetAddress">Street Address: </label>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="form-element">
+                            <input type="text" id="streetAddress" v-model="customerInfo.streetAddress" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col"> 
+                            <label for="city">City: </label>
+                        </div>
+                        <div class="col"> 
+                            <label for="state">State: </label>
+                        </div>
+                        <div class="col"> 
+                            <label for="zip">Zip Code: </label>
+                        </div>                   
+                    </div>
+                    <div class="row">
+                        <div class="form-element, col">
+                            <input type="text" id="city" v-model="customerInfo.city" />
+                        </div>
+                        <div class="form-element, col">
+                            <input type="text" id="streetAddress" v-model="customerInfo.state" />
+                        </div>
+                        <div class="form-element, col">
+                            <input type="text" id="zip" v-model="customerInfo.zip" />
+                        </div>
+                    </div>
+                </div>          
+
+                <div class="container">
+                    <div class="row">
+                        <h4> Add Tip:</h4>
+                    </div>
+                    <hr />
+                    <div class="row">
+                        <p class="col"> Tip amount: </p>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <button class="tip" name="tip" id="1">None</button>
+                        </div>
+                        <div class="col">
+                            <button class="tip" name="tip" id="1.1">10%</button>
+                        </div>
+                        <div class="col">
+                            <button class="tip" name="tip" id="1.15">15%</button>
+                        </div>
+                        <div class="col">
+                            <button class="tip" name="tip" id="1.2">20%</button>
+                        </div>
+                        <div class="col">
+                            <div class="row">
+                                <button class="tip, col" name="tip" id="custom">Custom</button>
+                                <input class="col" type="number" id="custom_tip">
+                            </div>
+                        </div>
+                    
+                    </div>
                 
                 </div>
-               
-            </div>
-            <div class="container">
-                <div class="row">
-                    <h4> Payment Info: </h4>
+                <div class="container">
+                    <div class="row">
+                        <h2> Payment Info: </h2>
+                    </div>
+                    <hr />
+                    <div class="row">
+                        <h3 class="col"> Credit Card Info:</h3>
+                    </div>
+                    <div class="row">
+
+                    </div>
+                    <div class="row">
+                        <p class="col">
+                            <label for="ccNumber">Credit Card Number: </label>
+                        </p>
+                        <p class="col">
+                            <label for="ccExp">Expiration: </label>
+                        </p>
+                    </div>
+                    <div class="row">
+                        <div class="form-element, col">                            
+                            <input type="text" id="ccNumber" v-model="customerInfo.ccNumber" />
+                        </div>
+                        <div class="form-element, col">                            
+                            <input type="text" id="ccExp" v-model="customerInfo.ccExp" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <p class="col"> <label for="ccCode">CCV: </label></p>
+                        <p class="col"><label for="zip">Zip Code: </label></p>
+                    </div>
+                    <div class="row">
+                        <div class="form-element, col">                            
+                            <input type="text" id="ccCode" v-model="customerInfo.ccCode" />
+                        </div>
+                        <div class="form-element, col">                            
+                            <input type="text" id="zip" v-model="customerInfo.zip" />
+                        </div>
+                    </div>
                 </div>
-                <hr />
-                <div class="row">
-                    <!-- These radio buttons aren't right.... can you help fix it? -->
-                    <input class="col" type="radio" name="payment_type" label="Credit Card"/>
-                    <p class="col"> Different card?</p>
-                </div>
-                <div class="row">
-                    <!-- These radio buttons aren't right.... can you help fix it? -->
-                    <input class="col" type="radio" name="payment_type" label="Credit Card"/>
-                    <p class="col"> Credit Card</p>
-                </div>
-                <div class="row">
-                    <p class="col">Card Number</p>
-                    <p class="col">Exp</p>
-                </div>
-                
-                <div class="row">
-                    <p class="col"> CCV</p>
-                    <p class="col">Zip</p>
-                </div>
-            </div>
+            </form>
+
         </div>
-        <Checkout />
     </div>
 </template>
 
@@ -120,17 +153,28 @@
 
 import NavBar from '../components/NavBar.vue';
 import ToppingsService from '../services/ToppingsService.js';
-import Checkout from '../components/Checkout.vue';
 
 
 export default {
     components: {
         NavBar,
-        Checkout
     },
     data() {
         return {
-            pizzas: []
+            pizzas: [],
+            customerInfo: {
+                name: '',
+                email: '',
+                phone: '',
+                streetAddress: '',
+                city: '',
+                state: '',
+                zip: '',
+                paymentType: '',
+                ccNumber: '',
+                ccExp: '',
+                ccCode: '',
+            }
         }
     },
     created() {
