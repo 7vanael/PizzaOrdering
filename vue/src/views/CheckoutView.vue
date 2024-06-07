@@ -32,6 +32,9 @@
                     <h3 class="col">Total</h3>
                     <p class="col">Price</p>
                 </div>
+                //
+                <button class="submitButton" type="submit">Confirm and Place Order</button>
+
             </div>
         </div>
         <div class="col">
@@ -160,7 +163,6 @@
                         </div>
                     </div>
                 </div>
-                <button class="submitButton" type="submit">Confirm and Place Order</button>
             </form>
         </div>
 
@@ -178,6 +180,7 @@ import NavBar from '../components/NavBar.vue';
 export default {
     components: {
         NavBar,
+        //import order from prior page
     },
     data() {
         return {
@@ -209,6 +212,7 @@ export default {
             this.isDelivery = !this.isDelivery;
         },
         sendOrder() {
+
             //  (maybe?) Really great code to actually POST to the DB here
             axios.post('/order', {
                 customerInfo: this.customerInfo,

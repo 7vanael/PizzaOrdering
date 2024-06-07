@@ -73,6 +73,21 @@ public class JdbcOrderDao implements OrderDao{
         }
     }
 
+    public List<Order> getListOfOrdersByStatus(String status){
+        List<Order> orders = new ArrayList<>();
+        String sql = "SELECT order_id, order_total, customer_id, order_status, order_type FROM orders WHERE order_status = ?::order_status_t";
+        try{
+            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, status);
+            while(results.next()){
+                orders.add(getOrder(results));
+            }
+            return orders;
+
+        }catch(Exception e) {
+            throw new DaoException(e.getMessage(), e);
+        }
+    }
+
 
     private Order getOrder(SqlRowSet results) {
         Order order = new Order();
