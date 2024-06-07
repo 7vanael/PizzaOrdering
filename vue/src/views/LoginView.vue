@@ -1,5 +1,9 @@
 <template>
-  <!-- <NavBar /> -->
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+      <router-link class="navbar-brand" to="/">Syntax Slices</router-link>
+    </div>
+  </nav>
   <div id="login">
     <form v-on:submit.prevent="login">
       <h1>Please Sign In</h1>
@@ -68,6 +72,22 @@ export default {
 </script>
 
 <style scoped>
+.navbar {
+  background-color: #F2DC9C;
+  border: 2px solid #2892C4;
+  border-radius: 5px;
+  padding: 0;
+  margin: 0;
+}
+
+.container-fluid {
+  margin: 0;
+  padding: 20;
+}
+
+.navbar-brand {
+  color: #F2DC9C;
+}
 #login {
   min-height: 100vh;
   display: flex;

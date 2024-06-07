@@ -1,11 +1,10 @@
 <template>
   <NavBar />
-  <div class="home">
-    <h1>Syntax Slices</h1>
+  <main id="home">
     <Menu />
     <CustomPizzaMenu />
     <!-- <p>You are authenticated if you see this.</p> -->
-  </div>
+  </main>
   
 </template>
 
@@ -45,3 +44,14 @@ export default {
 }
 
 </script>
+
+<style scoped>
+#home {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  /* min-height: 100dvh; */
+}
+</style>
