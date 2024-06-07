@@ -30,7 +30,7 @@ public class OrderController {
     @GetMapping(path = "/order")
     @ResponseStatus(HttpStatus.OK)
     public List<Order> getListOfOrders(){
-        return orderService.getListOfOrders();
+        return orderService.getListOfOrdersInProcess();
     }
 
 }

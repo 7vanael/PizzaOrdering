@@ -58,7 +58,7 @@ public class JdbcOrderDao implements OrderDao{
         return null;
     }
 
-    public List<Order> getListOfOrders(){
+    public List<Order> getListOfOrdersInProcess(){
         List<Order> orders = new ArrayList<>();
         String sql = "SELECT order_id, order_total, customer_id, order_status, order_type FROM orders WHERE order_status != 'Completed'::order_status_t AND order_status != 'Canceled'::order_status_t";
         try{
