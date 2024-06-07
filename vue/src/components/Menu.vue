@@ -55,7 +55,7 @@
                     <div class="carousel-inner">
                         <div v-for="(pizza, index) in pizzas" :key="pizza.name" v-on:click="setActivePizza(pizza)"
                             :class="['carousel-item', { active: index === 0 }]">
-                    <img :src="images[pizza.name]" class="d-block w-100" alt="pizza image">
+                            <img :src="images[pizza.name]" class="d-block w-100" alt="pizza image">
                             <!-- <img src="../images/BBQ chicken pizza.jpg" class="d-block w-100" alt="..."> -->
                             <div class="carousel-caption d-none d-md-block">
                                 <h5>{{ pizza.name }}</h5>
@@ -94,12 +94,12 @@ import CustomPizzaMenu from './CustomPizzaMenu.vue';
 export default {
     data() {
         return {
-            images: 
-                { 
+            images:
+            {
 
                 'The Front-End': '../images/AI_margherita_pizza.webp',
                 'The Default': '../images/pepperoni_pizza.jpg',
-                'The Back-End': '../images/BBQ_chicken_pizza.jpg', 
+                'The Back-End': '../images/BBQ_chicken_pizza.jpg',
                 'The Constructor': '../images/classic_cheese_pizza.jpg',
                 'The Polymorph': '../images/custom_pizza.jpeg',
                 'The Framework': '../images/Meat_Lovers.jpg',
@@ -107,10 +107,10 @@ export default {
                 'The API': '../images/tomato_basil_pizza.jpeg',
                 'The Debugger': '../images/veggie_pizza.webp',
                 'The Full-Stack': '../images/full_stack_pizza.jpg'
-                }
-                
-        ,
-        pizzas: [],
+            }
+
+            ,
+            pizzas: [],
         };
     },
     created() {
@@ -118,9 +118,19 @@ export default {
             this.pizzas = response.data;
         });
     },
-    methods:{
-        setActivePizza(pizza){
+    methods: {
+        setActivePizza(pizza) {
+            let veggieList, meatList, cheese;
             this.$store.commit("SET_ACTIVE_PIZZA", pizza);
+            pizza.toppings.forEach(
+                (topping) => {
+                  if (topping.type === "Cheese") { cheese = topping;}
+                  if (topping.type === "Meat") { meatList.push(topping); }
+                  if (topping.type === "Veggie") { veggieList.push(topping);}
+                });
+                this.$store.commit("SET_ACTIVE_CHEESE", cheese);
+                this.$store.commit("SET_ACTIVE_MEATS", meatList);
+                this.$store.commit("SET_ACTIVE_VEGGIES", veggieList); 
         }
     }
 }

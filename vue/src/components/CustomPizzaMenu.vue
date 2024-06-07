@@ -25,8 +25,9 @@
                 <ul class="list-group list-group">
                   <li v-for="crust in crustTypes" v-bind:key="crust.name" class="list-group-item">
                     <label>
-                      <input type="radio" name="pizza-crust-type" v-bind:value="crust.name" v-model="$store.state.activePizza.crust">
-                    </label> {{ crust.name }} - {{ crust.description}}
+                      <input type="radio" name="pizza-crust-type" v-bind:value="crust.name"
+                        v-model="$store.state.activePizza.crust">
+                    </label> {{ crust.name }} - {{ crust.description }}
                   </li>
                 </ul>
               </div>
@@ -35,7 +36,8 @@
                 <ul class="list-group list-group">
                   <li v-for="crust in crustSizes" v-bind:key="crust.name" class="list-group-item">
                     <label>
-                      <input type="radio" name="pizza-crust-size" v-bind:value="crust.name" v-model="$store.state.activePizza.size">
+                      <input type="radio" name="pizza-crust-size" v-bind:value="crust.name"
+                        v-model="$store.state.activePizza.size">
                     </label> {{ crust.name }}
                   </li>
                 </ul>
@@ -44,7 +46,7 @@
           </ul>
 
 
- <!--Button Start-->
+          <!--Button Start-->
           <div class="card-footer d-flex justify-content-end">
             <button class="btn btn-primary" @click="goToNextTab">Sauce & Cheese ></button>
           </div>
@@ -63,7 +65,8 @@
                     <ul class="list-group-item">
                       <li v-for="sauce in sauces" v-bind:key="sauce.name" class="list-group-item">
                         <label>
-                          <input type="radio" name="pizza-sauce" v-bind:value="sauce.name" v-model="$store.state.activePizza.sauce" >
+                          <input type="radio" name="pizza-sauce" v-bind:value="sauce.name"
+                            v-model="$store.state.activePizza.sauce">
                         </label>
                         {{ sauce.name }}
                       </li>
@@ -75,7 +78,7 @@
                     <ul class="list-group-item">
                       <li v-for="cheese in cheeseToppings" v-bind:key="cheese.name" class="list-group-item">
                         <label>
-                          <input type="radio" name="pizza-cheese" value={{cheese.name}}>
+                          <input type="radio" name="pizza-cheese" v-bind:value="cheese.name" v-model="$store.state.activeToppingsCheese.name">
                         </label>
                         {{ cheese.name }}
                       </li>
@@ -85,7 +88,7 @@
               </ul>
             </div>
 
-<!--Button Start-->
+            <!--Button Start-->
             <div class="card-footer d-flex justify-content-between mt-3">
               <button class="btn btn-secondary" @click="goToPreviousTab" v-if="index > 0">Crust & Size</button>
               <button class="btn btn-primary" @click="goToNextTab" v-if="index < tabs.length - 1">Meat Toppings</button>
@@ -104,9 +107,9 @@
                   <!--Meats-->
                   <div class="card card-radio my-20">
                     <ul class="list-group list-group">
-                      <li v-for="meat in meatToppings" v-bind:key="meat.name" class="list-group-item" >
+                      <li v-for="meat in meatToppings" v-bind:key="meat.name" class="list-group-item" index>
                         <label>
-                          <input type="checkbox" name="meat-toppings" v-bind:value="meat.name" v-model="$store.state.activePizza.toppings[0].name">
+                          <input type="checkbox" v-bind:name="meat.name" v-bind:value="meat.name" v-model="$store.state.activeToppingsMeats.name">
                         </label>
                         {{ meat.name }}
                       </li>
@@ -116,7 +119,7 @@
               </ul>
             </div>
 
-<!--Button Start-->
+            <!--Button Start-->
             <div class="card-footer d-flex justify-content-between mt-3">
               <button class="btn btn-secondary" @click="goToPreviousTab" v-if="index > 0">Sauce & Cheese</button>
               <button class="btn btn-primary" @click="goToNextTab" v-if="index < tabs.length - 1">Veggie Toppings</button>
@@ -138,7 +141,7 @@
                     <ul class="list-group">
                       <li v-for="veggie in veggieToppings" v-bind:key="veggie.name" class="list-group-item">
                         <label>
-                          <input type="checkbox" name="non-meat-toppings" value={{veggie.name}}>
+                          <input type="checkbox" name="non-meat-toppings" v-bind:value="veggie.name" v-model="$store.state.activeToppingsVeggies.name">
                         </label>
                         {{ veggie.name }}
                       </li>
@@ -150,7 +153,7 @@
           </div>
 
 
- <!--Button Start-->
+          <!--Button Start-->
           <div class="card-footer d-flex justify-content-between mt-3">
             <button class="btn btn-secondary" @click="goToPreviousTab" v-if="index > 0">Meat Toppings</button>
             <button class="btn btn-danger" @click="goToCheckout">Review Order</button>
@@ -180,8 +183,9 @@ export default {
       ],
       pizzaToppings: [],
       specialtyPizzas: [],
-      activePizza :{},
+      //activePizza: {},
       meatToppings: [],
+      activeMeatToppings: [],
       veggieToppings: [],
       cheeseToppings: [],
       crustTypes: [],
@@ -311,12 +315,27 @@ export default {
     ToppingsService.getPizzas().then(
       (response) => {
         this.specialtyPizzas = response.data;
-        let pizzaList;
+        let pizzaList, veggieList, meatList, cheese;
         pizzaList = this.specialtyPizzas;
         pizzaList.forEach(
           (pizzaLoop) => {
             if (pizzaLoop.name === "The Polymorph") {
               this.$store.commit("SET_ACTIVE_PIZZA", pizzaLoop);
+              pizzaLoop.toppings.forEach(
+                (topping) => {
+                  if (topping.type === "Cheese") { 
+                    cheese = topping;
+                  }
+                  if (topping.type === "Meat") { 
+                    meatList.push(topping); 
+                  }
+                  if (topping.type === "Veggie") { 
+                    veggieList.push(topping);
+                  }
+                });
+                this.$store.commit("SET_ACTIVE_CHEESE", cheese);
+                this.$store.commit("SET_ACTIVE_MEATS", meatList);
+                this.$store.commit("SET_ACTIVE_VEGGIES", veggieList); 
             }
           });
       });
@@ -394,5 +413,4 @@ input[type="checkbox"] {
   width: 1em;
   height: 1em;
   accent-color: #A4200B;
-}
-</style>
+}</style>
