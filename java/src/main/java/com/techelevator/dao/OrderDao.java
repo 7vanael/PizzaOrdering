@@ -12,4 +12,6 @@ public interface OrderDao {
     public List<Order> getListOfOrdersInProcess();
 
     public List<Order> getListOfOrdersByStatus(String status);
+
+    public void changeOrderStatus(int id, String status);
 }

@@ -30,4 +30,9 @@ public class OrderService {
             return orderDao.getListOfOrdersByStatus(status);
         }
     }
+
+    public Order changeOrderStatus(int id, String status){
+        orderDao.changeOrderStatus(id, status);
+        return orderDao.getOrderById(id);
+    }
 }
