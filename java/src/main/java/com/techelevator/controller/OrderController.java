@@ -33,4 +33,10 @@ public class OrderController {
         return orderService.getListOfOrders(status);
     }
 
+    @PutMapping(path = "/order/{id}/status")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public Order changeOrderStatus(@PathVariable int id, @RequestBody String status){
+        return orderService.changeOrderStatus(id, status);
+    }
+
 }
