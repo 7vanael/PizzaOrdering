@@ -9,5 +9,7 @@ public interface OrderDao {
 
     public Order getOrderById(int id);
 
-    public List<Order> getListOfOrders();
+    public List<Order> getListOfOrdersInProcess();
+
+    public List<Order> getListOfOrdersByStatus(String status);
 }
