@@ -29,6 +29,9 @@
                     <h3 class="col">Total</h3>
                     <p class="col">Price</p>
                 </div>
+                //
+                <button class="submitButton" type="submit">Confirm and Place Order</button>
+
             </div>
             
             
@@ -157,7 +160,6 @@
                         </div>
                     </div>
                 </div>
-                <button class="submitButton" type="submit">Confirm and Place Order</button>
             </form>
 
         </div>
@@ -173,6 +175,7 @@ import ToppingsService from '../services/ToppingsService.js';
 export default {
     components: {
         NavBar,
+        //import order from prior page
     },
     data() {
         return {
@@ -205,6 +208,7 @@ export default {
         },
         sendOrder() {
             // Really great code to actually POST to the DB here
+            //Do not send ccNumber, ccExp, or ccCode to DB. - Pretend it's sent to some actual payment processor. Not us!
         }
     }
 }
