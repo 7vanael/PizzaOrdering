@@ -1,8 +1,8 @@
 <template>
-  <NavBar />
+  <!-- <NavBar /> -->
   <div id="login">
     <form v-on:submit.prevent="login">
-      <h1 >Please Sign In</h1>
+      <h1>Please Sign In</h1>
       <div role="alert" v-if="invalidCredentials">
         Invalid username and password!
       </div>
@@ -17,20 +17,23 @@
         <label for="password">Password</label>
         <input type="password" id="password" v-model="user.password" required />
       </div>
-      <button type="submit">Sign in</button>
+      <div class="row">
+        <button type="submit">Sign in</button>
+      </div>
       <p>
-      <router-link v-bind:to="{ name: 'register' }">Need an account? Sign up.</router-link></p>
+        <router-link v-bind:to="{ name: 'register' }">Need an account? Sign up.</router-link>
+      </p>
     </form>
   </div>
 </template>
 
 <script>
 import authService from "../services/AuthService";
-import NavBar from '../components/NavBar.vue';
+// import NavBar from '../components/NavBar.vue';
 
 export default {
   components: {
-    NavBar
+    // NavBar
   },
   data() {
     return {
@@ -65,10 +68,58 @@ export default {
 </script>
 
 <style scoped>
-.form-input-group {
-  margin-bottom: 1rem;
+#login {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #A4200B;
+  background-color: #F7c516;
 }
+
+h1 {
+  margin-bottom: 1rem;
+  font-weight: bold;
+  font-size: 50pt;
+}
+
+.form-input-group {
+  display: flex;
+  flex-direction: column;
+  columns: 2;
+  padding: 20px;
+  justify-content: space-between;
+}
+
 label {
-  margin-right: 0.5rem;
+  font-size: 25pt;
+  color: #A4200B;
+  text-align: center;
+}
+
+input {
+  padding: 10px;
+  margin-top: 1rem;
+  border-radius: 5px;
+  border: 1px solid #A4200B;
+  width: 100%;
+}
+
+button {
+  background-color: #A4200B;
+  color: #F7C516;
+  border-radius: 5px;
+  padding: 10px;
+  margin-top: 2rem;
+  font-size: 20pt;
+  justify-content: center;
+}
+
+p {
+  margin-top: 20px;
+  font-size: 20pt;
+  color: #A4200B;
+  text-align: center;
 }
 </style>

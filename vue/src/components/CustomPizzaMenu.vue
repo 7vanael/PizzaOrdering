@@ -25,8 +25,9 @@
                 <ul class="list-group list-group">
                   <li v-for="crust in crustTypes" v-bind:key="crust.name" class="list-group-item">
                     <label>
-                      <input type="radio" name="pizza-crust-type" v-bind:value="crust.name" v-model="$store.state.activePizza.crust">
-                    </label> {{ crust.name }} - {{ crust.description}}
+                      <input type="radio" name="pizza-crust-type" v-bind:value="crust.name"
+                        v-model="$store.state.activePizza.crust">
+                    </label> {{ crust.name }} - {{ crust.description }}
                   </li>
                 </ul>
               </div>
@@ -35,7 +36,8 @@
                 <ul class="list-group list-group">
                   <li v-for="crust in crustSizes" v-bind:key="crust.name" class="list-group-item">
                     <label>
-                      <input type="radio" name="pizza-crust-size" v-bind:value="crust.name" v-model="$store.state.activePizza.size">
+                      <input type="radio" name="pizza-crust-size" v-bind:value="crust.name"
+                        v-model="$store.state.activePizza.size">
                     </label> {{ crust.name }}
                   </li>
                 </ul>
@@ -44,7 +46,7 @@
           </ul>
 
 
- <!--Button Start-->
+          <!--Button Start-->
           <div class="card-footer d-flex justify-content-end">
             <button class="btn btn-primary" @click="goToNextTab">Sauce & Cheese ></button>
           </div>
@@ -63,7 +65,8 @@
                     <ul class="list-group-item">
                       <li v-for="sauce in sauces" v-bind:key="sauce.name" class="list-group-item">
                         <label>
-                          <input type="radio" name="pizza-sauce" v-bind:value="sauce.name" v-model="$store.state.activePizza.sauce" >
+                          <input type="radio" name="pizza-sauce" v-bind:value="sauce.name"
+                            v-model="$store.state.activePizza.sauce">
                         </label>
                         {{ sauce.name }}
                       </li>
@@ -85,7 +88,7 @@
               </ul>
             </div>
 
-<!--Button Start-->
+            <!--Button Start-->
             <div class="card-footer d-flex justify-content-between mt-3">
               <button class="btn btn-secondary" @click="goToPreviousTab" v-if="index > 0">Crust & Size</button>
               <button class="btn btn-primary" @click="goToNextTab" v-if="index < tabs.length - 1">Meat Toppings</button>
@@ -104,9 +107,10 @@
                   <!--Meats-->
                   <div class="card card-radio my-20">
                     <ul class="list-group list-group">
-                      <li v-for="meat in meatToppings" v-bind:key="meat.name" class="list-group-item" >
+                      <li v-for="meat in meatToppings" v-bind:key="meat.name" class="list-group-item">
                         <label>
-                          <input type="checkbox" name="meat-toppings" v-bind:value="meat.name" v-model="$store.state.activePizza.toppings[0].name">
+                          <input type="checkbox" name="meat-toppings" v-bind:value="meat.name"
+                            v-model="$store.state.activePizza.toppings[0].name">
                         </label>
                         {{ meat.name }}
                       </li>
@@ -116,7 +120,7 @@
               </ul>
             </div>
 
-<!--Button Start-->
+            <!--Button Start-->
             <div class="card-footer d-flex justify-content-between mt-3">
               <button class="btn btn-secondary" @click="goToPreviousTab" v-if="index > 0">Sauce & Cheese</button>
               <button class="btn btn-primary" @click="goToNextTab" v-if="index < tabs.length - 1">Veggie Toppings</button>
@@ -150,7 +154,7 @@
           </div>
 
 
- <!--Button Start-->
+          <!--Button Start-->
           <div class="card-footer d-flex justify-content-between mt-3">
             <button class="btn btn-secondary" @click="goToPreviousTab" v-if="index > 0">Meat Toppings</button>
             <button class="btn btn-danger" @click="goToCheckout">Review Order</button>
@@ -180,21 +184,13 @@ export default {
       ],
       pizzaToppings: [],
       specialtyPizzas: [],
-      activePizza :{},
+      activePizza: {},
       meatToppings: [],
       veggieToppings: [],
       cheeseToppings: [],
       crustTypes: [],
       sauces: [],
       crustSizes: [],
-
-      // crustDescriptions: {
-      //   'Regular': 'Garlic seasoned crust with a rich, buttery taste.',
-      //   'Deep Dish': 'Chicago-style deep dish crust with a buttery, flaky exterior.',
-      //   'Thin': 'Thin enough for optimum crispy to crunchy ratio.',
-      //   'Cauliflower': 'Gluten-free cauliflower crust with a buttery, flaky exterior.',
-      // },
-
     }
   },
   methods: {
@@ -220,24 +216,25 @@ export default {
   created() {
     ToppingsService.getToppings().then(
       (response) => {
-        this.pizzaToppings = response.data;
-        // this.pizzaToppings.forEach(
-        // (topping) =>{
-        //   if(topping.topping_type === "Meat" && topping.topping_available){ 
-        //     this.meatToppings.push(topping);
-        //     console.log(topping.name);
-        //   }
-        //   if(topping.topping_type === "Veggie" && topping.topping_available){ 
-        //     this.veggieToppings.push(topping);
-        //   }
-        //   if(topping.topping_type === "Cheese" && topping.topping_available){ 
-        //     this.cheeseToppings.push(topping);
-        //   }
-        //   console.log(topping.name);
-        // });
+        // this.pizzaToppings = response.data;
+        this.pizzaToppings.forEach(
+        (topping) =>{
+          if(topping.topping_type === "Meat" && topping.topping_available){ 
+            this.meatToppings.push(topping);
+            // console.log(topping.name);
+          }
+          if(topping.topping_type === "Veggie" && topping.topping_available){ 
+            this.veggieToppings.push(topping);
+          }
+          if(topping.topping_type === "Cheese" && topping.topping_available){ 
+            this.cheeseToppings.push(topping);
+          }
+          // console.log(topping.name);
+        });
       });
     ToppingsService.getCheese().then(
       (response) => {
+        // this.cheeseToppings = response.data;
         let cheeseList;
         cheeseList = response.data;
         //console.log(cheeseList);
@@ -251,6 +248,7 @@ export default {
       });
     ToppingsService.getMeat().then(
       (response) => {
+        // this.meatToppings = response.data;
         let meatList;
         meatList = response.data;
         meatList.forEach(
@@ -262,7 +260,7 @@ export default {
       });
     ToppingsService.getSauce().then(
       (response) => {
-        //this.sauces = response.data;
+        // this.sauces = response.data;
         let sauceList;
         sauceList = response.data;
         sauceList.forEach(
@@ -274,7 +272,7 @@ export default {
       });
     ToppingsService.getCrust().then(
       (response) => {
-        //this.crustTypes = response.data;
+        // this.crustTypes = response.data;
         let crustList;
         crustList = response.data;
         crustList.forEach(
@@ -286,7 +284,7 @@ export default {
       });
     ToppingsService.getVeggie().then(
       (response) => {
-        //this.veggieToppings = response.data;
+        // this.veggieToppings = response.data;
         let veggieList;
         veggieList = response.data;
         veggieList.forEach(
@@ -298,9 +296,9 @@ export default {
       });
     ToppingsService.getSize().then(
       (response) => {
-        //this.crustSizes = response.data;
+        this.crustSizes = response.data;
         let sizesList;
-        sizesList = response.data;
+        // sizesList = response.data;
         sizesList.forEach(
           (sizeLoop) => {
             if (sizeLoop.available) {
@@ -317,8 +315,8 @@ export default {
           (pizzaLoop) => {
             if (pizzaLoop.name === "The Polymorph") {
               this.$store.commit("SET_ACTIVE_PIZZA", pizzaLoop);
-            }
-          });
+        }
+        });
       });
 
 
@@ -394,5 +392,4 @@ input[type="checkbox"] {
   width: 1em;
   height: 1em;
   accent-color: #A4200B;
-}
-</style>
+}</style>
