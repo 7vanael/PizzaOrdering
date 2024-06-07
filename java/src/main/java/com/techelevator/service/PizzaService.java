@@ -29,4 +29,8 @@ public class PizzaService {
             return toppingList;
         }
     }
+
+    public double getPriceBySize(String size){
+        return pizzaDao.getPriceBySize(size);
+    }
 }

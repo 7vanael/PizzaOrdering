@@ -17,4 +17,6 @@ public interface PizzaDao {
     Topping getTopping(String name);
 
     Pizza getPizzaById(int id);
+
+    double getPriceBySize(String size);
 }
