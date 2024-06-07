@@ -31,11 +31,25 @@
                 </div>
             </div>
             
-            <form>
-                <div class="container">
+            
+            <form v-on:submit.prevent="sendOrder">
+                <div class="container" v-show="!isDelivery">
+                    <div class="row">
+                        <h5 class="col">Pick-up In Store</h5>
+                        <p class="col, toggle" v-on:click="toggleDelivery"> Change to Delivery</p>
+                    </div>                    
+                    <hr />
+                    <div class="row">
+                        <div class="form-element">
+                            <label for="streetAddress">Street Address: </label>
+                        </div>
+                    </div>                  
+                    
+                </div>          
+                <div class="container" v-show="isDelivery">
                     <div class="row">
                         <h5 class="col">Delivery Address</h5>
-                        <p class="col"> Change to pickup</p>
+                        <p class="col, toggle" v-on:click="toggleDelivery"> Change to pickup</p>
                     </div>                    
                     <hr />
                     <div class="row">
@@ -103,7 +117,7 @@
                     </div>
                 
                 </div>
-                <div class="container">
+                <div class="container" v-show="isDelivery">
                     <div class="row">
                         <h2> Payment Info: </h2>
                     </div>
@@ -143,6 +157,7 @@
                         </div>
                     </div>
                 </div>
+                <button class="submitButton" type="submit">Confirm and Place Order</button>
             </form>
 
         </div>
@@ -162,6 +177,7 @@ export default {
     data() {
         return {
             pizzas: [],
+            isDelivery: false,
             customerInfo: {
                 name: '',
                 email: '',
@@ -183,6 +199,14 @@ export default {
                 this.pizzas = response.data;
             });
     },
+    methods: {
+        toggleDelivery () {
+            this.isDelivery = !this.isDelivery;
+        },
+        sendOrder() {
+            // Really great code to actually POST to the DB here
+        }
+    }
 }
 
 </script>
@@ -192,5 +216,35 @@ h1 {
     text-align: justify;
     text-decoration: underline;
     color: #2892C4;
+}
+.submitButton {
+    background-color: #A4200B;    
+    color: #F7C516;
+    border-radius: 5px;
+    padding: 10px;
+    margin-top: 2rem;
+    font-size: 20pt;
+}
+.toggle {
+    text-decoration: underline;
+    color:  #A4200B;
+}
+label {
+  font-size: 20pt;
+  /* color: #A4200B; */
+}
+
+input {
+  padding: 10px;
+  margin-top: 1rem;
+  border-radius: 5px;
+  border: 1px solid #A4200B;
+  width: 100%;
+}
+.container {
+  background-color: #F2DC9C;
+  border: 2px solid #2892C4;
+  border-radius: 5px;
+  padding: 20px;
 }
 </style>
