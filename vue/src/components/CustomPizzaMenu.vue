@@ -107,9 +107,9 @@
                   <!--Meats-->
                   <div class="card card-radio my-20">
                     <ul class="list-group list-group">
-                      <li v-for="meat in meatToppings" v-bind:key="meat.name" class="list-group-item" index>
+                      <li v-for="meat in meatToppings" v-bind:key="meat.name" class="list-group-item">
                         <label>
-                          <input type="checkbox" v-bind:name="meat.name" v-bind:value="meat.name" v-model="$store.state.activeToppingsMeats.name">
+                          <input type="checkbox" v-bind:name="meat.name" v-bind:value="meat.name" v-model="$store.state.activeToppingsMeats">
                         </label>
                         {{ meat.name }}
                       </li>
@@ -141,7 +141,7 @@
                     <ul class="list-group">
                       <li v-for="veggie in veggieToppings" v-bind:key="veggie.name" class="list-group-item">
                         <label>
-                          <input type="checkbox" name="non-meat-toppings" v-bind:value="veggie.name" v-model="$store.state.activeToppingsVeggies.name">
+                          <input type="checkbox" name="non-meat-toppings" v-bind:value="veggie.name" v-model="$store.state.activeToppingsVeggies">
                         </label>
                         {{ veggie.name }}
                       </li>
@@ -296,8 +296,8 @@ export default {
       });
     ToppingsService.getSize().then(
       (response) => {
-        this.crustSizes = response.data;
-        let sizesList;
+        this.crustSizes = [];
+        let sizesList = response.data;
         // sizesList = response.data;
         sizesList.forEach(
           (sizeLoop) => {
@@ -309,8 +309,7 @@ export default {
     ToppingsService.getPizzas().then(
       (response) => {
         this.specialtyPizzas = response.data;
-        let pizzaList, veggieList, meatList, cheese;
-        pizzaList = this.specialtyPizzas;
+        let pizzaList = this.specialtyPizzas, veggieList = [], meatList = [], cheese;
         pizzaList.forEach(
           (pizzaLoop) => {
             if (pizzaLoop.name === "The Polymorph") {
@@ -321,10 +320,10 @@ export default {
                     cheese = topping;
                   }
                   if (topping.type === "Meat") { 
-                    meatList.push(topping); 
+                    meatList.push(topping.name); 
                   }
                   if (topping.type === "Veggie") { 
-                    veggieList.push(topping);
+                    veggieList.push(topping.name);
                   }
                 });
                 this.$store.commit("SET_ACTIVE_CHEESE", cheese);

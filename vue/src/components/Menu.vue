@@ -57,7 +57,7 @@
                     </div>
 
                     <div class="carousel-inner">
-                        <div v-for="(pizza, index) in pizzas" :key="pizza.name"
+                        <div v-for="(pizza, index) in pizzas" :key="pizza.name" v-on:click="setActivePizza(pizza)"
                             :class="['carousel-item', { active: index === 0 }]">
                             <img :src="pizza.image" class="d-block w-100" :alt="pizza.name">
                             <div class="carousel-caption d-none d-md-block">
@@ -121,13 +121,14 @@ export default {
     },
     methods: {
         setActivePizza(pizza) {
-            let veggieList, meatList, cheese;
+            //console.log("reached set active pizza");
+            let veggieList = [], meatList = [], cheese;
             this.$store.commit("SET_ACTIVE_PIZZA", pizza);
             pizza.toppings.forEach(
                 (topping) => {
                   if (topping.type === "Cheese") { cheese = topping;}
-                  if (topping.type === "Meat") { meatList.push(topping); }
-                  if (topping.type === "Veggie") { veggieList.push(topping);}
+                  if (topping.type === "Meat") { meatList.push(topping.name); }
+                  if (topping.type === "Veggie") { veggieList.push(topping.name);}
                 });
                 this.$store.commit("SET_ACTIVE_CHEESE", cheese);
                 this.$store.commit("SET_ACTIVE_MEATS", meatList);
