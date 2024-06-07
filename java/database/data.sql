@@ -27,17 +27,17 @@ INSERT INTO crusts (crust_type, type_price_modifier, crust_description) VALUES (
 ('Deep Dish', 4, 'Chicago-style deep dish crust with a buttery, flaky exterior'), ('Thin', 0, 'Thin enough for optimum crispy to crunchy ratio'),
  ('Cauliflower', 3.5, 'Gluten-free cauliflower crust with a buttery flaky exterior');
 
-INSERT INTO specialty_pizzas  (pizza_name, pizza_size, crust_type, pizza_description) VALUES
-('The API', 'Large', 'Regular', 'Fresh Mozzarella, fresh basil, fresh tomato slices.. The cutting edge in classic Pizza-ing'),
-('The Default', 'Large', 'Regular', 'If there is no pepperoni, then it might as well be flat bread!'),
-('The Compiler', 'Large', 'Regular', 'The works! It has it all! Maybe even too much. Customize to your delight!'),
-('The Polymorph', 'Large', 'Regular', 'Design your pizza YOUR way!'),
-('The Constructor', 'Large', 'Regular', 'A Classic cheese pizza. Add some Jalapenos to spicy up your night!'),
-('The Back-End', 'Large', 'Regular', 'BBQ sauce, BBQ chicken, onions, and tons of cheese'),
-('The Front-End', 'Large', 'Regular', 'Sliced tomatoes, mozzarella cheese, garlic, fresh basil, and extra-virgin olive oil'),
-('The Debugger', 'Large', 'Regular', 'Pesto sauce with shredded mozzarella cheese and topped with fresh green peppers, black olives, onions, mushrooms, and fresh basil leaves'),
-('The Framework', 'Large', 'Regular', 'Served with crumbled Italian sausage, bacon, and pepperoni'),
-('The Full-Stack', 'Large', 'Regular', 'Delicious pepperoni, sausage, onions, banana peppers, mushrooms, and olives');
+INSERT INTO specialty_pizzas  (pizza_name, pizza_size, crust_type, sauce_type, pizza_description) VALUES
+('The API', 'Large', 'Regular', 'Tomato', 'Fresh Mozzarella, fresh basil, fresh tomato slices.. The cutting edge in classic Pizza-ing'),
+('The Default', 'Large', 'Regular', 'Tomato', 'If there is no pepperoni, then it might as well be flat bread!'),
+('The Compiler', 'Large', 'Regular', 'Tomato', 'The works! It has it all! Maybe even too much. Customize to your delight!'),
+('The Polymorph', 'Large', 'Regular', 'Tomato', 'Design your pizza YOUR way!'),
+('The Constructor', 'Large', 'Regular', 'Tomato', 'A Classic cheese pizza. Add some Jalapenos to spicy up your night!'),
+('The Back-End', 'Large', 'Regular', 'BBQ', 'BBQ sauce, BBQ chicken, onions, and tons of cheese'),
+('The Front-End', 'Large', 'Regular','Tomato', 'Sliced tomatoes, mozzarella cheese, garlic, fresh basil, and extra-virgin olive oil'),
+('The Debugger', 'Large', 'Regular', 'Pesto', 'Pesto sauce with shredded mozzarella cheese and topped with fresh green peppers, black olives, onions, mushrooms, and fresh basil leaves'),
+('The Framework', 'Large', 'Regular', 'Tomato', 'Served with crumbled Italian sausage, bacon, and pepperoni'),
+('The Full-Stack', 'Large', 'Regular', 'Tomato', 'Delicious pepperoni, sausage, onions, banana peppers, mushrooms, and olives');
 
 INSERT INTO specialty_toppings (pizza_id, topping) VALUES
 (1, 'Basil'), (1, 'Tomato slices'), (1, 'Fresh Mozzarella cheese'),
