@@ -6,7 +6,10 @@ export function createStore(currentToken, currentUser) {
     state: {
       token: currentToken || '',
       user: currentUser || {},
-      activePizza:{}
+      activePizza:{},
+      activeToppingsMeats:{},
+      activeToppingsCheese:{},
+      activeToppingsVeggies:{},
     },
     mutations: {
       SET_AUTH_TOKEN(state, token) {
@@ -27,6 +30,15 @@ export function createStore(currentToken, currentUser) {
       },
       SET_ACTIVE_PIZZA(state, pizza){
         state.activePizza = pizza;
+      },
+      SET_ACTIVE_MEATS(state, meats){
+        state.activeToppingsMeats = meats;
+      },
+      SET_ACTIVE_CHEESE(state, cheese){
+        state.activeToppingsCheese = cheese;
+      },
+      SET_ACTIVE_VEGGIES(state, veggies){
+        state.activeToppingsVeggies = veggies;
       }
     },
   });

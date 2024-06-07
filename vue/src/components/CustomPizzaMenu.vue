@@ -78,7 +78,7 @@
                     <ul class="list-group-item">
                       <li v-for="cheese in cheeseToppings" v-bind:key="cheese.name" class="list-group-item">
                         <label>
-                          <input type="radio" name="pizza-cheese" value={{cheese.name}}>
+                          <input type="radio" name="pizza-cheese" v-bind:value="cheese.name" v-model="$store.state.activeToppingsCheese.name">
                         </label>
                         {{ cheese.name }}
                       </li>
@@ -107,10 +107,9 @@
                   <!--Meats-->
                   <div class="card card-radio my-20">
                     <ul class="list-group list-group">
-                      <li v-for="meat in meatToppings" v-bind:key="meat.name" class="list-group-item">
+                      <li v-for="meat in meatToppings" v-bind:key="meat.name" class="list-group-item" index>
                         <label>
-                          <input type="checkbox" name="meat-toppings" v-bind:value="meat.name"
-                            v-model="$store.state.activePizza.toppings[0].name">
+                          <input type="checkbox" v-bind:name="meat.name" v-bind:value="meat.name" v-model="$store.state.activeToppingsMeats.name">
                         </label>
                         {{ meat.name }}
                       </li>
@@ -142,7 +141,7 @@
                     <ul class="list-group">
                       <li v-for="veggie in veggieToppings" v-bind:key="veggie.name" class="list-group-item">
                         <label>
-                          <input type="checkbox" name="non-meat-toppings" value={{veggie.name}}>
+                          <input type="checkbox" name="non-meat-toppings" v-bind:value="veggie.name" v-model="$store.state.activeToppingsVeggies.name">
                         </label>
                         {{ veggie.name }}
                       </li>
@@ -184,8 +183,9 @@ export default {
       ],
       pizzaToppings: [],
       specialtyPizzas: [],
-      activePizza: {},
+      //activePizza: {},
       meatToppings: [],
+      activeMeatToppings: [],
       veggieToppings: [],
       cheeseToppings: [],
       crustTypes: [],
@@ -309,14 +309,29 @@ export default {
     ToppingsService.getPizzas().then(
       (response) => {
         this.specialtyPizzas = response.data;
-        let pizzaList;
+        let pizzaList, veggieList, meatList, cheese;
         pizzaList = this.specialtyPizzas;
         pizzaList.forEach(
           (pizzaLoop) => {
             if (pizzaLoop.name === "The Polymorph") {
               this.$store.commit("SET_ACTIVE_PIZZA", pizzaLoop);
-        }
-        });
+              pizzaLoop.toppings.forEach(
+                (topping) => {
+                  if (topping.type === "Cheese") { 
+                    cheese = topping;
+                  }
+                  if (topping.type === "Meat") { 
+                    meatList.push(topping); 
+                  }
+                  if (topping.type === "Veggie") { 
+                    veggieList.push(topping);
+                  }
+                });
+                this.$store.commit("SET_ACTIVE_CHEESE", cheese);
+                this.$store.commit("SET_ACTIVE_MEATS", meatList);
+                this.$store.commit("SET_ACTIVE_VEGGIES", veggieList); 
+            }
+          });
       });
 
 

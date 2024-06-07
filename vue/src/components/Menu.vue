@@ -121,8 +121,18 @@ export default {
     },
     methods: {
         setActivePizza(pizza) {
+            let veggieList, meatList, cheese;
             this.$store.commit("SET_ACTIVE_PIZZA", pizza);
-            }
+            pizza.toppings.forEach(
+                (topping) => {
+                  if (topping.type === "Cheese") { cheese = topping;}
+                  if (topping.type === "Meat") { meatList.push(topping); }
+                  if (topping.type === "Veggie") { veggieList.push(topping);}
+                });
+                this.$store.commit("SET_ACTIVE_CHEESE", cheese);
+                this.$store.commit("SET_ACTIVE_MEATS", meatList);
+                this.$store.commit("SET_ACTIVE_VEGGIES", veggieList); 
+        }
     }
 };
 
