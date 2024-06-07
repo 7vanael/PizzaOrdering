@@ -4,7 +4,7 @@
         <h1>Review Your Order and Checkout</h1>
         <div class="order">
             <div class="container">
-                <img src="../images/tomato basil pizza.jpeg" alt="pizza image" />
+                <img src="../../public/images/tomato_basil_pizza.jpeg" alt="pizza image" />
                 <p>Change Order</p>
                 <div class="row">
                     <h3 class="col">Pizza Name</h3>
@@ -30,89 +30,137 @@
                     <p class="col">Price</p>
                 </div>
             </div>
-            <!-- Most of the contents of these need to actually have data in the fields, will
-            likely need to import prop? Not sure how you'd like to handle -->
-            <div class="container">
-                <div class="row">
-                    <h4 class="col">Delivery Address</h4>
-                    <p class="col"> Change to pickup</p>
-                </div>
-                <hr />
-                <div class="row">
-                    <p class="col"> Street Address</p>
-                    <p class="col"> Change Address </p>
-                </div>
-                <div class="row">
-                    <p class="col"> City, State Zip</p>
-                </div>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <h4> Add tip:</h4>
-                </div>
-                <hr />
-                <div class="row">
-                    <p class="col"> Tip amount: </p>
-                </div>           
-            </div>
-            <div class="container">
-                <div class="row">
-                    <h4> Add Tip:</h4>
-                </div>
-                <hr />
-                <div class="row">
-                    <p class="col"> Tip amount: </p>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <button class="tip" name="tip" id="1">None</button>
-                    </div>
-                    <div class="col">
-                        <button class="tip" name="tip" id="1.1">10%</button>
-                    </div>
-                    <div class="col">
-                        <button class="tip" name="tip" id="1.15">15%</button>
-                    </div>
-                    <div class="col">
-                        <button class="tip" name="tip" id="1.2">20%</button>
-                    </div>
-                    <div class="col">
-                        <div class="row">
-                            <button class="tip, col" name="tip" id="custom">Custom</button>
-                            <input class="col" type="number" id="custom_tip">
+            
+            
+            <form v-on:submit.prevent="sendOrder">
+                <div class="container" v-show="!isDelivery">
+                    <div class="row">
+                        <h5 class="col">Pick-up In Store</h5>
+                        <p class="col, toggle" v-on:click="toggleDelivery"> Change to Delivery</p>
+                    </div>                    
+                    <hr />
+                    <div class="row">
+                        <div class="form-element">
+                            <label for="streetAddress">Street Address: </label>
+                        </div>
+                    </div>                  
+                    
+                </div>          
+                <div class="container" v-show="isDelivery">
+                    <div class="row">
+                        <h5 class="col">Delivery Address</h5>
+                        <p class="col, toggle" v-on:click="toggleDelivery"> Change to pickup</p>
+                    </div>                    
+                    <hr />
+                    <div class="row">
+                        <div class="form-element">
+                            <label for="streetAddress">Street Address: </label>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="form-element">
+                            <input type="text" id="streetAddress" v-model="customerInfo.streetAddress" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col"> 
+                            <label for="city">City: </label>
+                        </div>
+                        <div class="col"> 
+                            <label for="state">State: </label>
+                        </div>
+                        <div class="col"> 
+                            <label for="zip">Zip Code: </label>
+                        </div>                   
+                    </div>
+                    <div class="row">
+                        <div class="form-element, col">
+                            <input type="text" id="city" v-model="customerInfo.city" />
+                        </div>
+                        <div class="form-element, col">
+                            <input type="text" id="streetAddress" v-model="customerInfo.state" />
+                        </div>
+                        <div class="form-element, col">
+                            <input type="text" id="zip" v-model="customerInfo.zip" />
+                        </div>
+                    </div>
+                </div>          
+
+                <div class="container">
+                    <div class="row">
+                        <h4> Add Tip:</h4>
+                    </div>
+                    <hr />
+                    <div class="row">
+                        <p class="col"> Tip amount: </p>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <button class="tip" name="tip" id="1">None</button>
+                        </div>
+                        <div class="col">
+                            <button class="tip" name="tip" id="1.1">10%</button>
+                        </div>
+                        <div class="col">
+                            <button class="tip" name="tip" id="1.15">15%</button>
+                        </div>
+                        <div class="col">
+                            <button class="tip" name="tip" id="1.2">20%</button>
+                        </div>
+                        <div class="col">
+                            <div class="row">
+                                <button class="tip, col" name="tip" id="custom">Custom</button>
+                                <input class="col" type="number" id="custom_tip">
+                            </div>
+                        </div>
+                    
+                    </div>
                 
                 </div>
-               
-            </div>
-            <div class="container">
-                <div class="row">
-                    <h4> Payment Info: </h4>
+                <div class="container" v-show="isDelivery">
+                    <div class="row">
+                        <h2> Payment Info: </h2>
+                    </div>
+                    <hr />
+                    <div class="row">
+                        <h3 class="col"> Credit Card Info:</h3>
+                    </div>
+                    <div class="row">
+
+                    </div>
+                    <div class="row">
+                        <p class="col">
+                            <label for="ccNumber">Credit Card Number: </label>
+                        </p>
+                        <p class="col">
+                            <label for="ccExp">Expiration: </label>
+                        </p>
+                    </div>
+                    <div class="row">
+                        <div class="form-element, col">                            
+                            <input type="text" id="ccNumber" v-model="customerInfo.ccNumber" />
+                        </div>
+                        <div class="form-element, col">                            
+                            <input type="text" id="ccExp" v-model="customerInfo.ccExp" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <p class="col"> <label for="ccCode">CCV: </label></p>
+                        <p class="col"><label for="zip">Zip Code: </label></p>
+                    </div>
+                    <div class="row">
+                        <div class="form-element, col">                            
+                            <input type="text" id="ccCode" v-model="customerInfo.ccCode" />
+                        </div>
+                        <div class="form-element, col">                            
+                            <input type="text" id="zip" v-model="customerInfo.zip" />
+                        </div>
+                    </div>
                 </div>
-                <hr />
-                <div class="row">
-                    <!-- These radio buttons aren't right.... can you help fix it? -->
-                    <input class="col" type="radio" name="payment_type" label="Credit Card"/>
-                    <p class="col"> Different card?</p>
-                </div>
-                <div class="row">
-                    <!-- These radio buttons aren't right.... can you help fix it? -->
-                    <input class="col" type="radio" name="payment_type" label="Credit Card"/>
-                    <p class="col"> Credit Card</p>
-                </div>
-                <div class="row">
-                    <p class="col">Card Number</p>
-                    <p class="col">Exp</p>
-                </div>
-                
-                <div class="row">
-                    <p class="col"> CCV</p>
-                    <p class="col">Zip</p>
-                </div>
-            </div>
+                <button class="submitButton" type="submit">Confirm and Place Order</button>
+            </form>
+
         </div>
-        <Checkout />
     </div>
 </template>
 
@@ -120,17 +168,29 @@
 
 import NavBar from '../components/NavBar.vue';
 import ToppingsService from '../services/ToppingsService.js';
-import Checkout from '../components/Checkout.vue';
 
 
 export default {
     components: {
         NavBar,
-        Checkout
     },
     data() {
         return {
-            pizzas: []
+            pizzas: [],
+            isDelivery: false,
+            customerInfo: {
+                name: '',
+                email: '',
+                phone: '',
+                streetAddress: '',
+                city: '',
+                state: '',
+                zip: '',
+                paymentType: '',
+                ccNumber: '',
+                ccExp: '',
+                ccCode: '',
+            }
         }
     },
     created() {
@@ -139,6 +199,14 @@ export default {
                 this.pizzas = response.data;
             });
     },
+    methods: {
+        toggleDelivery () {
+            this.isDelivery = !this.isDelivery;
+        },
+        sendOrder() {
+            // Really great code to actually POST to the DB here
+        }
+    }
 }
 
 </script>
@@ -148,5 +216,35 @@ h1 {
     text-align: justify;
     text-decoration: underline;
     color: #2892C4;
+}
+.submitButton {
+    background-color: #A4200B;    
+    color: #F7C516;
+    border-radius: 5px;
+    padding: 10px;
+    margin-top: 2rem;
+    font-size: 20pt;
+}
+.toggle {
+    text-decoration: underline;
+    color:  #A4200B;
+}
+label {
+  font-size: 20pt;
+  /* color: #A4200B; */
+}
+
+input {
+  padding: 10px;
+  margin-top: 1rem;
+  border-radius: 5px;
+  border: 1px solid #A4200B;
+  width: 100%;
+}
+.container {
+  background-color: #F2DC9C;
+  border: 2px solid #2892C4;
+  border-radius: 5px;
+  padding: 20px;
 }
 </style>

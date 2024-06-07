@@ -3,47 +3,51 @@
         <div class="row">
             <div class="col-2">
                 <div class="menu">
-                    <div class="menu-items">
-                        <div class="menu-item">
-                            <a href="#pizzas">
-                                <h3>Pizzas</h3>
-                            </a>
-                        </div>
-                        <div class="menu-item">
-                            <a href="#pizzas">
-                                <h3>Salads</h3>
-                            </a>
-                        </div>
-                        <div class="menu-item">
-                            <a href="#pizzas">
-                                <h3>Sides</h3>
-                            </a>
-                        </div>
-                        <div class="menu-item">
-                            <a href="#pizzas">
-                                <h3>Kid's Meal</h3>
-                            </a>
-                        </div>
-                        <div class="menu-item">
-                            <a href="#pizzas">
-                                <h3>Beverages</h3>
-                            </a>
-                        </div>
-                        <div class="menu-item">
-                            <a href="#pizzas">
-                                <h3>Desserts</h3>
-                            </a>
-                        </div>
-                        <div class="menu-item">
-                            <a href="#pizzas">
-                                <h3>Deals</h3>
-                            </a>
+                    <div class="menu">
+                        <div class="menu-items">
+                            <div class="menu-item">
+                                <a href="#pizzas">
+                                    <h3>Pizzas</h3>
+                                </a>
+                            </div>
+                            <div class="menu-item">
+                                <a href="#salads">
+                                    <h3>Salads</h3>
+                                </a>
+                            </div>
+                            <div class="menu-item">
+                                <a href="#sides">
+                                    <h3>Sides</h3>
+                                </a>
+                            </div>
+                            <div class="menu-item">
+                                <a href="#kids">
+                                    <h3>Kid's Meal</h3>
+                                </a>
+                            </div>
+                            <div class="menu-item">
+                                <a href="#beverages">
+                                    <h3>Beverages</h3>
+                                </a>
+                            </div>
+                            <div class="menu-item">
+                                <a href="#desserts">
+                                    <h3>Desserts</h3>
+                                </a>
+                            </div>
+                            <div class="menu-item">
+                                <a href="#deals">
+                                    <h3>Deals</h3>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="col-10">
+
+                <!-- Pizza Carousel-->
                 <div id="carouselExampleCaptions" class="carousel slide">
                     <div class="carousel-indicators">
                         <button v-for="(pizza, index) in pizzas" :key="index" type="button"
@@ -53,18 +57,16 @@
                     </div>
 
                     <div class="carousel-inner">
-                        <div v-for="(pizza, index) in pizzas" :key="pizza.name"
+                        <div v-for="(pizza, index) in pizzas" :key="pizza.name" v-on:click="setActivePizza(pizza)"
                             :class="['carousel-item', { active: index === 0 }]">
-                    <img :src="images[pizza.name]" class="d-block w-100" alt="pizza image">
-                            <!-- <img src="../images/BBQ chicken pizza.jpg" class="d-block w-100" alt="..."> -->
+                            <img :src="pizza.image" class="d-block w-100" :alt="pizza.name">
                             <div class="carousel-caption d-none d-md-block">
                                 <h5>{{ pizza.name }}</h5>
                                 <p>{{ pizza.description }}</p>
                             </div>
-
                         </div>
-
                     </div>
+
                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
                         data-bs-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -75,14 +77,16 @@
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">Next</span>
                     </button>
-
                 </div>
+
+                <!-- Salad Carousel-->
+
             </div>
-
         </div>
+
+
+
         <CustomPizzaMenu />
-
-
     </section>
 </template>
 
@@ -94,12 +98,11 @@ import CustomPizzaMenu from './CustomPizzaMenu.vue';
 export default {
     data() {
         return {
-            images: 
-                { 
-
+            images:
+            {
                 'The Front-End': '../images/AI_margherita_pizza.webp',
                 'The Default': '../images/pepperoni_pizza.jpg',
-                'The Back-End': '../images/BBQ_chicken_pizza.jpg', 
+                'The Back-End': '../images/BBQ_chicken_pizza.jpg',
                 'The Constructor': '../images/classic_cheese_pizza.jpg',
                 'The Polymorph': '../images/custom_pizza.jpeg',
                 'The Framework': '../images/Meat_Lovers.jpg',
@@ -107,18 +110,32 @@ export default {
                 'The API': '../images/tomato_basil_pizza.jpeg',
                 'The Debugger': '../images/veggie_pizza.webp',
                 'The Full-Stack': '../images/full_stack_pizza.jpg'
-                }
-                
-        ,
-        pizzas: [],
+            },
+            pizzas: [],
         };
     },
     created() {
         ToppingsService.getPizzas().then(response => {
             this.pizzas = response.data;
         });
+    },
+    methods: {
+        setActivePizza(pizza) {
+            //console.log("reached set active pizza");
+            let veggieList = [], meatList = [], cheese;
+            this.$store.commit("SET_ACTIVE_PIZZA", pizza);
+            pizza.toppings.forEach(
+                (topping) => {
+                  if (topping.type === "Cheese") { cheese = topping;}
+                  if (topping.type === "Meat") { meatList.push(topping.name); }
+                  if (topping.type === "Veggie") { veggieList.push(topping.name);}
+                });
+                this.$store.commit("SET_ACTIVE_CHEESE", cheese);
+                this.$store.commit("SET_ACTIVE_MEATS", meatList);
+                this.$store.commit("SET_ACTIVE_VEGGIES", veggieList); 
+        }
     }
-}
+};
 
 
 
