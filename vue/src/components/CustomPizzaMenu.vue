@@ -191,14 +191,6 @@ export default {
       crustTypes: [],
       sauces: [],
       crustSizes: [],
-
-      // crustDescriptions: {
-      //   'Regular': 'Garlic seasoned crust with a rich, buttery taste.',
-      //   'Deep Dish': 'Chicago-style deep dish crust with a buttery, flaky exterior.',
-      //   'Thin': 'Thin enough for optimum crispy to crunchy ratio.',
-      //   'Cauliflower': 'Gluten-free cauliflower crust with a buttery, flaky exterior.',
-      // },
-
     }
   },
   methods: {
@@ -224,24 +216,25 @@ export default {
   created() {
     ToppingsService.getToppings().then(
       (response) => {
-        this.pizzaToppings = response.data;
-        // this.pizzaToppings.forEach(
-        // (topping) =>{
-        //   if(topping.topping_type === "Meat" && topping.topping_available){ 
-        //     this.meatToppings.push(topping);
-        //     console.log(topping.name);
-        //   }
-        //   if(topping.topping_type === "Veggie" && topping.topping_available){ 
-        //     this.veggieToppings.push(topping);
-        //   }
-        //   if(topping.topping_type === "Cheese" && topping.topping_available){ 
-        //     this.cheeseToppings.push(topping);
-        //   }
-        //   console.log(topping.name);
-        // });
+        // this.pizzaToppings = response.data;
+        this.pizzaToppings.forEach(
+        (topping) =>{
+          if(topping.topping_type === "Meat" && topping.topping_available){ 
+            this.meatToppings.push(topping);
+            // console.log(topping.name);
+          }
+          if(topping.topping_type === "Veggie" && topping.topping_available){ 
+            this.veggieToppings.push(topping);
+          }
+          if(topping.topping_type === "Cheese" && topping.topping_available){ 
+            this.cheeseToppings.push(topping);
+          }
+          // console.log(topping.name);
+        });
       });
     ToppingsService.getCheese().then(
       (response) => {
+        // this.cheeseToppings = response.data;
         let cheeseList;
         cheeseList = response.data;
         //console.log(cheeseList);
@@ -255,6 +248,7 @@ export default {
       });
     ToppingsService.getMeat().then(
       (response) => {
+        // this.meatToppings = response.data;
         let meatList;
         meatList = response.data;
         meatList.forEach(
@@ -266,7 +260,7 @@ export default {
       });
     ToppingsService.getSauce().then(
       (response) => {
-        //this.sauces = response.data;
+        // this.sauces = response.data;
         let sauceList;
         sauceList = response.data;
         sauceList.forEach(
@@ -278,7 +272,7 @@ export default {
       });
     ToppingsService.getCrust().then(
       (response) => {
-        //this.crustTypes = response.data;
+        // this.crustTypes = response.data;
         let crustList;
         crustList = response.data;
         crustList.forEach(
@@ -290,7 +284,7 @@ export default {
       });
     ToppingsService.getVeggie().then(
       (response) => {
-        //this.veggieToppings = response.data;
+        // this.veggieToppings = response.data;
         let veggieList;
         veggieList = response.data;
         veggieList.forEach(
@@ -302,9 +296,9 @@ export default {
       });
     ToppingsService.getSize().then(
       (response) => {
-        //this.crustSizes = response.data;
+        this.crustSizes = response.data;
         let sizesList;
-        sizesList = response.data;
+        // sizesList = response.data;
         sizesList.forEach(
           (sizeLoop) => {
             if (sizeLoop.available) {
