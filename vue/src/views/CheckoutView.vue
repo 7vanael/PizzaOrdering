@@ -11,10 +11,16 @@
                 <router-link class="changeOrder" to="/">Change Order</router-link>
                 <div class="row price">
                     <h3 class="col"> {{ this.$store.state.activePizza.name }}</h3>
-                    <p class="col"> {{ this.crustCost }}</p>
+                    <!-- <p class="col"> {{ this.crustCost }}</p> -->
                 </div>
-                <h5>{{ this.$store.state.activePizza.description }}</h5>
-                <hr />
+                <p id="pizzaIngredients">
+                    Crust: {{ this.$store.state.activePizza.crust }} <br/>
+                    Size: {{ this.$store.state.activePizza.size }} <br/>
+                    Sauce: {{ this.$store.state.activePizza.sauce }} <br/>
+                    Cheese: {{ this.$store.state.activeToppingsCheese.name }} <br/>
+                    Toppings: {{ this.$store.state.activeToppingString }}<br/>
+                </p>
+                <!-- <hr />
                 <div class="row price">
                     <h4 class="col">Subtotal</h4>
                     <p class="col">Price</p>
@@ -27,10 +33,10 @@
                     <h4 class="col">Tip</h4>
                     <p class="col">Price</p>
                 </div>
-                <hr />
+                <hr /> -->
                 <div class="row price">
                     <h3 class="col">Total</h3>
-                    <p class="col">Price</p>
+                    <p class="col">{{this.tempCost[this.$store.state.activePizza.size]}}</p>
                 </div>
 
                 <button class="submitButton" type="submit">Confirm and Place Order</button>
@@ -92,7 +98,7 @@
                     </div>
                 </div>
 
-                <div class="container tip">
+                <!-- <div class="container tip">
                     <div class="row">
                         <h2> Add Tip:</h2>
                     </div>
@@ -122,7 +128,7 @@
 
                     </div>
 
-                </div>
+                </div> -->
                 <div class="container payment" v-show="isDelivery">
                     <div class="row">
                         <h2> Payment Info: </h2>
@@ -174,7 +180,7 @@
 
 // import axios from 'axios';
 import NavBar from '../components/NavBar.vue';
-import ToppingsService from '../services/ToppingsService.js';
+// import ToppingsService from '../services/ToppingsService.js';
 import OrderService from '../services/OrderService.js';
 
 export default {
@@ -184,6 +190,11 @@ export default {
     },
     data() {
         return {
+            tempCost:{
+                "Large":10.25,
+                "Medium":9.45,
+                "Small":8.65,
+            },
             pizzas: [],
             currentPizza: {},
             isDelivery: false,
@@ -198,7 +209,7 @@ export default {
                 city: '',
                 state: '',
                 zip: '',
-                paymentType: '',
+                //paymentType: '',
             },
             ccInfo:{
                 ccNumber: '',
@@ -215,13 +226,13 @@ export default {
             ordersList: {},
         }
     },
-    created() {
-        ToppingsService.getCrustPriceBySize(this.crustSize).then(
-                (response)=>{
-                    this.crustCost = response.data;
-                    console.log("current crust price: " + this.crustCost);
-            });
-    },
+    // created() {
+    //     ToppingsService.getCrustPriceBySize(this.crustSize).then(
+    //             (response)=>{
+    //                 this.crustCost = response.data;
+    //                 console.log("current crust price: " + this.crustCost);
+    //         });
+    // },
     methods: {
         setCrustSize(){
            this.crustSize = this.$store.state.activePizza.crust.size;
@@ -268,14 +279,6 @@ export default {
         goToCustomPizzaMenu() {
             this.$router.push('/');
         },
-    },
-    computed:{
-        getTotalPrice(){
-            let total = 0.0;
-            total += this.crustCost; 
-            //this.totalCost = total;
-            return total;
-        }
     }
     
 }

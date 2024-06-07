@@ -10,6 +10,7 @@ export function createStore(currentToken, currentUser) {
       activeToppingsMeats:[],
       activeToppingsCheese:{},
       activeToppingsVeggies:[],
+      activeToppingString:'',
       currentOrder:{},
     },
     mutations: {
@@ -43,6 +44,10 @@ export function createStore(currentToken, currentUser) {
       },
       SET_CURRENT_ORDER(state, order){
         state.currentOrder = order;
+      }
+      ,
+      SET_ACTIVE_TOPPING_STRING(state, toppingString){
+        state.activeToppingString = toppingString;
       }
     },
   });
