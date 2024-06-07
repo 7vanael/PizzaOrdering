@@ -38,7 +38,7 @@
                     <label>
                       <input type="radio" name="pizza-crust-size" v-bind:value="crust.name"
                         v-model="$store.state.activePizza.size">
-                    </label> {{ crust.name }}
+                    </label> {{ crust.name }} - <!--{{ sizes.price }}-->
                   </li>
                 </ul>
               </div>

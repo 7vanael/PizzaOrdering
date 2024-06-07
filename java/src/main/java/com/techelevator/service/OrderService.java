@@ -23,7 +23,11 @@ public class OrderService {
         return orderDao.getOrderById(id);
     }
 
-    public List<Order> getListOfOrders(){
-        return orderDao.getListOfOrders();
+    public List<Order> getListOfOrders(String status){
+        if(status == null || status.equals("")) {
+            return orderDao.getListOfOrdersInProcess();
+        } else {
+            return orderDao.getListOfOrdersByStatus(status);
+        }
     }
 }

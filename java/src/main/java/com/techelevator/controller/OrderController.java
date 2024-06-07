@@ -29,8 +29,8 @@ public class OrderController {
 
     @GetMapping(path = "/order")
     @ResponseStatus(HttpStatus.OK)
-    public List<Order> getListOfOrders(){
-        return orderService.getListOfOrders();
+    public List<Order> getListOfOrders(@RequestParam(required = false) String status){
+        return orderService.getListOfOrders(status);
     }
 
 }
