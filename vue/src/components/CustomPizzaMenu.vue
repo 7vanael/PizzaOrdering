@@ -25,8 +25,7 @@
                 <ul class="list-group list-group">
                   <li v-for="crust in crustTypes" v-bind:key="crust.name" class="list-group-item">
                     <label>
-                      <input type="radio" name="pizza-crust-type" v-bind:value="crust.name"
-                        v-model="$store.state.activePizza.crust">
+                      <input type="radio" name="pizza-crust-type" v-bind:value="crust.name" v-model="$store.state.activePizza.crust">
                     </label> {{ crust.name }} - {{ crust.description }}
                   </li>
                 </ul>
@@ -36,8 +35,7 @@
                 <ul class="list-group list-group">
                   <li v-for="crust in crustSizes" v-bind:key="crust.name" class="list-group-item">
                     <label>
-                      <input type="radio" name="pizza-crust-size" v-bind:value="crust.name"
-                        v-model="$store.state.activePizza.size">
+                      <input type="radio" name="pizza-crust-size" v-bind:value="crust.name" v-model="$store.state.activePizza.size">
                     </label> {{ crust.name }} - <!--{{ sizes.price }}-->
                   </li>
                 </ul>
@@ -65,8 +63,7 @@
                     <ul class="list-group-item">
                       <li v-for="sauce in sauces" v-bind:key="sauce.name" class="list-group-item">
                         <label>
-                          <input type="radio" name="pizza-sauce" v-bind:value="sauce.name"
-                            v-model="$store.state.activePizza.sauce">
+                          <input type="radio" name="pizza-sauce" v-bind:value="sauce.name" v-model="$store.state.activePizza.sauce">
                         </label>
                         {{ sauce.name }}
                       </li>
@@ -197,98 +194,98 @@ export default {
     
   },
   created() {
-    // ToppingsService.getToppings().then(
-    //   (response) => {
-    //     // this.pizzaToppings = response.data;
-    //     this.pizzaToppings.forEach(
-    //     (topping) =>{
-    //       if(topping.topping_type === "Meat" && topping.topping_available){ 
-    //         this.meatToppings.push(topping);
-    //         // console.log(topping.name);
-    //       }
-    //       if(topping.topping_type === "Veggie" && topping.topping_available){ 
-    //         this.veggieToppings.push(topping);
-    //       }
-    //       if(topping.topping_type === "Cheese" && topping.topping_available){ 
-    //         this.cheeseToppings.push(topping);
-    //       }
-    //       // console.log(topping.name);
-    //     });
-    //   });
-    // ToppingsService.getCheese().then(
-    //   (response) => {
-    //     // this.cheeseToppings = response.data;
-    //     let cheeseList;
-    //     cheeseList = response.data;
-    //     //console.log(cheeseList);
-    //     cheeseList.forEach(
-    //       (cheeseLoop) => {
-    //         if (cheeseLoop.available /* && cheeseLoop.toppingTier == 2*/) {
-    //           this.cheeseToppings.push(cheeseLoop);
-    //           //console.log(cheeseLoop);
-    //         }
-    //       });
-    //   });
-    // ToppingsService.getMeat().then(
-    //   (response) => {
-    //     // this.meatToppings = response.data;
-    //     let meatList;
-    //     meatList = response.data;
-    //     meatList.forEach(
-    //       (toppingLoop) => {
-    //         if (toppingLoop.available) {
-    //           this.meatToppings.push(toppingLoop);
-    //         }
-    //       });
-    //   });
-    // ToppingsService.getSauce().then(
-    //   (response) => {
-    //     // this.sauces = response.data;
-    //     let sauceList;
-    //     sauceList = response.data;
-    //     sauceList.forEach(
-    //       (toppingLoop) => {
-    //         if (toppingLoop.available) {
-    //           this.sauces.push(toppingLoop);
-    //         }
-    //       });
-    //   });
-    // ToppingsService.getCrust().then(
-    //   (response) => {
-    //     // this.crustTypes = response.data;
-    //     let crustList;
-    //     crustList = response.data;
-    //     crustList.forEach(
-    //       (typesLoop) => {
-    //         if (typesLoop.available) {
-    //           this.crustTypes.push(typesLoop);
-    //         }
-    //       });
-    //   });
-    // ToppingsService.getVeggie().then(
-    //   (response) => {
-    //     // this.veggieToppings = response.data;
-    //     let veggieList;
-    //     veggieList = response.data;
-    //     veggieList.forEach(
-    //       (toppingLoop) => {
-    //         if (toppingLoop.available) {
-    //           this.veggieToppings.push(toppingLoop);
-    //         }
-    //       });
-    //   });
-    // ToppingsService.getSize().then(
-    //   (response) => {
-    //     this.crustSizes = [];
-    //     let sizesList = response.data;
-    //     // sizesList = response.data;
-    //     sizesList.forEach(
-    //       (sizeLoop) => {
-    //         if (sizeLoop.available) {
-    //           this.crustSizes.push(sizeLoop);
-    //         }
-    //       });
-    //   });
+    ToppingsService.getToppings().then(
+      (response) => {
+        // this.pizzaToppings = response.data;
+        this.pizzaToppings.forEach(
+        (topping) =>{
+          if(topping.topping_type === "Meat" && topping.topping_available){ 
+            this.meatToppings.push(topping);
+            // console.log(topping.name);
+          }
+          if(topping.topping_type === "Veggie" && topping.topping_available){ 
+            this.veggieToppings.push(topping);
+          }
+          if(topping.topping_type === "Cheese" && topping.topping_available){ 
+            this.cheeseToppings.push(topping);
+          }
+          // console.log(topping.name);
+        });
+      });
+    ToppingsService.getCheese().then(
+      (response) => {
+        // this.cheeseToppings = response.data;
+        let cheeseList;
+        cheeseList = response.data;
+        //console.log(cheeseList);
+        cheeseList.forEach(
+          (cheeseLoop) => {
+            if (cheeseLoop.available /* && cheeseLoop.toppingTier == 2*/) {
+              this.cheeseToppings.push(cheeseLoop);
+              //console.log(cheeseLoop);
+            }
+          });
+      });
+    ToppingsService.getMeat().then(
+      (response) => {
+        // this.meatToppings = response.data;
+        let meatList;
+        meatList = response.data;
+        meatList.forEach(
+          (toppingLoop) => {
+            if (toppingLoop.available) {
+              this.meatToppings.push(toppingLoop);
+            }
+          });
+      });
+    ToppingsService.getSauce().then(
+      (response) => {
+        // this.sauces = response.data;
+        let sauceList;
+        sauceList = response.data;
+        sauceList.forEach(
+          (toppingLoop) => {
+            if (toppingLoop.available) {
+              this.sauces.push(toppingLoop);
+            }
+          });
+      });
+    ToppingsService.getCrust().then(
+      (response) => {
+        // this.crustTypes = response.data;
+        let crustList;
+        crustList = response.data;
+        crustList.forEach(
+          (typesLoop) => {
+            if (typesLoop.available) {
+              this.crustTypes.push(typesLoop);
+            }
+          });
+      });
+    ToppingsService.getVeggie().then(
+      (response) => {
+        // this.veggieToppings = response.data;
+        let veggieList;
+        veggieList = response.data;
+        veggieList.forEach(
+          (toppingLoop) => {
+            if (toppingLoop.available) {
+              this.veggieToppings.push(toppingLoop);
+            }
+          });
+      });
+    ToppingsService.getSize().then(
+      (response) => {
+        this.crustSizes = [];
+        let sizesList = response.data;
+        // sizesList = response.data;
+        sizesList.forEach(
+          (sizeLoop) => {
+            if (sizeLoop.available) {
+              this.crustSizes.push(sizeLoop);
+            }
+          });
+      });
     ToppingsService.getPizzas().then(
       (response) => {
         this.specialtyPizzas = response.data;
