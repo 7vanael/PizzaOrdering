@@ -172,7 +172,7 @@
 
 <script>
 
-import axios from 'axios';
+// import axios from 'axios';
 import NavBar from '../components/NavBar.vue';
 // import ToppingsService from '../services/ToppingsService.js';
 
@@ -198,7 +198,12 @@ export default {
                 ccNumber: '',
                 ccExp: '',
                 ccCode: '',
-            }
+            },
+            currentOrder:{
+                "total":0,
+                "status":'',
+                "type": "",
+            },
         }
     },
     // created() {
@@ -212,17 +217,19 @@ export default {
             this.isDelivery = !this.isDelivery;
         },
         fetchOrders() {
-            axios.get('/order').then((response) => {
+            /*axios.get('/order').then((response) => {
                 console.log('Order fetched successfully!', response.data);
                 this.orders = response.data;
             }).catch((error) => {
                 console.log('Error fetching orders', error);
-            });
+            });*/
         },
         sendOrder() {
 
             //  (maybe?) Really great code to actually POST to the DB here
-           /*axios.post('/order', {
+
+            //this.$store.commit("SET_CURRENT_ORDER", currentOrder);
+            /*axios.post('/order', {
                 customerInfo: this.customerInfo,
                 pizzas: this.pizzas
             }).then((response) => {
