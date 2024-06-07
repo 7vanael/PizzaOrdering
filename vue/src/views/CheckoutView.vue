@@ -13,7 +13,7 @@
                     <h3 class="col"> {{ this.$store.state.activePizza.name }}</h3>
                     <p class="col"> {{ this.crustCost }}</p>
                 </div>
-                <h5>{{ this.$store.state.activePizza.description }}</h5>
+                <h5>{{ customerPizzaSelections }}</h5>
                 <hr />
                 <div class="row price">
                     <h4 class="col">Subtotal</h4>
@@ -275,6 +275,9 @@ export default {
             total += this.crustCost; 
             //this.totalCost = total;
             return total;
+        },
+        customerPizzaSelections() {
+            return JSON.stringify(this.$store.state.activePizza.toppings);
         }
     }
     

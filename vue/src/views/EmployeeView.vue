@@ -1,4 +1,5 @@
 <template>
+    <Navbar />
     <div>
         <div class="container">
             <!-- Header -->
@@ -6,9 +7,9 @@
             <div class="row">
                 <div class="col">
                     <PizzaAvailability />
-                    <p class="toggle" v-on:click="togglePizzaForm"> Add a Specialty Pizza</p>
+                    <h2 class="toggle" v-on:click="togglePizzaForm"> Add a Specialty Pizza</h2>
                     <form v-on:submit.prevent="addNewPizza" v-show="showPizzaForm">
-                        <label for="name">Pizza name:</label>
+                        <label for="name">Pizza name: </label>
                         <input type="text" id="name" name="name" v-model="newPizza.pizza_name">
                         <label for="description">Pizza description:</label>
                         <input type="text" id="description" name="description" v-model="newPizza.pizza_description">
@@ -36,10 +37,12 @@
 
 import PizzaAvailability from '../components/PizzaAvailability.vue';
 import ToppingsAvailability from '../components/ToppingsAvailability.vue';
+import Navbar from '../components/Navbar.vue';
 import ToppingsService from '../services/ToppingsService';
 
 export default{
     components: {
+        Navbar,
     PizzaAvailability,
     ToppingsAvailability
 },
