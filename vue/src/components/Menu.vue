@@ -59,7 +59,7 @@
                     <div class="carousel-inner">
                         <div v-for="(pizza, index) in pizzas" :key="pizza.name" v-on:click="setActivePizza(pizza)"
                             :class="['carousel-item', { active: index === 0 }]">
-                            <img :src="pizza.image" class="d-block w-100" :alt="pizza.name">
+                            <img :src="images[pizza.name]" class="d-block w-100" :alt="pizza.name">
                             <div class="carousel-caption d-none d-md-block">
                                 <h5>{{ pizza.name }}</h5>
                                 <p>{{ pizza.description }}</p>
@@ -100,16 +100,16 @@ export default {
         return {
             images:
             {
-                'The Front-End': '../images/AI_margherita_pizza.webp',
-                'The Default': '../images/pepperoni_pizza.jpg',
-                'The Back-End': '../images/BBQ_chicken_pizza.jpg',
-                'The Constructor': '../images/classic_cheese_pizza.jpg',
-                'The Polymorph': '../images/custom_pizza.jpeg',
-                'The Framework': '../images/Meat_Lovers.jpg',
-                'The Compiler': '../images/supreme_pizza.webp',
-                'The API': '../images/tomato_basil_pizza.jpeg',
-                'The Debugger': '../images/veggie_pizza.webp',
-                'The Full-Stack': '../images/full_stack_pizza.jpg'
+                'The Front-End': '/images/AI_margherita_pizza.webp',
+                'The Default': '/images/pepperoni_pizza.jpg',
+                'The Back-End': '/images/BBQ_chicken_pizza.jpg',
+                'The Constructor': '/images/classic_cheese_pizza.jpg',
+                'The Polymorph': '/images/custom_pizza.jpeg',
+                'The Framework': '/images/Meat_Lovers.jpg',
+                'The Compiler': '/images/supreme_pizza.webp',
+                'The API': '/images/tomato_basil_pizza.jpeg',
+                'The Debugger': '/images/veggie_pizza.webp',
+                'The Full-Stack': '/images/full_stack_pizza.jpg'
             },
             pizzas: [],
         };
