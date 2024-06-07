@@ -32,7 +32,7 @@
                     <h3 class="col">Total</h3>
                     <p class="col">Price</p>
                 </div>
-                //
+                
                 <button class="submitButton" type="submit">Confirm and Place Order</button>
 
             </div>
@@ -211,15 +211,23 @@ export default {
         toggleDelivery() {
             this.isDelivery = !this.isDelivery;
         },
+        fetchOrders() {
+            axios.get('/order').then((response) => {
+                console.log('Order fetched successfully!', response.data);
+                this.orders = response.data;
+            }).catch((error) => {
+                console.log('Error fetching orders', error);
+            });
+        },
         sendOrder() {
 
             //  (maybe?) Really great code to actually POST to the DB here
-            axios.post('/order', {
+           /*axios.post('/order', {
                 customerInfo: this.customerInfo,
                 pizzas: this.pizzas
             }).then((response) => {
                 console.log(response);
-            });
+            });*/
         },
         goToCustomPizzaMenu() {
             this.$router.push('/');
