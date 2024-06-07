@@ -5,6 +5,8 @@ import com.techelevator.service.OrderService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 public class OrderController {
     OrderService orderService;
@@ -24,4 +26,11 @@ public class OrderController {
     public Order getOrderById(@PathVariable int id){
         return orderService.getOrderById(id);
     }
+
+    @GetMapping(path = "/order")
+    @ResponseStatus(HttpStatus.OK)
+    public List<Order> getListOfOrders(){
+        return orderService.getListOfOrders();
+    }
+
 }
