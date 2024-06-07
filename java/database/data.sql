@@ -46,7 +46,7 @@ INSERT INTO specialty_toppings (pizza_id, topping) VALUES
 (4, 'House Cheese Blend'),
 (5, 'House Cheese Blend'),
 (6, 'BBQ chicken'),(6, 'BBQ'), (6, 'Onions'), (6, 'House Cheese Blend'),
-(7, 'Sliced Tomato'), (7, 'Mozzarella Cheese'), (7, 'Garlic'), (7, 'Basil'), (7, 'Olive Oil Drizzle'),
+(7, 'Tomato'), (7, 'Fresh Mozzarella cheese'), (7, 'Garlic'), (7, 'Basil'), (7, 'Olive Oil Drizzle'),
 (8, 'Fresh Mozzarella cheese'), (8, 'Pesto'), (8, 'Green Peppers'), (8, 'Black Olives'), (8, 'Onions'), (8, 'Mushrooms'), (8, 'Basil'),
 (9, 'House Cheese Blend'), (9, 'Italian Sausage'), (9, 'Bacon'), (9, 'Pepperoni'),
 (10, 'House Cheese Blend'), (10, 'Pepperoni'), (10, 'Italian Sausage'), (10, 'Onions'), (10, 'Mushrooms'), (10, 'Green Olives'), (10, 'Banana Peppers')
