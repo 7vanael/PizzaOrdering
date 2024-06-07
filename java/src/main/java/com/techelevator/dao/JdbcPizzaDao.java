@@ -149,4 +149,18 @@ public class JdbcPizzaDao implements PizzaDao {
         }
         return null;
     }
+
+    public double getPriceBySize(String size){
+        double price = 0;
+        String sql = "SELECT pizza_base_price FROM pizza_sizes WHERE pizza_size = ?";
+        try {
+            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, size);
+            if(results.next()){
+                price = results.getDouble("pizza_base_price");
+            }
+        }catch(Exception e) {
+            throw new DaoException(e.getMessage(), e);
+        }
+        return price;
+    }
 }

@@ -40,6 +40,9 @@ export function createStore(currentToken, currentUser) {
       },
       SET_ACTIVE_VEGGIES(state, veggies){
         state.activeToppingsVeggies = veggies;
+      },
+      SET_CURRENT_ORDER(state, order){
+        state.currentOrder = order;
       }
     },
   });

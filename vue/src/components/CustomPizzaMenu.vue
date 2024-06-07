@@ -25,7 +25,8 @@
                 <ul class="list-group list-group">
                   <li v-for="crust in crustTypes" v-bind:key="crust.name" class="list-group-item">
                     <label>
-                      <input type="radio" name="pizza-crust-type" v-bind:value="crust.name" v-model="$store.state.activePizza.crust">
+                      <input type="radio" name="pizza-crust-type" v-bind:value="crust.name"
+                        v-model="$store.state.activePizza.crust">
                     </label> {{ crust.name }} - {{ crust.description }}
                   </li>
                 </ul>
@@ -35,7 +36,8 @@
                 <ul class="list-group list-group">
                   <li v-for="crust in crustSizes" v-bind:key="crust.name" class="list-group-item">
                     <label>
-                      <input type="radio" name="pizza-crust-size" v-bind:value="crust.name" v-model="$store.state.activePizza.size">
+                      <input type="radio" name="pizza-crust-size" v-bind:value="crust.name"
+                        v-model="$store.state.activePizza.size">
                     </label> {{ crust.name }} - <!--{{ sizes.price }}-->
                   </li>
                 </ul>
@@ -63,7 +65,8 @@
                     <ul class="list-group-item">
                       <li v-for="sauce in sauces" v-bind:key="sauce.name" class="list-group-item">
                         <label>
-                          <input type="radio" name="pizza-sauce" v-bind:value="sauce.name" v-model="$store.state.activePizza.sauce">
+                          <input type="radio" name="pizza-sauce" v-bind:value="sauce.name"
+                            v-model="$store.state.activePizza.sauce">
                         </label>
                         {{ sauce.name }}
                       </li>

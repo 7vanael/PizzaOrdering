@@ -38,4 +38,14 @@ public class PizzaController {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
         }
     }
+
+    @GetMapping(path = "/price")
+    @ResponseStatus(HttpStatus.OK)
+    public double getPriceBySize(@RequestParam String size){
+        try{
+            return pizzaService.getPriceBySize(size);
+        } catch (DaoException e) {
+        throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
+    }
+    }
 }

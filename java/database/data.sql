@@ -44,11 +44,12 @@ INSERT INTO specialty_toppings (pizza_id, topping) VALUES
 (2, 'Pepperoni'), (2, 'House Cheese Blend'),
 (3, 'Green Peppers'), (3, 'Black Olives'), 	(3, 'Bacon'), (3, 'Mushrooms'), (3, 'Italian Sausage'), (3, 'Onions'), (3, 'House Cheese Blend'),  (3, 'Olive Oil Drizzle'), (3, 'Garlic'),
 (4, 'House Cheese Blend'),
-(5, 'House Cheese Blend'),(5, 'BBQ chicken'),(5, 'BBQ'), (5, 'Onions'),
-(6, 'Fresh Mozzarella cheese'), (6, 'Basil'), (6, 'Olive Oil Drizzle'), (6, 'Garlic'),
-(7, 'Fresh Mozzarella cheese'), (7, 'Pesto'), (7, 'Green Peppers'), (7, 'Black Olives'), (7, 'Onions'), (7, 'Mushrooms'), (7, 'Basil'),
-(8, 'House Cheese Blend'), (8, 'Italian Sausage'), (8, 'Bacon'), (8, 'Pepperoni'),
-(9, 'House Cheese Blend'), (9, 'Pepperoni'), (9, 'Italian Sausage'), (9, 'Onions'), (9, 'Mushrooms'), (9, 'Green Olives'), (9, 'Banana Peppers')
+(5, 'House Cheese Blend'),
+(6, 'BBQ chicken'),(6, 'BBQ'), (6, 'Onions'), (6, 'House Cheese Blend'),
+(7, 'Tomato'), (7, 'Fresh Mozzarella cheese'), (7, 'Garlic'), (7, 'Basil'), (7, 'Olive Oil Drizzle'),
+(8, 'Fresh Mozzarella cheese'), (8, 'Pesto'), (8, 'Green Peppers'), (8, 'Black Olives'), (8, 'Onions'), (8, 'Mushrooms'), (8, 'Basil'),
+(9, 'House Cheese Blend'), (9, 'Italian Sausage'), (9, 'Bacon'), (9, 'Pepperoni'),
+(10, 'House Cheese Blend'), (10, 'Pepperoni'), (10, 'Italian Sausage'), (10, 'Onions'), (10, 'Mushrooms'), (10, 'Green Olives'), (10, 'Banana Peppers')
 ;
 
 INSERT INTO orders (order_total, order_status, order_type)
