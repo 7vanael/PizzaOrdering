@@ -70,10 +70,17 @@
 <script scoped>
 import ToppingsService from '../services/ToppingsService';
 
-export default {
-    data() {
+export default{
+    components: {
+
+    },
+    data(){
         return {            
-            meatToppings: [],            
+            pizzaToppings: [],
+            specialtyPizzas: [],
+            //activePizza: {},
+            meatToppings: [],
+            activeMeatToppings: [],
             veggieToppings: [],
             cheeseToppings: [],
             crustTypes: [],
@@ -85,16 +92,44 @@ export default {
 
     },
     created() {
-    
+    ToppingsService.getToppings().then(
+      (response) => {
+        this.pizzaToppings.forEach(
+        (topping) =>{
+          if(topping.topping_type === "Meat" && topping.topping_available){ 
+            this.meatToppings.push(topping);
+          }
+          if(topping.topping_type === "Veggie" && topping.topping_available){ 
+            this.veggieToppings.push(topping);
+          }
+          if(topping.topping_type === "Cheese" && topping.topping_available){ 
+            this.cheeseToppings.push(topping);
+          }
+          
+        });
+        this.pizzaToppings.forEach(
+        (topping) =>{
+          if(topping.topping_type === "Meat" && !topping.topping_available){ 
+            this.meatToppings.push(topping);
+          }
+          if(topping.topping_type === "Veggie" && !topping.topping_available){ 
+            this.veggieToppings.push(topping);
+          }
+          if(topping.topping_type === "Cheese" && !topping.topping_available){ 
+            this.cheeseToppings.push(topping);
+          }
+          
+        });
+      });
     ToppingsService.getCheese().then(
       (response) => {
         let cheeseList;
         cheeseList = response.data;
         cheeseList.forEach(
           (cheeseLoop) => {
-            // if (cheeseLoop.available /* && cheeseLoop.toppingTier == 2*/) {
+            if (cheeseLoop.available /* && cheeseLoop.toppingTier == 2*/) {
               this.cheeseToppings.push(cheeseLoop);
-            // }
+            }
           });
       });
     ToppingsService.getMeat().then(
@@ -103,9 +138,9 @@ export default {
         meatList = response.data;
         meatList.forEach(
           (toppingLoop) => {
-            // if (toppingLoop.available) {
+            if (toppingLoop.available) {
               this.meatToppings.push(toppingLoop);
-            // }
+            }
           });
       });
     ToppingsService.getSauce().then(
@@ -114,9 +149,9 @@ export default {
         sauceList = response.data;
         sauceList.forEach(
           (toppingLoop) => {
-            // if (toppingLoop.available) {
+            if (toppingLoop.available) {
               this.sauces.push(toppingLoop);
-            // }
+            }
           });
       });
     ToppingsService.getCrust().then(
@@ -125,20 +160,21 @@ export default {
         crustList = response.data;
         crustList.forEach(
           (typesLoop) => {
-            // if (typesLoop.available) {
+            if (typesLoop.available) {
               this.crustTypes.push(typesLoop);
-            // }
+            }
           });
       });
     ToppingsService.getVeggie().then(
       (response) => {
+        // this.veggieToppings = response.data;
         let veggieList;
         veggieList = response.data;
         veggieList.forEach(
           (toppingLoop) => {
-            // if (toppingLoop.available) {
+            if (toppingLoop.available) {
               this.veggieToppings.push(toppingLoop);
-            // }
+            }
           });
       });
     ToppingsService.getSize().then(
@@ -148,11 +184,38 @@ export default {
         // sizesList = response.data;
         sizesList.forEach(
           (sizeLoop) => {
-            // if (sizeLoop.available) {
+            if (sizeLoop.available) {
               this.crustSizes.push(sizeLoop);
-            // }
+            }
           });
       });
+    ToppingsService.getPizzas().then(
+      (response) => {
+        this.specialtyPizzas = response.data;
+        let pizzaList = this.specialtyPizzas, veggieList = [], meatList = [], cheese;
+        pizzaList.forEach(
+          (pizzaLoop) => {
+            if (pizzaLoop.name === "The Polymorph") {
+              this.$store.commit("SET_ACTIVE_PIZZA", pizzaLoop);
+              pizzaLoop.toppings.forEach(
+                (topping) => {
+                  if (topping.type === "Cheese") { 
+                    cheese = topping;
+                  }
+                  if (topping.type === "Meat") { 
+                    meatList.push(topping.name); 
+                  }
+                  if (topping.type === "Veggie") { 
+                    veggieList.push(topping.name);
+                  }
+                });
+                this.$store.commit("SET_ACTIVE_CHEESE", cheese);
+                this.$store.commit("SET_ACTIVE_MEATS", meatList);
+                this.$store.commit("SET_ACTIVE_VEGGIES", veggieList); 
+            }
+          });
+      });
+
 
   },
 

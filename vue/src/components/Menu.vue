@@ -6,74 +6,39 @@
                     <div class="menu">
                         <div class="menu-items">
                             <div class="menu-item">
-                                <!-- <a href="#pizzas"> -->
-                                <nav>
-                                    <!-- <h3>Pizzas</h3> -->
-                                    <router-link v-bind:to="{ name: 'home' }">
-                                        <h3>Pizzas</h3>
-                                    </router-link>
-                                </nav>
-                                <!-- </a> -->
+                                <a href="#pizzas">
+                                    <h3>Pizzas</h3>
+                                </a>
                             </div>
                             <div class="menu-item">
-                                <!-- <a href="#salads">
+                                <a href="#salads">
                                     <h3>Salads</h3>
-                                </a> -->
-                                <nav>
-                                    <router-link v-bind:to="{ name: 'coming_soon' }">
-                                        <h3>Salads</h3>
-                                    </router-link>
-                                </nav>
+                                </a>
                             </div>
                             <div class="menu-item">
-                                <!-- <a href="#sides">
+                                <a href="#sides">
                                     <h3>Sides</h3>
-                                </a> -->
-                                <nav>
-                                    <router-link v-bind:to="{ name: 'coming_soon' }">
-                                        <h3>Sides</h3>
-                                    </router-link>
-                                </nav>
+                                </a>
                             </div>
                             <div class="menu-item">
-                                <!-- <a href="#kids">
+                                <a href="#kids">
                                     <h3>Kid's Meal</h3>
-                                </a> -->
-                                <nav>
-                                    <router-link v-bind:to="{ name: 'coming_soon' }">
-                                        <h3>Kid's Meal</h3>
-                                    </router-link>
-                                </nav>
+                                </a>
                             </div>
                             <div class="menu-item">
-                                <!-- <a href="#beverages">
+                                <a href="#beverages">
                                     <h3>Beverages</h3>
-                                </a> -->
-                                <nav>
-                                    <router-link v-bind:to="{ name: 'coming_soon' }">
-                                        <h3>Beverages</h3>
-                                    </router-link>
-                                </nav>
+                                </a>
                             </div>
                             <div class="menu-item">
-                                <!-- <a href="#desserts">
+                                <a href="#desserts">
                                     <h3>Desserts</h3>
-                                </a> -->
-                                <nav>
-                                    <router-link v-bind:to="{ name: 'coming_soon' }">
-                                        <h3>Desserts</h3>
-                                    </router-link>
-                                </nav>
+                                </a>
                             </div>
                             <div class="menu-item">
-                                <!-- <a href="#deals">
+                                <a href="#deals">
                                     <h3>Deals</h3>
-                                </a> -->
-                                <nav>
-                                    <router-link v-bind:to="{ name: 'coming_soon' }">
-                                        <h3>Deals</h3>
-                                    </router-link>
-                                </nav>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -161,13 +126,13 @@ export default {
             this.$store.commit("SET_ACTIVE_PIZZA", pizza);
             pizza.toppings.forEach(
                 (topping) => {
-                    if (topping.type === "Cheese") { cheese = topping; }
-                    if (topping.type === "Meat") { meatList.push(topping.name); }
-                    if (topping.type === "Veggie") { veggieList.push(topping.name); }
+                  if (topping.type === "Cheese") { cheese = topping;}
+                  if (topping.type === "Meat") { meatList.push(topping.name); }
+                  if (topping.type === "Veggie") { veggieList.push(topping.name);}
                 });
-            this.$store.commit("SET_ACTIVE_CHEESE", cheese);
-            this.$store.commit("SET_ACTIVE_MEATS", meatList);
-            this.$store.commit("SET_ACTIVE_VEGGIES", veggieList);
+                this.$store.commit("SET_ACTIVE_CHEESE", cheese);
+                this.$store.commit("SET_ACTIVE_MEATS", meatList);
+                this.$store.commit("SET_ACTIVE_VEGGIES", veggieList); 
         }
     }
 };
