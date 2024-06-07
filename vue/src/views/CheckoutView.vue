@@ -5,8 +5,8 @@
         <div class="order col">
 
             <div class="container">
-                <img src="../../public/images/tomato_basil_pizza.jpeg" alt="pizza image" />
-                <router-link @click="goToCustomPizzaMenu">Change Order</router-link>
+                <img class="row" src="../../public/images/tomato_basil_pizza.jpeg" alt="pizza image" />
+                <router-link to="/">Change Order</router-link>
                 <div class="row">
                     <h3 class="col">Pizza Name</h3>
                     <p class="col">Price</p>
@@ -31,31 +31,31 @@
                     <p class="col">Price</p>
                 </div>
             </div>
-        </div>    
-        <div class="col">   
+        </div>
+        <div class="col">
             <form v-on:submit.prevent="sendOrder">
                 <div class="container pickup" v-show="!isDelivery">
                     <div class="row">
                         <h5 class="col">Pick-up In Store</h5>
                         <p class="col toggle" v-on:click="toggleDelivery"> Change to Delivery</p>
-                    </div>                    
-                    <hr />
-                    <div class="row">
-                        <div class="form-element">
-                            <label for="streetAddress">Street Address: </label>
-                        </div>
-                    </div>                  
-                    
-                </div>          
-                <div class="container delivery" v-show="isDelivery">
-                    <div class="row">
-                        <h5 class="col">Delivery Address</h5>
-                        <p class="col, toggle" v-on:click="toggleDelivery"> Change to pickup</p>
-                    </div>                    
+                    </div>
                     <hr />
                     <div class="row">
                         <div class="form-element">
                             <label for="streetAddress">Street Address: 1234 Pizza Place, Pizza City, PZ 91224</label>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="container delivery" v-show="isDelivery">
+                    <div class="row">
+                        <h5 class="col">Delivery Address</h5>
+                        <p class="col, toggle" v-on:click="toggleDelivery"> Change to pickup</p>
+                    </div>
+                    <hr />
+                    <div class="row">
+                        <div class="form-element">
+                            <label for="streetAddress">Street Address: </label>
                         </div>
                     </div>
                     <div class="row">
@@ -64,15 +64,15 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col"> 
+                        <div class="col">
                             <label for="city">City: </label>
                         </div>
-                        <div class="col"> 
+                        <div class="col">
                             <label for="state">State: </label>
                         </div>
-                        <div class="col"> 
+                        <div class="col">
                             <label for="zip">Zip Code: </label>
-                        </div>                   
+                        </div>
                     </div>
                     <div class="row">
                         <div class="form-element, col">
@@ -85,7 +85,7 @@
                             <input type="text" id="zip" v-model="customerInfo.zip" />
                         </div>
                     </div>
-                </div>          
+                </div>
 
                 <div class="container">
                     <div class="row">
@@ -114,9 +114,9 @@
                                 <input class="col" type="number" id="custom_tip">
                             </div>
                         </div>
-                    
+
                     </div>
-                
+
                 </div>
                 <div class="container" v-show="isDelivery">
                     <div class="row">
@@ -138,10 +138,10 @@
                         </p>
                     </div>
                     <div class="row">
-                        <div class="form-element, col">                            
+                        <div class="form-element, col">
                             <input type="text" id="ccNumber" v-model="customerInfo.ccNumber" />
                         </div>
-                        <div class="form-element, col">                            
+                        <div class="form-element, col">
                             <input type="text" id="ccExp" v-model="customerInfo.ccExp" />
                         </div>
                     </div>
@@ -150,26 +150,27 @@
                         <p class="col"><label for="zip">Zip Code: </label></p>
                     </div>
                     <div class="row">
-                        <div class="form-element, col">                            
+                        <div class="form-element, col">
                             <input type="text" id="ccCode" v-model="customerInfo.ccCode" />
                         </div>
-                        <div class="form-element, col">                            
+                        <div class="form-element, col">
                             <input type="text" id="zip" v-model="customerInfo.zip" />
                         </div>
                     </div>
                 </div>
                 <button class="submitButton" type="submit">Confirm and Place Order</button>
             </form>
-        </div> 
+        </div>
 
-        
+
     </div>
 </template>
 
 <script>
 
+import axios from 'axios';
 import NavBar from '../components/NavBar.vue';
-import ToppingsService from '../services/ToppingsService.js';
+// import ToppingsService from '../services/ToppingsService.js';
 
 
 export default {
@@ -195,24 +196,30 @@ export default {
             }
         }
     },
-    created() {
-        ToppingsService.getPizzas().then(
-            (response) => {
-                this.pizzas = response.data;
-            });
-    },
+    // created() {
+    //     ToppingsService.getPizzas().then(
+    //         (response) => {
+    //             this.pizzas = response.data;
+    //         });
+    // },
     methods: {
-        toggleDelivery () {
+        toggleDelivery() {
             this.isDelivery = !this.isDelivery;
         },
         sendOrder() {
-            // Really great code to actually POST to the DB here
+            //  (maybe?) Really great code to actually POST to the DB here
+            axios.post('/order', {
+                customerInfo: this.customerInfo,
+                pizzas: this.pizzas
+            }).then((response) => {
+                console.log(response);
+            });
         },
         goToCustomPizzaMenu() {
-        this.$router.push('/home');
-      }
+            this.$router.push('/');
+        }
     },
-    
+
 }
 
 </script>
@@ -223,17 +230,18 @@ h1 {
     text-decoration: underline;
     color: #2892C4;
 }
-img {
-    
-}
+
+img {}
+
 form {
     display: flex;
     flex-direction: column;
     height: 100%;
 }
+
 .submitButton {
     display: flex;
-    background-color: #A4200B;    
+    background-color: #A4200B;
     color: #F7C516;
     border-radius: 5px;
     padding: 10px;
@@ -241,6 +249,7 @@ form {
     font-size: 20pt;
     justify-content: center;
 }
+
 button.tip {
     background-color: #A4200B;
     color: #F7C516;
@@ -249,28 +258,32 @@ button.tip {
     margin-top: 1rem;
     font-size: 24pt;
 }
+
 .row.tip {
     display: flex;
     flex-direction: row;
     padding: none;
     margin: none;
 }
+
 .toggle {
     text-decoration: underline;
-    color:  #A4200B;
+    color: #A4200B;
 }
+
 label {
-  font-size: 20pt;
-  /* color: #A4200B; */
+    font-size: 20pt;
+    /* color: #A4200B; */
 }
 
 input {
-  padding: 10px;
-  margin-top: 1rem;
-  border-radius: 5px;
-  border: 1px solid #A4200B;
-  width: 100%;
+    padding: 10px;
+    margin-top: 1rem;
+    border-radius: 5px;
+    border: 1px solid #A4200B;
+    width: 100%;
 }
+
 .container {
     margin-top: 2rem;
     padding: 1rem;
@@ -278,22 +291,22 @@ input {
     background-color: #F2DC9C;
     border-radius: 5px;
 }
+
 .container.delivery {
-  background-color: #F2DC9C;
-  border: 2px solid #2892C4;
-  border-radius: 5px;
-  padding: 20px;
+    background-color: #F2DC9C;
+    border: 2px solid #2892C4;
+    border-radius: 5px;
+    padding: 20px;
 }
 
 .container.pickup {
-  background-color: #F2DC9C;
-  border: 2px solid #2892C4;
-  border-radius: 5px;
-  margin: none;
+    background-color: #F2DC9C;
+    border: 2px solid #2892C4;
+    border-radius: 5px;
+    margin: none;
 }
+
 p {
     font-size: 20pt;
     color: #A4200B;
-}
-
-</style>
+}</style>
