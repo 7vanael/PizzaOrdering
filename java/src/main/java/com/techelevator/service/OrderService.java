@@ -5,6 +5,8 @@ import com.techelevator.dao.OrderDao;
 import com.techelevator.model.Order;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class OrderService {
     OrderDao orderDao;
@@ -19,5 +21,9 @@ public class OrderService {
 
     public Order getOrderById(int id){
         return orderDao.getOrderById(id);
+    }
+
+    public List<Order> getListOfOrders(){
+        return orderDao.getListOfOrders();
     }
 }
