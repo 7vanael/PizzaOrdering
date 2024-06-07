@@ -191,7 +191,18 @@ export default {
     }
   },
   methods: {
-    
+    setActiveTab(index) {
+      this.activeTabIndex = index;
+    },
+    goToNextTab() {
+      this.activeTabIndex++;
+    },
+    goToPreviousTab() {
+      this.activeTabIndex--;
+    },
+    goToCheckout() {
+      this.$router.push({ name: 'Checkout' });
+    },
   },
   created() {
     ToppingsService.getToppings().then(
