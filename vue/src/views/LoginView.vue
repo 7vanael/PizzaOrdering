@@ -22,7 +22,7 @@
         <input type="password" id="password" v-model="user.password" required />
       </div>
       <div class="row">
-        <button type="submit">Sign in</button>
+        <button @click="goToEmployeePage" type="submit">Sign in</button>
       </div>
       <p>
         <router-link v-bind:to="{ name: 'register' }">Need an account? Sign up.</router-link>
@@ -66,6 +66,10 @@ export default {
             this.invalidCredentials = true;
           }
         });
+    },
+    goToEmployeePage() {
+      console.log("This is successfully going to the employee page! Yay!")
+      this.$router.push("/employee");
     }
   }
 };
