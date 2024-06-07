@@ -39,7 +39,7 @@
                     <p class="col">{{this.tempCost[this.$store.state.activePizza.size]}}</p>
                 </div>
 
-                <button class="submitButton" type="submit">Confirm and Place Order</button>
+                <button class="submitButton" type="submit" v-on:click="sendOrder()">Confirm and Place Order</button>
 
             </div>
         </div>
@@ -271,7 +271,7 @@ export default {
             OrderService.placeOrder(this.currentOrder).then(
                 (response)=>{
                     console.log('Order placed Successfully, order number: ' + response.data.id);
-                    
+                    window.alert('Your order # is: '+ response.data.id );
                 }).catch((error) => {
                 console.log('Error placing order', error);
             });
