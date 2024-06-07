@@ -88,6 +88,16 @@ public class JdbcOrderDao implements OrderDao{
         }
     }
 
+    public void changeOrderStatus(int id, String status) {
+        String sql = "UPDATE orders SET order_status = ?::order_status_t WHERE order_id = ?";
+        try{
+            jdbcTemplate.update(sql, status, id);
+
+        }catch(Exception e) {
+        throw new DaoException(e.getMessage(), e);
+    }
+    }
+
 
     private Order getOrder(SqlRowSet results) {
         Order order = new Order();
