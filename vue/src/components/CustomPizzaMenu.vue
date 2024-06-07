@@ -201,8 +201,9 @@ export default {
       this.activeTabIndex--;
     },
     goToCheckout() {
-      this.$router.push({ name: 'Checkout' });
+      this.$router.push('/checkout');
     },
+    
   },
   created() {
     ToppingsService.getToppings().then(
