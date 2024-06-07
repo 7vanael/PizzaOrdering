@@ -8,6 +8,7 @@ import LogoutView from '../views/LogoutView.vue';
 import RegisterView from '../views/RegisterView.vue';
 import CheckoutView from '../views/CheckoutView.vue';
 import LocationView from '../views/LocationView.vue';
+import ComingSoonView from '../views/ComingSoonView.vue';
 /**
  * The Vue Router is used to "direct" the browser to render a specific view component
  * inside of App.vue depending on the URL.
@@ -61,6 +62,15 @@ const routes = [
     path: "/location",
     name: "location",
     component: LocationView,
+    meta: {
+      requiresAuth: false
+    }
+  }
+  ,
+  {
+    path: "/coming_soon",
+    name: "coming_soon",
+    component: ComingSoonView,
     meta: {
       requiresAuth: false
     }
