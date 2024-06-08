@@ -260,22 +260,14 @@ export default {
         },
         sendOrder() {
 
-            //  (maybe?) Really great code to actually POST to the DB here
-
-            /*axios.post('/order', {
-                customerInfo: this.customerInfo,
-                pizzas: this.pizzas
-            }).then((response) => {
-                console.log(response);
-            });*/
-
             this.currentOrder.customer = this.customerInfo;
-            this.currentOrder.items.push(this.$store.state.activePizza);
+            this.currentOrder.items.push({pizza:this.$store.state.activePizza});
+            this.currentOrder.type = this.isDelivery?"Delivery":"Pick-up";
 
             OrderService.placeOrder(this.currentOrder).then(
                 (response)=>{
-                    console.log('Order placed Successfully, order number: ' + response.data.id);
-                    window.alert('Your order # is: '+ response.data.id );
+                    console.log('Order placed Successfully, order number: ' + response.data);
+                    window.alert('Your order # is: '+ response.data );
                 }).catch((error) => {
                 console.log('Error placing order', error);
             });

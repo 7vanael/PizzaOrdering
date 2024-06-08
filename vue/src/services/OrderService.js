@@ -9,6 +9,6 @@ export default {
         return axios.get('/order');
     },
     placeOrder(order){
-        return axios.post('/topics', order);
+        return axios.post('/order', order);
     },
 }

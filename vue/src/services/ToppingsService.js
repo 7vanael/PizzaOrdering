@@ -26,7 +26,7 @@ export default {
         return axios.get('/pizzas');
     },
     getCrustPriceBySize(size){
-        return axios.get(`/price/${size}`);
+        return axios.get(`/price`, {params: {size: size}});
     }
 
 }
