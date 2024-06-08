@@ -37,8 +37,8 @@
                   <li v-for="crust in crustSizes" v-bind:key="crust.name" class="list-group-item">
                     <label>
                       <input type="radio" name="pizza-crust-size" v-bind:value="crust.name"
-                        v-model="$store.state.activePizza.size">
-                    </label> {{ crust.name }} - <!--{{ sizes.price }}-->
+                        v-model="$store.state.activePizza.size" v-on:click="setCurrentPriceByCrustSize()">
+                    </label> {{ crust.name }}<!--- {{ sizes.price }}-->
                   </li>
                 </ul>
               </div>
@@ -209,7 +209,15 @@ export default {
     goToCheckout() {
       this.$router.push('/checkout');
     },
-
+    setCurrentPriceByCrustSize() {
+      console.log("reached crust size method");
+      ToppingsService.getCrustPriceBySize(this.$store.state.activePizza.size).then(
+        (response) => {
+          this.crustCost = response.data;
+          this.$store.commit("SET_CURRENT_CRUST_PRICE", this.crustCost);
+          console.log("current crust price: " + this.crustCost);
+        });
+    },
   },
   created() {
     ToppingsService.getToppings().then(
@@ -337,12 +345,24 @@ export default {
         ToppingsService.getCrustPriceBySize(this.$store.state.activePizza.size).then(
           (response) => {
             this.crustCost = response.data;
+            this.$store.commit("SET_CURRENT_CRUST_PRICE", this.crustCost);
             console.log("current crust price: " + this.crustCost);
           });
       });
 
 
   },
+  // method:{
+  //   setCurrentPriceByCrustSize(){
+  //     console.log("reached crust size method");
+  //     ToppingsService.getCrustPriceBySize(this.$store.state.activePizza.size).then(
+  //         (response) => {
+  //           this.crustCost = response.data;
+  //           this.$store.commit("SET_CURRENT_CRUST_PRICE", this.crustCost);
+  //           console.log("current crust price: " + this.crustCost);
+  //         });
+  //   },
+  // }
 }
 </script>
 

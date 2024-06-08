@@ -12,6 +12,7 @@ export function createStore(currentToken, currentUser) {
       activeToppingsVeggies:[],
       activeToppingString:'',
       currentOrder:{},
+      currentCrustPrice:0,
     },
     mutations: {
       SET_AUTH_TOKEN(state, token) {
@@ -44,10 +45,12 @@ export function createStore(currentToken, currentUser) {
       },
       SET_CURRENT_ORDER(state, order){
         state.currentOrder = order;
-      }
-      ,
+      },
       SET_ACTIVE_TOPPING_STRING(state, toppingString){
         state.activeToppingString = toppingString;
+      },
+      SET_CURRENT_CRUST_PRICE(state, price){
+        state.currentCrustPrice = price;
       }
     },
   });

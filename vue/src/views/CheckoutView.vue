@@ -36,7 +36,7 @@
                 <hr /> -->
                 <div class="row price">
                     <h3 class="col">Total</h3>
-                    <p class="col">{{this.tempCost[this.$store.state.activePizza.size]}}</p>
+                    <p class="col">{{this.$store.state.currentCrustPrice}}</p>
                 </div>
 
                 <button class="submitButton" type="submit" v-on:click="sendOrder()">Confirm and Place Order</button>
@@ -184,7 +184,7 @@
 
 // import axios from 'axios';
 import NavBar from '../components/NavBar.vue';
-// import ToppingsService from '../services/ToppingsService.js';
+import ToppingsService from '../services/ToppingsService.js';
 import OrderService from '../services/OrderService.js';
 
 export default {
@@ -222,7 +222,7 @@ export default {
             },
             currentOrder: {
                 "total": 0,
-                "status": '',
+                "status": 'Received',
                 "type": "",
                 "items": [],
                 "customer": {},
@@ -230,13 +230,13 @@ export default {
             ordersList: {},
         }
     },
-    // created() {
-    //     ToppingsService.getCrustPriceBySize(this.crustSize).then(
-    //             (response)=>{
-    //                 this.crustCost = response.data;
-    //                 console.log("current crust price: " + this.crustCost);
-    //         });
-    // },
+    created() {
+        ToppingsService.getCrustPriceBySize(this.$store.state.activePizza.size).then(
+                (response)=>{
+                    this.crustCost = response.data;
+                    console.log("current crust price: " + this.crustCost);
+            });
+    },
     methods: {
         setCrustSize(){
            this.crustSize = this.$store.state.activePizza.crust.size;
