@@ -358,17 +358,7 @@ export default {
 
 
   },
-  // method:{
-  //   setCurrentPriceByCrustSize(){
-  //     console.log("reached crust size method");
-  //     ToppingsService.getCrustPriceBySize(this.$store.state.activePizza.size).then(
-  //         (response) => {
-  //           this.crustCost = response.data;
-  //           this.$store.commit("SET_CURRENT_CRUST_PRICE", this.crustCost);
-  //           console.log("current crust price: " + this.crustCost);
-  //         });
-  //   },
-  // }
+
 }
 </script>
 
