@@ -5,15 +5,12 @@
         <div class="container">
             <h1> Welcome, Syntax Slices Employee!</h1>
             <h2> Here you can create a new pizza to add to the menu and adjust toppings availability.</h2>
-            <!-- <button class="toggle" @click="toggleToppingForm">Toppings Availability Menu</button> -->
             <hr />
-
             <div class="row">
                 <button class="toggle" @click="toggleComponent">{{ buttonText }}</button>
             </div>
             <div class="row">
                 <CustomPizzaMenu v-if="showCustomPizzaMenu" :showButton="false" />
-                <ToppingsAvailability v-else />
             </div>
             <div class="row" v-if="showCustomPizzaMenu">
                 <div class="col-4">
@@ -32,6 +29,14 @@
                 <div class="col-3">
                     <button class="submitButton" type="submit">Add New Pizza to Menu</button>
                 </div>
+                </div>
+            <div class="row" v-else>
+                <ToppingsAvailability  />
+                <div class="col-3">
+                <button class="submitButton" type="submit">Update Toppings Availability</button>
+            </div>
+
+                
 
 
                 <!-- Toppings Availability Menu  -->
@@ -44,11 +49,7 @@
                     <form v-on:submit.prevent="addNewPizza" v-show="showPizzaForm">
                     </form> -->
 
-                <!-- <div v-show="!isToppingForm"> -->
-                <!-- <div class="col"> -->
-                <!-- <ToppingsAvailability /> -->
-                <!-- </div> -->
-                <!-- <div class="col"> -->
+              
                 <!-- Pending orders  -- Should this be displaying another component? -->
             </div>
 
