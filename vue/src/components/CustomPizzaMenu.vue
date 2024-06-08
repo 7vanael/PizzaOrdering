@@ -159,7 +159,7 @@
           <!--Button Start-->
           <div class="card-footer d-flex justify-content-between mt-3">
             <button class="btn btn-secondary" @click="goToPreviousTab" v-if="index > 0">Meat Toppings</button>
-            <button class="btn btn-danger" @click="goToCheckout">Review Order</button>
+            <button v-if="showButton" class="btn btn-danger" @click="goToCheckout">Review Order</button>
           </div>
 
 
@@ -194,6 +194,12 @@ export default {
       crustTypes: [],
       sauces: [],
       crustSizes: [],
+    }
+  },
+  props: {
+    showButton: {
+      type: Boolean,
+      default: true
     }
   },
   methods: {
