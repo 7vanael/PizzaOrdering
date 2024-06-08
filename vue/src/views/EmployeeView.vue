@@ -4,31 +4,40 @@
         <div class="container">
             <!-- Header -->
             <h1> Welcome, Syntax Slices Employee!</h1>
+            
+            <button class="toggle" @click="toggleToppingForm">Add Specialty Pizza</button>
+            <button class="toggle" @click="toggleToppingForm">Toppings Availability Menu</button>
+
+
             <div class="row">
-                <div class="col">
+                <div v-show="isToppingForm" class="col">
+                            <label for="name">Name Your Creation: </label>
+                            <input type="text" id="name" name="name" v-model="newPizza.pizza_name">
+                            <label for="description">Pizza description: </label>
+                            <input type="text" id="description" name="description" v-model="newPizza.pizza_description">
+                            <!-- TODO: INSERT THE CUSTOM BUILD MENU HERE?? TO SELECT THE REST OF THE OPTIONS?? -->
+                            <!-- Do we need to include an image file? Can we accept it to the images folder? -->
+                            <!-- submit form to add new specialty pizza to DB -->
+                            <button class="submitButton" type="submit">Add this Specialty Pizza to the Menu</button>
+                
                     <PizzaAvailability />
-                    <h2 class="toggle" v-on:click="togglePizzaForm"> Add a Specialty Pizza</h2>
+                    <button class="toggle" v-on:click="togglePizzaForm"> Add a Specialty Pizza</button>
                     <form v-on:submit.prevent="addNewPizza" v-show="showPizzaForm">
-                        <label for="name">Pizza name: </label>
-                        <input type="text" id="name" name="name" v-model="newPizza.pizza_name">
-                        <label for="description">Pizza description:</label>
-                        <input type="text" id="description" name="description" v-model="newPizza.pizza_description">
-                        <CustomPizzaMenu/>
-                        <!-- TODO: INSERT THE CUSTOM BUILD MENU HERE?? TO SELECT THE REST OF THE OPTIONS?? -->
-                        <!-- Do we need to include an image file? Can we accept it to the images folder? -->
-                        <!-- submit form to add new specialty pizza to DB -->
-                        <button class="submitButton" type="submit">Add this Specialty Pizza to the Menu</button>
+
+                        <CustomPizzaMenu />
+                        
                     </form>
                 </div>
-                <div class="col">
-                    <ToppingsAvailability />
-                </div>
-                <div class="col">
-                    <!-- Pending orders  -- Should this be displaying another component?-->
+                <div v-show="!isToppingForm">
+                    <div class="col">
+                        <ToppingsAvailability />
+                    </div>
+                    <div class="col">
+                        <!-- Pending orders  -- Should this be displaying another component?-->
+                    </div>
                 </div>
             </div>
         </div>
-
     </div>
 </template>
 
@@ -61,8 +70,8 @@ export default {
         }
     },
     methods: {
-        togglePizzaForm() {
-            this.showPizzaForm = !this.showPizzaForm;
+        toggleToppingForm() {
+            this.isToppingForm = !this.isToppingForm;
         },
         addNewPizza() {
             // Fabulously slick code that will send the newPizza on over to the DB

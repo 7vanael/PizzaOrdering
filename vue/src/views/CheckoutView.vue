@@ -45,19 +45,23 @@
         </div>
         <div class="col">
             <form v-on:submit.prevent="sendOrder">
+
+
                 <div class="container pickup" v-show="!isDelivery">
                     <div class="row">
                         <h5 class="col">Pick-up In Store</h5>
                         <p class="col toggle" v-on:click="toggleDelivery"> Change to Delivery</p>
                     </div>
+                    
                     <hr />
                     <div class="row">
                         <div class="form-element">
                             <label class="pickup address" for="streetAddress">Street Address: 1234 Pizza Place, Pizza City, PZ 91224</label>
                         </div>
                     </div>
-
                 </div>
+
+
                 <div class="container delivery" v-show="isDelivery">
                     <div class="row">
                         <h5 class="col">Delivery Address</h5>
