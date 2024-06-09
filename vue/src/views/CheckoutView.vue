@@ -11,6 +11,7 @@
                 <router-link class="changeOrder" to="/">Change Order</router-link>
                 <div class="row price">
                     <h3 class="col"> {{ this.$store.state.activePizza.name }}</h3>
+                    <p class="col">{{ this.$store.state.currentCrustPrice }}</p>
                     <!-- <p class="col"> {{ this.crustCost }}</p> -->
                 </div>
                 <p id="pizzaIngredients">
@@ -18,16 +19,14 @@
                     {{ this.$store.state.activePizza.crust }},  
                     {{ this.$store.state.activePizza.sauce }}, 
                     {{ this.$store.state.activeToppingsCheese }},
-
-
-                    <!-- {{ this.$store.state.activeToppingString }} -->
                     {{ this.$store.state.activeToppingsMeats.join(', ') }},
-                    {{ this.$store.state.activeToppingsVeggies.join(', ') }},
+                    {{ this.$store.state.activeToppingsVeggies.join(', ') }}
+                    
+                    <hr />
                     <!-- {{ this.$store.state.activeToppingsSpecialty.name }} -->
-                    
-                    
+                    <!-- {{ this.$store.state.activeToppingString }} -->
                 </p>
-                <!-- <hr />
+                
                 <div class="row price">
                     <h4 class="col">Subtotal</h4>
                     <p class="col">Price</p>
@@ -40,7 +39,7 @@
                     <h4 class="col">Tip</h4>
                     <p class="col">Price</p>
                 </div>
-                <hr /> -->
+                <hr /> 
                 <div class="row price">
                     <h3 class="col">Total</h3>
                     <p class="col">{{this.$store.state.currentCrustPrice}}</p>
@@ -82,7 +81,7 @@
                     </div>
                     <div class="row">
                         <div class="form-element">
-                            <input type="text" id="streetAddress" v-model="customerInfo.streetAddress" />
+                            <input type="text" id="streetAddress" placeholder="123 Pizza Rd" v-model="customerInfo.streetAddress" />
                         </div>
                     </div>
                     <div class="row">
@@ -98,13 +97,13 @@
                     </div>
                     <div class="row">
                         <div class="form-element, col">
-                            <input type="text" id="city" v-model="customerInfo.city" />
+                            <input type="text" id="city" placeholder="Pizza City" v-model="customerInfo.city" />
                         </div>
                         <div class="form-element, col">
-                            <input type="text" id="streetAddress" v-model="customerInfo.state" />
+                            <input type="text" id="streetAddress" placeholder="PZ" v-model="customerInfo.state" />
                         </div>
                         <div class="form-element, col">
-                            <input type="text" id="zip" v-model="customerInfo.zip" />
+                            <input type="text" id="zip" placeholder="12345" v-model="customerInfo.zip" />
                         </div>
                     </div>
                 </div>

@@ -11,34 +11,34 @@
                                 </a>
                             </div>
                             <div class="menu-item">
-                                <a href="#salads">
+                                <router-link to="/coming_soon">
                                     <h3>Salads</h3>
-                                </a>
+                                </router-link>
                             </div>
                             <div class="menu-item">
-                                <a href="#sides">
+                                <router-link to="/coming_soon">
                                     <h3>Sides</h3>
-                                </a>
+                                </router-link>
                             </div>
                             <div class="menu-item">
-                                <a href="#kids">
+                                <router-link to="/coming_soon">
                                     <h3>Kid's Meal</h3>
-                                </a>
+                                </router-link>
                             </div>
                             <div class="menu-item">
-                                <a href="#beverages">
+                                <router-link to="/coming_soon">
                                     <h3>Beverages</h3>
-                                </a>
+                                </router-link>
                             </div>
                             <div class="menu-item">
-                                <a href="#desserts">
+                                <router-link to="/coming_soon">
                                     <h3>Desserts</h3>
-                                </a>
+                                </router-link>
                             </div>
                             <div class="menu-item">
-                                <a href="#deals">
+                                <router-link to="/coming_soon">
                                     <h3>Deals</h3>
-                                </a>
+                                </router-link>
                             </div>
                         </div>
                     </div>
