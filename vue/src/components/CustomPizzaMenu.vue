@@ -226,19 +226,18 @@ export default {
     },
   },
   created() {
-    ToppingsService.getToppings().then(
-      (response) => {
+    ToppingsService.getToppings().then((response) => {
         // this.pizzaToppings = response.data;
         this.pizzaToppings.forEach(
           (topping) => {
-            if (topping.topping_type === "Meat" && topping.topping_available) {
+            if (toppings.topping_type === "Meat" && toppings.topping_available) {
               this.meatToppings.push(topping);
               // console.log(topping.name);
             }
-            if (topping.topping_type === "Veggie" && topping.topping_available) {
+            if (toppings.topping_type === "Veggie" && toppings.topping_available) {
               this.veggieToppings.push(topping);
             }
-            if (topping.topping_type === "Cheese" && topping.topping_available) {
+            if (toppings.topping_type === "Cheese" && toppings.topping_available) {
               this.cheeseToppings.push(topping);
             }
             // console.log(topping.name);
@@ -318,38 +317,41 @@ export default {
             }
           });
       });
-    ToppingsService.getPizzas().then(
-      (response) => {
+    ToppingsService.getPizzas().then((response) => {
         this.specialtyPizzas = response.data;
-        let pizzaList = this.specialtyPizzas, veggieList = [], meatList = [], cheese;
+        let pizzaList = this.specialtyPizzas;
+        let veggiesList = [];
+        let meats = [];
+        let cheese;
         let stringToppingList = '';
-        pizzaList.forEach(
-          (pizzaLoop) => {
-            if (pizzaLoop.name === "The Polymorph") {
-              this.$store.commit("SET_ACTIVE_PIZZA", pizzaLoop);
-              pizzaLoop.toppings.forEach(
-                (topping) => {
-                  if (topping.type === "Cheese") {
-                    cheese = topping;
-                  }
-                  if (topping.type === "Meat") {
-                    meatList.push(topping.name);
-                    stringToppingList += ' ' + topping.name;
-                  }
-                  if (topping.type === "Veggie") {
-                    veggieList.push(topping.name);
-                    stringToppingList += ' ' + topping.name;
-                  }
-                });
-              this.$store.commit("SET_ACTIVE_CHEESE", cheese);
-              this.$store.commit("SET_ACTIVE_MEATS", meatList);
-              this.$store.commit("SET_ACTIVE_VEGGIES", veggieList);
-              this.$store.commit("SET_ACTIVE_TOPPING_STRING", stringToppingList);
 
-            }
-          });
-        ToppingsService.getCrustPriceBySize(this.$store.state.activePizza.size).then(
-          (response) => {
+        pizzaList.forEach((pizzaLoop) => {
+          if (pizzaLoop.name === "The Polymorph") {
+            this.$store.commit("SET_ACTIVE_PIZZA", pizzaLoop);
+            pizzaLoop.toppings.forEach((topping) => {
+              if (topping.type === "Cheese") {
+                cheese = topping;
+              }
+              if (topping.type === "Meat") {
+                meats.push(topping.name);
+                if (stringToppingList.length !== 0) stringToppingList += ',';
+                stringToppingList += ' ' + topping.name;
+              }
+              if (topping.type === "Veggie") {
+                veggies.push(topping.name);
+                if (stringToppingList.length !== 0) stringToppingList += ',';
+                stringToppingList += ' ' + topping.name;
+              }
+            });
+            this.$store.commit("SET_ACTIVE_CHEESE", cheese);
+            this.$store.commit("SET_ACTIVE_MEATS", meats);
+            this.$store.commit("SET_ACTIVE_VEGGIES", veggiesList);
+            this.$store.commit("SET_ACTIVE_TOPPING_STRING", stringToppingList);
+
+          }
+        });
+        
+        ToppingsService.getCrustPriceBySize(this.$store.state.activePizza.size).then((response) => {
             this.crustCost = response.data;
             this.$store.commit("SET_CURRENT_CRUST_PRICE", this.crustCost);
             console.log("current crust price: " + this.crustCost);

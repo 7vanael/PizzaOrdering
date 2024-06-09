@@ -61,7 +61,7 @@
 
 import PizzaAvailability from '../components/PizzaAvailability.vue';
 import ToppingsAvailability from '../components/ToppingsAvailability.vue';
-import Navbar from '../components/Navbar.vue';
+import Navbar from '../components/NavBar.vue';
 import ToppingsService from '../services/ToppingsService';
 import CustomPizzaMenu from '../components/CustomPizzaMenu.vue';
 

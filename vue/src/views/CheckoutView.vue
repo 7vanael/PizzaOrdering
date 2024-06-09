@@ -14,11 +14,18 @@
                     <!-- <p class="col"> {{ this.crustCost }}</p> -->
                 </div>
                 <p id="pizzaIngredients">
-                    Crust: {{ this.$store.state.activePizza.crust }} <br/>
-                    Size: {{ this.$store.state.activePizza.size }} <br/>
-                    Sauce: {{ this.$store.state.activePizza.sauce }} <br/>
-                    Cheese: {{ this.$store.state.activeToppingsCheese.name }} <br/>
-                    Toppings: {{ this.$store.state.activeToppingString }}<br/>
+                    {{ this.$store.state.activePizza.size }},
+                    {{ this.$store.state.activePizza.crust }},  
+                    {{ this.$store.state.activePizza.sauce }}, 
+                    {{ this.$store.state.activeToppingsCheese }},
+
+
+                    <!-- {{ this.$store.state.activeToppingString }} -->
+                    {{ this.$store.state.activeToppingsMeats.join(', ') }},
+                    {{ this.$store.state.activeToppingsVeggies.join(', ') }},
+                    <!-- {{ this.$store.state.activeToppingsSpecialty.name }} -->
+                    
+                    
                 </p>
                 <!-- <hr />
                 <div class="row price">
@@ -154,10 +161,10 @@
                     </div>
                     <div class="row">
                         <div class="form-element, col">
-                            <input type="text" id="ccNumber" v-model="ccInfo.ccNumber" />
+                            <input type="text" id="ccNumber" placeholder="1234 1234 1234 1234" v-model="ccInfo.ccNumber" />
                         </div>
                         <div class="form-element, col">
-                            <input type="text" id="ccExp" v-model="ccInfo.ccExp" />
+                            <input type="text" id="ccExp" placeholder="MM/YY" v-model="ccInfo.ccExp" />
                         </div>
                     </div>
                     <div class="row">
@@ -166,10 +173,10 @@
                     </div>
                     <div class="row">
                         <div class="form-element, col">
-                            <input type="text" id="ccCode" v-model="ccInfo.ccCode" />
+                            <input type="text" id="ccCode" placeholder="123" v-model="ccInfo.ccCode" />
                         </div>
                         <div class="form-element, col">
-                            <input type="text" id="zip" v-model="customerInfo.zip" />
+                            <input type="text" id="zip" placeholder="12345" v-model="customerInfo.zip" />
                         </div>
                     </div>
                 </div>
@@ -231,8 +238,7 @@ export default {
         }
     },
     created() {
-        ToppingsService.getCrustPriceBySize(this.$store.state.activePizza.size).then(
-                (response)=>{
+        ToppingsService.getCrustPriceBySize(this.$store.state.activePizza.size).then((response)=>{
                     this.crustCost = response.data;
                     console.log("current crust price: " + this.crustCost);
             });

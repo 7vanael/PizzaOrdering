@@ -122,28 +122,30 @@ export default {
     methods: {
         setActivePizza(pizza) {
             //console.log("reached set active pizza");
-            let veggieList = [], meatList = [], cheese;
+            let veggies = [];
+            let meats = []; 
+            let cheese;
             let stringToppingList = '';
             this.$store.commit("SET_ACTIVE_PIZZA", pizza);
             pizza.toppings.forEach(
                 (topping) => {
                     if (topping.type === "Cheese") {
-                        cheese = topping;
+                        cheese = topping.name;
                     }
                     if (topping.type === "Meat") {
-                        meatList.push(topping.name);
+                        meats.push(topping.name);
                         if(stringToppingList.length != 0) stringToppingList += ',';
                         stringToppingList += ' ' + topping.name;
                     }
                     if (topping.type === "Veggie") {
-                        veggieList.push(topping.name);
+                        veggies.push(topping.name);
                         if(stringToppingList.length != 0) stringToppingList += ',';
                         stringToppingList += ' ' + topping.name;
                     }
                 });
             this.$store.commit("SET_ACTIVE_CHEESE", cheese);
-            this.$store.commit("SET_ACTIVE_MEATS", meatList);
-            this.$store.commit("SET_ACTIVE_VEGGIES", veggieList);
+            this.$store.commit("SET_ACTIVE_MEATS", meats);
+            this.$store.commit("SET_ACTIVE_VEGGIES", veggies);
             this.$store.commit("SET_ACTIVE_TOPPING_STRING", stringToppingList);
         }
     }
