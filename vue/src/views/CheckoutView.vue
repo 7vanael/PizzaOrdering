@@ -1,5 +1,6 @@
 <template>
     <NavBar />
+
     <div class="review-order row">
         <h1>Review Your Order and Checkout</h1>
         <div class="order col">
@@ -16,17 +17,17 @@
                 </div>
                 <p id="pizzaIngredients">
                     {{ this.$store.state.activePizza.size }},
-                    {{ this.$store.state.activePizza.crust }},  
-                    {{ this.$store.state.activePizza.sauce }}, 
+                    {{ this.$store.state.activePizza.crust }},
+                    {{ this.$store.state.activePizza.sauce }},
                     {{ this.$store.state.activeToppingsCheese }},
                     {{ this.$store.state.activeToppingsMeats.join(', ') }},
                     {{ this.$store.state.activeToppingsVeggies.join(', ') }}
-                    
+
                     <hr />
                     <!-- {{ this.$store.state.activeToppingsSpecialty.name }} -->
                     <!-- {{ this.$store.state.activeToppingString }} -->
                 </p>
-                
+
                 <div class="row price">
                     <h4 class="col">Subtotal</h4>
                     <p class="col">Price</p>
@@ -39,10 +40,10 @@
                     <h4 class="col">Tip</h4>
                     <p class="col">Price</p>
                 </div>
-                <hr /> 
+                <hr />
                 <div class="row price">
                     <h3 class="col">Total</h3>
-                    <p class="col">{{this.$store.state.currentCrustPrice}}</p>
+                    <p class="col">{{ this.$store.state.currentCrustPrice }}</p>
                 </div>
 
                 <button class="submitButton" type="submit" v-on:click="sendOrder()">Confirm and Place Order</button>
@@ -58,11 +59,12 @@
                         <h5 class="col">Pick-up In Store</h5>
                         <p class="col toggle" v-on:click="toggleDelivery"> Change to Delivery</p>
                     </div>
-                    
+
                     <hr />
                     <div class="row">
                         <div class="form-element">
-                            <label class="pickup address" for="streetAddress">Street Address: 1234 Pizza Place, Pizza City, PZ 91224</label>
+                            <label class="pickup address" for="streetAddress">Street Address: 1234 Pizza Place, Pizza
+                                City, PZ 91224</label>
                         </div>
                     </div>
                 </div>
@@ -81,7 +83,8 @@
                     </div>
                     <div class="row">
                         <div class="form-element">
-                            <input type="text" id="streetAddress" placeholder="123 Pizza Rd" v-model="customerInfo.streetAddress" />
+                            <input type="text" id="streetAddress" placeholder="123 Pizza Rd"
+                                v-model="customerInfo.streetAddress" />
                         </div>
                     </div>
                     <div class="row">
@@ -200,15 +203,15 @@ export default {
     },
     data() {
         return {
-            tempCost:{
-                "Large":10.25,
-                "Medium":9.45,
-                "Small":8.65,
+            tempCost: {
+                "Large": 10.25,
+                "Medium": 9.45,
+                "Small": 8.65,
             },
             pizzas: [],
             currentPizza: {},
             isDelivery: false,
-            totalCost:0.0,
+            totalCost: 0.0,
             crustCost: 0.0,
             crustSize: '',
             customerInfo: {
@@ -221,7 +224,7 @@ export default {
                 zip: '',
                 //paymentType: '',
             },
-            ccInfo:{
+            ccInfo: {
                 ccNumber: '',
                 ccExp: '',
                 ccCode: '',
@@ -237,14 +240,14 @@ export default {
         }
     },
     created() {
-        ToppingsService.getCrustPriceBySize(this.$store.state.activePizza.size).then((response)=>{
-                    this.crustCost = response.data;
-                    console.log("current crust price: " + this.crustCost);
-            });
+        ToppingsService.getCrustPriceBySize(this.$store.state.activePizza.size).then((response) => {
+            this.crustCost = response.data;
+            console.log("current crust price: " + this.crustCost);
+        });
     },
     methods: {
-        setCrustSize(){
-           this.crustSize = this.$store.state.activePizza.crust.size;
+        setCrustSize() {
+            this.crustSize = this.$store.state.activePizza.crust.size;
         },
         toggleDelivery() {
             this.isDelivery = !this.isDelivery;
@@ -260,28 +263,28 @@ export default {
                 (response) => {
                     this.ordersList = response.data;
                 }).catch((error) => {
-                console.log('Error fetching orders', error);
-            });
+                    console.log('Error fetching orders', error);
+                });
         },
         sendOrder() {
 
             this.currentOrder.customer = this.customerInfo;
-            this.currentOrder.items.push({pizza:this.$store.state.activePizza});
-            this.currentOrder.type = this.isDelivery?"Delivery":"Pick-up";
+            this.currentOrder.items.push({ pizza: this.$store.state.activePizza });
+            this.currentOrder.type = this.isDelivery ? "Delivery" : "Pick-up";
 
             OrderService.placeOrder(this.currentOrder).then(
-                (response)=>{
+                (response) => {
                     console.log('Order placed Successfully, order number: ' + response.data);
-                    window.alert('Your order # is: '+ response.data );
+                    window.alert('Your order # is: ' + response.data);
                 }).catch((error) => {
-                console.log('Error placing order', error);
-            });
+                    console.log('Error placing order', error);
+                });
         },
         goToCustomPizzaMenu() {
             this.$router.push('/');
         },
     }
-    
+
 }
 
 </script>
@@ -291,10 +294,14 @@ h1 {
     text-align: justify;
     text-decoration: underline;
     color: #2892C4;
+    margin-top: 2em;
+    margin-left: 1em;
 }
+
 img {
-width: 50%;
+    width: 50%;
 }
+
 .row>img {
     display: flex;
     /* max-height: 700px; */
@@ -317,6 +324,7 @@ form {
     display: flex;
     flex-direction: column;
     height: 100%;
+    margin-right: 2em;
 }
 
 .submitButton {
@@ -335,8 +343,6 @@ form {
     color: #2892C4;
     font-weight: bold;
 }
-
-
 
 button.tip {
     background-color: #A4200B;
@@ -386,28 +392,25 @@ input {
     border: 2px solid #2892C4;
     background-color: #F2DC9C;
     border-radius: 5px;
+    margin: 1em 2em 0 2em;
 }
 
 .container.delivery {
     background-color: #F2DC9C;
     border: 2px solid #2892C4;
     border-radius: 5px;
-    padding: 20px;
 }
 
 .container.pickup {
     background-color: #F2DC9C;
     border: 2px solid #2892C4;
     border-radius: 5px;
-    margin: none;
 }
 
 h5 {
     font-size: 40pt;
     color: #A4200B;
 }
-
-
 
 p {
     font-size: 24pt;
@@ -434,9 +437,9 @@ p {
     text-align: left;
     font-size: 28pt;
 }
+
 .pizzaDescription {
     font-size: 20pt;
     color: #2892C4;
 }
-
 </style>

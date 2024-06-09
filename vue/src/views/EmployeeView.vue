@@ -15,12 +15,12 @@
             <div class="row" v-if="showCustomPizzaMenu">
                 <div class="col-4">
                     <label for="name">Name Your Creation:
-                        <input type="text" id="name" name="name" v-model="newPizza.pizza_name">
+                        <input type="text" id="name" name="name" v-model="newPizza.pizza_name" required>
                     </label>
                 </div>
                 <div class="col-4">
                     <label for="description">Pizza description:
-                        <input type="text" id="description" name="description" v-model="newPizza.pizza_description">
+                        <input type="text" id="description" name="description" v-model="newPizza.pizza_description" required>
                     </label>
                 </div>
                 <!-- TODO: INSERT THE CUSTOM BUILD MENU HERE?? TO SELECT THE REST OF THE OPTIONS??  -->
@@ -35,20 +35,6 @@
                 <div class="col-3">
                 <button class="submitButton" type="submit">Update Toppings Availability</button>
             </div>
-
-                
-
-
-                <!-- Toppings Availability Menu  -->
-                <!-- <div class="row">
-                <ToppingsAvailability v-show="showToppingsAvailability" /> -->
-                <!-- <CustomPizzaMenu /> -->
-
-                <!-- <PizzaAvailability /> -->
-                <!-- <button class="toggle" v-on:click="togglePizzaForm"> Add a Specialty Pizza</button>
-                    <form v-on:submit.prevent="addNewPizza" v-show="showPizzaForm">
-                    </form> -->
-
               
                 <!-- Pending orders  -- Should this be displaying another component? -->
             </div>

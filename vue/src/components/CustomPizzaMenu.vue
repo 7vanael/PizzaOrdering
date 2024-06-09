@@ -230,14 +230,14 @@ export default {
         // this.pizzaToppings = response.data;
         this.pizzaToppings.forEach(
           (topping) => {
-            if (toppings.topping_type === "Meat" && toppings.topping_available) {
+            if (topping.topping_type === "Meat" && topping.topping_available) {
               this.meatToppings.push(topping);
               // console.log(topping.name);
             }
-            if (toppings.topping_type === "Veggie" && toppings.topping_available) {
+            if (topping.topping_type === "Veggie" && topping.topping_available) {
               this.veggieToppings.push(topping);
             }
-            if (toppings.topping_type === "Cheese" && toppings.topping_available) {
+            if (topping.topping_type === "Cheese" && topping.topping_available) {
               this.cheeseToppings.push(topping);
             }
             // console.log(topping.name);
