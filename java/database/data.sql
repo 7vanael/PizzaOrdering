@@ -2,6 +2,7 @@ BEGIN TRANSACTION;
 
 INSERT INTO users (username,password_hash,role) VALUES ('user','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_USER');
 INSERT INTO users (username,password_hash,role) VALUES ('admin','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_ADMIN');
+INSERT INTO users (username,password_hash,role) VALUES ('employee1','$2a$10$fSQN3k7KIGlWk1rRNGmla.VxLYyxhAPNw4Di53HFLmeNor.J7egqO','ROLE_USER');
 
 INSERT INTO topping_tiers (topping_tier, tier_description, tier_price_modifier)
 VALUES (0, 'Essentials', 0), (1, 'Need to haves', 1.25), (2, 'Premium', 2.25);
