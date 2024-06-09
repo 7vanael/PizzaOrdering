@@ -1,6 +1,6 @@
 <template>
     <section class="container-fluid">
-        <div class="row">
+        <div class="row menu">
             <div class="col-2">
                 <div class="menu">
                     <div class="menu">
@@ -170,6 +170,11 @@ export default {
     display: flex;
     min-height: 100%;
     background-color: #2892C4;
+}
+.row.menu {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 
 .menu-items {
