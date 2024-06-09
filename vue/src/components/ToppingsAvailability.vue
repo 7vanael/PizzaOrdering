@@ -11,7 +11,7 @@
         <ul class="size">
           <li v-for="crust in crustSizes" v-bind:key="crust.name" class="list-group-item">
             <label>
-              <input type="checkbox" v-bind:name="size.name" v-bind:value="size.name"
+              <input type="radio" v-bind:name="size.name" v-bind:value="size.name"
                 v-model="$store.state.activeToppingsSize">
             </label> {{ crust.name }}
           </li>
@@ -21,7 +21,7 @@
         <ul class="crust">
           <li v-for="crust in crustTypes" v-bind:key="crust.name" class="list-group-item">
             <label>
-              <input type="checkbox" v-bind:name="crust.name" v-bind:value="crust.name"
+              <input type="radio" v-bind:name="crust.name" v-bind:value="crust.name"
                 v-model="$store.state.activeToppingsCrust">
             </label> {{ crust.name }}
           </li>

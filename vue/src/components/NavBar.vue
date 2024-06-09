@@ -12,6 +12,8 @@
           <router-link class="nav-link" to="/register">Sign Up</router-link>
           <router-link class="nav-link" to="/login">Log In</router-link>
           <router-link class="nav-link" to="/employee">Employee</router-link>
+          <router-link class="nav-link" to="/logout">Logout</router-link>
+
         </div>
       </div>
     </div>
