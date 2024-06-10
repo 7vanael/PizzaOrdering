@@ -6,6 +6,11 @@
             <h1> Welcome, Syntax Slices Employee!</h1>
             <h2> Here you can create a new pizza to add to the menu and adjust toppings availability.</h2>
             <hr />
+            <h3> Review Specialty Pizza Availability: </h3>
+            <div class="row">
+                <PizzaAvailability />
+            </div>
+            <hr />
             <div class="row">
                 <button class="toggle" @click="toggleComponent">{{ buttonText }}</button>
             </div>
@@ -22,10 +27,7 @@
                     <label for="description">Pizza description:
                         <input type="text" id="description" name="description" v-model="newPizza.pizza_description" required>
                     </label>
-                </div>
-                <!-- TODO: INSERT THE CUSTOM BUILD MENU HERE?? TO SELECT THE REST OF THE OPTIONS??  -->
-                <!-- Do we need to include an image file? Can we accept it to the images folder? -->
-                <!-- submit form to add new specialty pizza to DB -->
+                </div>                
                 <div class="col-3">
                     <button class="submitButton" type="submit" @click.prevent="addNewPizza">Add New Pizza to Menu</button>
                 </div>
@@ -48,9 +50,9 @@
 import PizzaAvailability from '../components/PizzaAvailability.vue';
 import ToppingsAvailability from '../components/ToppingsAvailability.vue';
 import Navbar from '../components/NavBar.vue';
-import ToppingsService from '../services/ToppingsService';
+import ToppingsService from '../services/ToppingsService.js';
 import CustomPizzaMenu from '../components/CustomPizzaMenu.vue';
-import EmployeeService from '../services/EmployeeService';
+import EmployeeService from '../services/EmployeeService.js';
 
 export default {
     components: {

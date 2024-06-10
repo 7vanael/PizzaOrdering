@@ -37,8 +37,10 @@ INSERT INTO specialty_pizzas  (pizza_name, pizza_size, crust_type, sauce_type, p
 ('The Back-End', 'Large', 'Regular', 'BBQ', 'BBQ sauce, BBQ chicken, onions, and tons of cheese'),
 ('The Front-End', 'Large', 'Regular','Tomato', 'Sliced tomatoes, mozzarella cheese, garlic, fresh basil, and extra-virgin olive oil'),
 ('The Debugger', 'Large', 'Regular', 'Pesto', 'Pesto sauce with shredded mozzarella cheese and topped with fresh green peppers, black olives, onions, mushrooms, and fresh basil leaves'),
-('The Framework', 'Large', 'Regular', 'Tomato', 'Served with crumbled Italian sausage, bacon, and pepperoni'),
-('The Full-Stack', 'Large', 'Regular', 'Tomato', 'Delicious pepperoni, sausage, onions, banana peppers, mushrooms, and olives');
+('The Framework', 'Large', 'Regular', 'Tomato', 'Served with crumbled Italian sausage, bacon, and pepperoni');
+
+INSERT INTO specialty_pizzas  (pizza_name, pizza_size, crust_type, sauce_type, pizza_description, pizza_available) VALUES
+('The Full-Stack', 'Large', 'Regular', 'Tomato', 'Delicious pepperoni, sausage, onions, banana peppers, mushrooms, and olives', FALSE);
 
 INSERT INTO specialty_toppings (pizza_id, topping) VALUES
 (1, 'Basil'), (1, 'Tomato slices'), (1, 'Fresh Mozzarella cheese'),
