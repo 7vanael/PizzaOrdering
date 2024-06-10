@@ -27,7 +27,7 @@
                 <!-- Do we need to include an image file? Can we accept it to the images folder? -->
                 <!-- submit form to add new specialty pizza to DB -->
                 <div class="col-3">
-                    <button class="submitButton" type="submit">Add New Pizza to Menu</button>
+                    <button class="submitButton" type="submit" @click.prevent="addNewPizza">Add New Pizza to Menu</button>
                 </div>
                 </div>
             <div class="row" v-else>
@@ -50,6 +50,7 @@ import ToppingsAvailability from '../components/ToppingsAvailability.vue';
 import Navbar from '../components/NavBar.vue';
 import ToppingsService from '../services/ToppingsService';
 import CustomPizzaMenu from '../components/CustomPizzaMenu.vue';
+import EmployeeService from '../services/EmployeeService';
 
 export default {
     components: {
@@ -64,10 +65,6 @@ export default {
             // showPizzaForm: false,
             newPizza: {
                 pizza_name: '',
-                pizza_size: '',
-                crust_type: '',
-                sauce_type: '',
-                pizza_available: true,
                 pizza_description: ''
             }
         }
@@ -83,14 +80,28 @@ export default {
         },
         addNewPizza() {
             // Fabulously slick code that will send the newPizza on over to the DB
+            const pizza = {
+                name: this.newPizza.pizza_name,
+                size: this.$store.state.activePizza.size,
+                crust: this.$store.state.activePizza.crust,
+                sauce: this.$store.state.activePizza.sauce,
+                available: true,
+                description: this.newPizza.pizza_description,
+                toppings: [
+                    {name: this.$store.state.activeToppingsCheese.name},
+                ]
+            }
+            for(let i = 0; i < this.$store.state.activeToppingsMeats.length; i++){
+                pizza.toppings.push({name: this.$store.state.activeToppingsMeats[i]})
+            }
+            for(let i = 0; i < this.$store.state.activeToppingsVeggies.length; i++){
+                pizza.toppings.push({name: this.$store.state.activeToppingsVeggies[i]})
+            }
+            EmployeeService.addPizza(pizza);
             this.clearForm();
         },
         clearForm() {
             this.newPizza.pizza_name = '';
-            this.newPizza.pizza_size = '';
-            this.newPizza.crust_type = '';
-            this.newPizza.sauce_type = '';
-            this.newPizza.pizza_available = true;
             this.newPizza.pizza_description = '';
 
         }
