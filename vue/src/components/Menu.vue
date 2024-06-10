@@ -116,7 +116,10 @@ export default {
     },
     created() {
         ToppingsService.getPizzas().then(response => {
-            this.pizzas = response.data;
+
+            this.pizzas = response.data.filter(pizza=>{
+                return pizza.available == true;
+            });
         });
     },
     methods: {

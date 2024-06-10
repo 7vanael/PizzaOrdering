@@ -20,9 +20,10 @@
                     Crust Type: {{ this.$store.state.activePizza.crust }},
                     Sauce: {{ this.$store.state.activePizza.sauce }},
                     {{ this.$store.state.activeToppingsCheese.name }},
-                    {{ this.$store.state.activeToppingString }}
+                    <!-- {{ this.$store.state.activeToppingString }} -->
 
-                    <!-- {{ this.$store.state.activeToppingsVeggies}} -->
+                    {{ this.$store.state.activeToppingsMeats.join(', ') }}
+                    {{ this.$store.state.activeToppingsVeggies.join(', ') }}
                 </p>
                 <hr />
                     <!-- {{ this.$store.state.activeToppingsSpecialty.name }} -->

@@ -37,7 +37,7 @@
                   <li v-for="crust in crustSizes" v-bind:key="crust.name" class="list-group-item">
                     <label>
                       <input type="radio" name="pizza-crust-size" v-bind:value="crust.name"
-                        v-model="$store.state.activePizza.size" v-on:click="setCurrentPriceByCrustSize()">
+                        v-model="$store.state.activePizza.size" v-on:change="setCurrentPriceByCrustSize()">
                     </label> {{ crust.name }}<!--- {{ sizes.price }}-->
                   </li>
                 </ul>
@@ -159,7 +159,7 @@
           <!--Button Start-->
           <div class="card-footer d-flex justify-content-between mt-3">
             <button class="btn btn-secondary" @click="goToPreviousTab" v-if="index > 0">Meat Toppings</button>
-            <button v-if="showButton" class="btn btn-danger" @click="goToCheckout" >Review Order</button>
+            <button v-if="showButton" class="btn btn-danger" @click="goToCheckout">Review Order</button>
           </div>
 
 
@@ -213,10 +213,9 @@ export default {
       this.activeTabIndex--;
     },
     goToCheckout() {
-      this.updateActiveToppings();
       //console.log("reached go to checkout method");
       this.$router.push('/checkout');
-      
+
     },
     setCurrentPriceByCrustSize() {
       console.log("reached crust size method");
@@ -227,59 +226,25 @@ export default {
           console.log("current crust price: " + this.crustCost);
         });
     },
-    updateActiveToppings() {
-      //console.log("reached update active toppings method");
-      let currentActivePizza = this.$store.state.activePizza;
-        let veggiesList = [];
-        let meats = [];
-        let cheese;
-        let stringToppingList = '';
-
-            // this.$store.commit("SET_ACTIVE_PIZZA", currentActivePizza);
-            currentActivePizza.toppings.forEach((topping) => {
-              //console.log("adding topping");
-              if (topping.type === "Cheese") {
-                cheese = topping;
-                console.log("adding Cheese");
-              }
-              if (topping.type == "Meat") {
-                meats.push(topping.name);
-                if (stringToppingList.length !== 0) stringToppingList += ',';
-                stringToppingList += ' ' + topping.name;
-                console.log("adding meat");
-              }
-              if (topping.type == "Veggie") {
-                veggiesList.push(topping.name);
-                if (stringToppingList.length !== 0) stringToppingList += ',';
-                stringToppingList += ' ' + topping.name;
-                console.log("adding veggie");
-              }
-            });
-            this.$store.commit("SET_ACTIVE_CHEESE", cheese);
-            this.$store.commit("SET_ACTIVE_MEATS", meats);
-            this.$store.commit("SET_ACTIVE_VEGGIES", veggiesList);
-            this.$store.commit("SET_ACTIVE_TOPPING_STRING", stringToppingList);
-    },
-
   },
   created() {
     ToppingsService.getToppings().then((response) => {
-        // this.pizzaToppings = response.data;
-        this.pizzaToppings.forEach(
-          (topping) => {
-            if (topping.topping_type === "Meat" && topping.topping_available) {
-              this.meatToppings.push(topping);
-              // console.log(topping.name);
-            }
-            if (topping.topping_type === "Veggie" && topping.topping_available) {
-              this.veggieToppings.push(topping);
-            }
-            if (topping.topping_type === "Cheese" && topping.topping_available) {
-              this.cheeseToppings.push(topping);
-            }
+      // this.pizzaToppings = response.data;
+      this.pizzaToppings.forEach(
+        (topping) => {
+          if (topping.topping_type === "Meat" && topping.topping_available) {
+            this.meatToppings.push(topping);
             // console.log(topping.name);
-          });
-      });
+          }
+          if (topping.topping_type === "Veggie" && topping.topping_available) {
+            this.veggieToppings.push(topping);
+          }
+          if (topping.topping_type === "Cheese" && topping.topping_available) {
+            this.cheeseToppings.push(topping);
+          }
+          // console.log(topping.name);
+        });
+    });
     ToppingsService.getCheese().then(
       (response) => {
         // this.cheeseToppings = response.data;
@@ -355,45 +320,47 @@ export default {
           });
       });
     ToppingsService.getPizzas().then((response) => {
-        this.specialtyPizzas = response.data;
-        let pizzaList = this.specialtyPizzas;
-        let veggiesList = [];
-        let meats = [];
-        let cheese;
-        let stringToppingList = '';
-
-        pizzaList.forEach((pizzaLoop) => {
-          if (pizzaLoop.name === "The Polymorph") {
-            this.$store.commit("SET_ACTIVE_PIZZA", pizzaLoop);
-            pizzaLoop.toppings.forEach((topping) => {
-              if (topping.type === "Cheese") {
-                cheese = topping;
-              }
-              if (topping.type === "Meat") {
-                meats.push(topping.name);
-                if (stringToppingList.length !== 0) stringToppingList += ',';
-                stringToppingList += ' ' + topping.name;
-              }
-              if (topping.type === "Veggie") {
-                veggiesList.push(topping.name);
-                if (stringToppingList.length !== 0) stringToppingList += ',';
-                stringToppingList += ' ' + topping.name;
-              }
-            });
-            this.$store.commit("SET_ACTIVE_CHEESE", cheese);
-            this.$store.commit("SET_ACTIVE_MEATS", meats);
-            this.$store.commit("SET_ACTIVE_VEGGIES", veggiesList);
-            this.$store.commit("SET_ACTIVE_TOPPING_STRING", stringToppingList);
-
-          }
-        });
-        
-        ToppingsService.getCrustPriceBySize(this.$store.state.activePizza.size).then((response) => {
-            this.crustCost = response.data;
-            this.$store.commit("SET_CURRENT_CRUST_PRICE", this.crustCost);
-            console.log("current crust price: " + this.crustCost);
-          });
+      this.specialtyPizzas = response.data.filter(pizza => {
+        return pizza.available == true;
       });
+      let pizzaList = this.specialtyPizzas;
+      let veggiesList = [];
+      let meats = [];
+      let cheese;
+      let stringToppingList = '';
+
+      pizzaList.forEach((pizzaLoop) => {
+        if (pizzaLoop.name === "The Polymorph") {
+          this.$store.commit("SET_ACTIVE_PIZZA", pizzaLoop);
+          pizzaLoop.toppings.forEach((topping) => {
+            if (topping.type === "Cheese") {
+              cheese = topping;
+            }
+            if (topping.type === "Meat") {
+              meats.push(topping.name);
+              if (stringToppingList.length !== 0) stringToppingList += ',';
+              stringToppingList += ' ' + topping.name;
+            }
+            if (topping.type === "Veggie") {
+              veggiesList.push(topping.name);
+              if (stringToppingList.length !== 0) stringToppingList += ',';
+              stringToppingList += ' ' + topping.name;
+            }
+          });
+          this.$store.commit("SET_ACTIVE_CHEESE", cheese);
+          this.$store.commit("SET_ACTIVE_MEATS", meats);
+          this.$store.commit("SET_ACTIVE_VEGGIES", veggiesList);
+          this.$store.commit("SET_ACTIVE_TOPPING_STRING", stringToppingList);
+
+        }
+      });
+
+      ToppingsService.getCrustPriceBySize(this.$store.state.activePizza.size).then((response) => {
+        this.crustCost = response.data;
+        this.$store.commit("SET_CURRENT_CRUST_PRICE", this.crustCost);
+        console.log("current crust price: " + this.crustCost);
+      });
+    });
 
 
   },
