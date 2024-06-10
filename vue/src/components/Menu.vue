@@ -130,7 +130,7 @@ export default {
             pizza.toppings.forEach(
                 (topping) => {
                     if (topping.type === "Cheese") {
-                        cheese = topping.name;
+                        cheese = topping;
                     }
                     if (topping.type === "Meat") {
                         meats.push(topping.name);
