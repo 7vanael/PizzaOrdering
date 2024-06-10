@@ -159,7 +159,7 @@
           <!--Button Start-->
           <div class="card-footer d-flex justify-content-between mt-3">
             <button class="btn btn-secondary" @click="goToPreviousTab" v-if="index > 0">Meat Toppings</button>
-            <button v-if="showButton" class="btn btn-danger" @click="goToCheckout">Review Order</button>
+            <button v-if="showButton" class="btn btn-danger" @click="goToCheckout" >Review Order</button>
           </div>
 
 
@@ -213,7 +213,10 @@ export default {
       this.activeTabIndex--;
     },
     goToCheckout() {
+      this.updateActiveToppings();
+      //console.log("reached go to checkout method");
       this.$router.push('/checkout');
+      
     },
     setCurrentPriceByCrustSize() {
       console.log("reached crust size method");
@@ -224,6 +227,40 @@ export default {
           console.log("current crust price: " + this.crustCost);
         });
     },
+    updateActiveToppings() {
+      //console.log("reached update active toppings method");
+      let currentActivePizza = this.$store.state.activePizza;
+        let veggiesList = [];
+        let meats = [];
+        let cheese;
+        let stringToppingList = '';
+
+            // this.$store.commit("SET_ACTIVE_PIZZA", currentActivePizza);
+            currentActivePizza.toppings.forEach((topping) => {
+              //console.log("adding topping");
+              if (topping.type === "Cheese") {
+                cheese = topping;
+                console.log("adding Cheese");
+              }
+              if (topping.type == "Meat") {
+                meats.push(topping.name);
+                if (stringToppingList.length !== 0) stringToppingList += ',';
+                stringToppingList += ' ' + topping.name;
+                console.log("adding meat");
+              }
+              if (topping.type == "Veggie") {
+                veggiesList.push(topping.name);
+                if (stringToppingList.length !== 0) stringToppingList += ',';
+                stringToppingList += ' ' + topping.name;
+                console.log("adding veggie");
+              }
+            });
+            this.$store.commit("SET_ACTIVE_CHEESE", cheese);
+            this.$store.commit("SET_ACTIVE_MEATS", meats);
+            this.$store.commit("SET_ACTIVE_VEGGIES", veggiesList);
+            this.$store.commit("SET_ACTIVE_TOPPING_STRING", stringToppingList);
+    },
+
   },
   created() {
     ToppingsService.getToppings().then((response) => {
