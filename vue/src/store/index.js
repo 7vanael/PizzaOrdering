@@ -12,6 +12,7 @@ export function createStore(currentToken, currentUser) {
       activeToppingsVeggies:[],
       activeToppingString:'',
       currentOrder:{},
+      availablePizzas: [],
       currentCrustPrice:0,
     },
     mutations: {
