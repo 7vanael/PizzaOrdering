@@ -26,9 +26,9 @@
                     {{ this.$store.state.activeToppingsVeggies.join(', ') }}
                 </p>
                 <hr />
-                    <!-- {{ this.$store.state.activeToppingsSpecialty.name }} -->
-                    <!-- {{ this.$store.state.activeToppingString }} -->
-                
+                <!-- {{ this.$store.state.activeToppingsSpecialty.name }} -->
+                <!-- {{ this.$store.state.activeToppingString }} -->
+
 
                 <!-- <div class="row price">
                     <h4 class="col">Subtotal</h4>
@@ -49,7 +49,7 @@
                 <div class="row price">
                     <h3 class="col">Total</h3>
                     <p class="col">{{ this.$store.state.currentCrustPrice }}</p>
-                </div> 
+                </div>
 
                 <button class="submitButton" type="submit" v-on:click="sendOrder()">Confirm and Place Order</button>
 
@@ -64,59 +64,99 @@
                         <h5 class="col">Pick-up In Store</h5>
                         <p class="col toggle" v-on:click="toggleDelivery"> Change to Delivery</p>
                     </div>
-
-                    <hr />
                     <div class="row">
                         <div class="form-element">
                             <label class="pickup address" for="streetAddress">Street Address: 1234 Pizza Place, Pizza
                                 City, PZ 91224</label>
                         </div>
                     </div>
-                </div>
-
-
-                <div class="container delivery" v-show="isDelivery">
-                    <div class="row">
-                        <h5 class="col">Delivery Address</h5>
-                        <p class="col toggle" v-on:click="toggleDelivery"> Change to Pickup</p>
-                    </div>
                     <hr />
-                    <div class="row">
-                        <div class="form-element">
-                            <label class="delivery address" for="streetAddress">Street Address: </label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-element">
-                            <input type="text" id="streetAddress" placeholder="123 Pizza Rd"
-                                v-model="customerInfo.streetAddress" />
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <label for="city">City: </label>
-                        </div>
-                        <div class="col">
-                            <label for="state">State: </label>
-                        </div>
-                        <div class="col">
-                            <label for="zip">Zip Code: </label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-element, col">
-                            <input type="text" id="city" placeholder="Pizza City" v-model="customerInfo.city" />
-                        </div>
-                        <div class="form-element, col">
-                            <input type="text" id="streetAddress" placeholder="PZ" v-model="customerInfo.state" />
-                        </div>
-                        <div class="form-element, col">
-                            <input type="text" id="zip" placeholder="12345" v-model="customerInfo.zip" />
-                        </div>
-                    </div>
-                </div>
 
-                <!-- <div class="container tip">
+
+                    <div class="row">
+                        <div class="form-element">
+                            <label class="pickup address" for="customerName">Customer Name: </label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-element, col">
+                            <input type="text" id="customerNamePickup" placeholder="First and Last Name"
+                                v-model="customerInfo.name" />
+                        </div>
+                        <div class="row">
+                            <div class="form-element">
+                                <label class="pickup address" for="customerEmail">Email: </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-element, col">
+                                <input type="text" id="emailPickup" placeholder="email@email.com"
+                                    v-model="customerInfo.email" />
+                            </div>
+                        </div>
+
+                        <div class="container delivery" v-show="isDelivery">
+                            <div class="row">
+                                <h5 class="col">Delivery Address</h5>
+                                <p class="col toggle" v-on:click="toggleDelivery"> Change to Pickup</p>
+                            </div>
+                            <hr />
+                            <div class="row">
+                                <div class="form-element">
+                                    <label class="delivery address" for="customerName">Customer Name: </label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-element, col">
+                                    <input type="text" id="customerName" placeholder="First and Last Name"
+                                        v-model="customerInfo.name" />
+                                </div>
+                                <div class="row">
+                                    <div class="form-element">
+                                        <label class="delivery address" for="customerEmail">Email: </label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-element, col">
+                                        <input type="text" id="email" placeholder="email@email.com"
+                                            v-model="customerInfo.email" />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-element">
+                                        <label class="delivery address" for="streetAddress">Street Address: </label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-element">
+                                        <input type="text" id="streetAddress" placeholder="123 Pizza Rd"
+                                            v-model="customerInfo.streetAddress" />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <label for="city">City: </label>
+                                    </div>
+                                    <div class="col">
+                                        <label for="state">State: </label>
+                                    </div>
+                                    <div class="col">
+                                        <label for="zip">Zip Code: </label>
+                                    </div>
+                                </div>
+                                <div class="form-element, col">
+                                    <input type="text" id="city" placeholder="Pizza City" v-model="customerInfo.city" />
+                                </div>
+                                <div class="form-element, col">
+                                    <input type="text" id="streetAddress" placeholder="PZ" v-model="customerInfo.state" />
+                                </div>
+                                <div class="form-element, col">
+                                    <input type="text" id="zip" placeholder="12345" v-model="customerInfo.zip" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="container tip">
                     <div class="row">
                         <h2> Add Tip:</h2>
                     </div>
@@ -147,6 +187,7 @@
                     </div>
 
                 </div> -->
+                </div>
                 <div class="container payment" v-show="isDelivery">
                     <div class="row">
                         <h2> Payment Info: </h2>
