@@ -65,14 +65,14 @@
                         <p class="col toggle" v-on:click="toggleDelivery"> Change to Delivery</p>
                     </div>
                     <div class="row">
-                            <div class="form-element">
-                                <label class="pickup address" for="streetAddress">Street Address: 1234 Pizza Place, Pizza
-                                    City, PZ 91224</label>
-                            </div>
+                        <div class="form-element">
+                            <label class="pickup address" for="streetAddress">Street Address: 1234 Pizza Place, Pizza
+                                City, PZ 91224</label>
                         </div>
-                        <hr />
-                        
-                    
+                    </div>
+                    <hr />
+
+
                     <div class="row">
                         <div class="form-element">
                             <label class="pickup address" for="customerName">Customer Name: </label>
@@ -95,67 +95,67 @@
                             </div>
                         </div>
 
-                    <div class="container delivery" v-show="isDelivery">
-                        <div class="row">
-                            <h5 class="col">Delivery Address</h5>
-                            <p class="col toggle" v-on:click="toggleDelivery"> Change to Pickup</p>
-                        </div>
-                        <hr />
-                        <div class="row">
-                            <div class="form-element">
-                                <label class="delivery address" for="customerName">Customer Name: </label>
+                        <div class="container delivery" v-show="isDelivery">
+                            <div class="row">
+                                <h5 class="col">Delivery Address</h5>
+                                <p class="col toggle" v-on:click="toggleDelivery"> Change to Pickup</p>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-element, col">
-                                <input type="text" id="customerName" placeholder="First and Last Name"
-                                    v-model="customerInfo.name" />
-                            </div>
+                            <hr />
                             <div class="row">
                                 <div class="form-element">
-                                    <label class="delivery address" for="customerEmail">Email: </label>
+                                    <label class="delivery address" for="customerName">Customer Name: </label>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="form-element, col">
-                                    <input type="text" id="email" placeholder="email@email.com"
-                                        v-model="customerInfo.email" />
+                                    <input type="text" id="customerName" placeholder="First and Last Name"
+                                        v-model="customerInfo.name" />
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="form-element">
-                                    <label class="delivery address" for="streetAddress">Street Address: </label>
+                                <div class="row">
+                                    <div class="form-element">
+                                        <label class="delivery address" for="customerEmail">Email: </label>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="form-element">
-                                    <input type="text" id="streetAddress" placeholder="123 Pizza Rd"
-                                        v-model="customerInfo.streetAddress" />
+                                <div class="row">
+                                    <div class="form-element, col">
+                                        <input type="text" id="email" placeholder="email@email.com"
+                                            v-model="customerInfo.email" />
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <label for="city">City: </label>
+                                <div class="row">
+                                    <div class="form-element">
+                                        <label class="delivery address" for="streetAddress">Street Address: </label>
+                                    </div>
                                 </div>
-                                <div class="col">
-                                    <label for="state">State: </label>
+                                <div class="row">
+                                    <div class="form-element">
+                                        <input type="text" id="streetAddress" placeholder="123 Pizza Rd"
+                                            v-model="customerInfo.streetAddress" />
+                                    </div>
                                 </div>
-                                <div class="col">
-                                    <label for="zip">Zip Code: </label>
+                                <div class="row">
+                                    <div class="col">
+                                        <label for="city">City: </label>
+                                    </div>
+                                    <div class="col">
+                                        <label for="state">State: </label>
+                                    </div>
+                                    <div class="col">
+                                        <label for="zip">Zip Code: </label>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-element, col">
-                                <input type="text" id="city" placeholder="Pizza City" v-model="customerInfo.city" />
-                            </div>
-                            <div class="form-element, col">
-                                <input type="text" id="streetAddress" placeholder="PZ" v-model="customerInfo.state" />
-                            </div>
-                            <div class="form-element, col">
-                                <input type="text" id="zip" placeholder="12345" v-model="customerInfo.zip" />
+                                <div class="form-element, col">
+                                    <input type="text" id="city" placeholder="Pizza City" v-model="customerInfo.city" />
+                                </div>
+                                <div class="form-element, col">
+                                    <input type="text" id="streetAddress" placeholder="PZ" v-model="customerInfo.state" />
+                                </div>
+                                <div class="form-element, col">
+                                    <input type="text" id="zip" placeholder="12345" v-model="customerInfo.zip" />
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
                     <!-- <div class="container tip">
                     <div class="row">
                         <h2> Add Tip:</h2>
@@ -188,47 +188,46 @@
 
                 </div> -->
                 </div>
-                    <div class="container payment" v-show="isDelivery">
-                        <div class="row">
-                            <h2> Payment Info: </h2>
-                        </div>
-                        <hr />
-                        <div class="row">
-                            <h3 class="col"> Credit Card Info:</h3>
-                        </div>
-                        <div class="row">
+                <div class="container payment" v-show="isDelivery">
+                    <div class="row">
+                        <h2> Payment Info: </h2>
+                    </div>
+                    <hr />
+                    <div class="row">
+                        <h3 class="col"> Credit Card Info:</h3>
+                    </div>
+                    <div class="row">
 
+                    </div>
+                    <div class="row">
+                        <p class="col">
+                            <label for="ccNumber">Credit Card Number: </label>
+                        </p>
+                        <p class="col">
+                            <label for="ccExp">Expiration: </label>
+                        </p>
+                    </div>
+                    <div class="row">
+                        <div class="form-element, col">
+                            <input type="text" id="ccNumber" placeholder="1234 1234 1234 1234" v-model="ccInfo.ccNumber" />
                         </div>
-                        <div class="row">
-                            <p class="col">
-                                <label for="ccNumber">Credit Card Number: </label>
-                            </p>
-                            <p class="col">
-                                <label for="ccExp">Expiration: </label>
-                            </p>
-                        </div>
-                        <div class="row">
-                            <div class="form-element, col">
-                                <input type="text" id="ccNumber" placeholder="1234 1234 1234 1234"
-                                    v-model="ccInfo.ccNumber" />
-                            </div>
-                            <div class="form-element, col">
-                                <input type="text" id="ccExp" placeholder="MM/YY" v-model="ccInfo.ccExp" />
-                            </div>
-                        </div>
-                        <div class="row">
-                            <p class="col"> <label for="ccCode">CCV: </label></p>
-                            <p class="col"><label for="zip">Zip Code: </label></p>
-                        </div>
-                        <div class="row">
-                            <div class="form-element, col">
-                                <input type="text" id="ccCode" placeholder="123" v-model="ccInfo.ccCode" />
-                            </div>
-                            <div class="form-element, col">
-                                <input type="text" id="zip" placeholder="12345" v-model="customerInfo.zip" />
-                            </div>
+                        <div class="form-element, col">
+                            <input type="text" id="ccExp" placeholder="MM/YY" v-model="ccInfo.ccExp" />
                         </div>
                     </div>
+                    <div class="row">
+                        <p class="col"> <label for="ccCode">CCV: </label></p>
+                        <p class="col"><label for="zip">Zip Code: </label></p>
+                    </div>
+                    <div class="row">
+                        <div class="form-element, col">
+                            <input type="text" id="ccCode" placeholder="123" v-model="ccInfo.ccCode" />
+                        </div>
+                        <div class="form-element, col">
+                            <input type="text" id="zip" placeholder="12345" v-model="customerInfo.zip" />
+                        </div>
+                    </div>
+                </div>
             </form>
         </div>
 
@@ -488,4 +487,5 @@ p {
 .pizzaDescription {
     font-size: 20pt;
     color: #2892C4;
-}</style>
+}
+</style>

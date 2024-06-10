@@ -11,13 +11,12 @@
                 <PizzaAvailability />
             </div>
             <hr />
+            <h3> Add a New Specialty Pizza to the Menu: </h3>
             <div class="row">
-                <button class="toggle" @click="toggleComponent">{{ buttonText }}</button>
+                <CustomPizzaMenu  />
+                
             </div>
-            <div class="row">
-                <CustomPizzaMenu v-if="showCustomPizzaMenu" :showButton="false" />
-            </div>
-            <div class="row" v-if="showCustomPizzaMenu">
+             <div class="row">
                 <div class="col-4">
                     <label for="name">Name Your Creation:
                         <input type="text" id="name" name="name" v-model="newPizza.pizza_name" required>
@@ -32,7 +31,7 @@
                     <button class="submitButton" type="submit" @click.prevent="addNewPizza">Add New Pizza to Menu</button>
                 </div>
                 </div>
-            <div class="row" v-else>
+            <div class="row">
                 <ToppingsAvailability  />
                 <div class="col-3">
                 <button class="submitButton" type="submit">Update Toppings Availability</button>
@@ -72,14 +71,14 @@ export default {
         }
     },
     computed: {
-        buttonText() {
-            return this.showCustomPizzaMenu ? 'Toppings Availability Menu' : 'Add Specialty Pizza';
-        }
+        // buttonText() {
+        //     return this.showCustomPizzaMenu ? 'Toppings Availability Menu' : 'Add Specialty Pizza';
+        // }
     },
     methods: {
-        toggleComponent() {
-            this.showCustomPizzaMenu = !this.showCustomPizzaMenu;
-        },
+        // toggleComponent() {
+        //     this.showCustomPizzaMenu = !this.showCustomPizzaMenu;
+        // },
         addNewPizza() {
 
             // Fabulously slick code that will send the newPizza on over to the DB
