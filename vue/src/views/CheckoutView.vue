@@ -16,14 +16,15 @@
                     <!-- <p class="col"> {{ this.crustCost }}</p> -->
                 </div>
                 <p id="pizzaIngredients">
-                    {{ this.$store.state.activePizza.size }},
-                    {{ this.$store.state.activePizza.crust }},
-                    {{ this.$store.state.activePizza.sauce }},
-                    {{ this.$store.state.activeToppingsCheese }},
-                    {{ this.$store.state.activeToppingsMeats.join(', ') }},
-                    {{ this.$store.state.activeToppingsVeggies.join(', ') }}
+                    Crust Size: {{ this.$store.state.activePizza.size }},
+                    Crust Type: {{ this.$store.state.activePizza.crust }},
+                    Sauce: {{ this.$store.state.activePizza.sauce }},
+                    {{ this.$store.state.activeToppingsCheese.name }},
+                    {{ this.$store.state.activeToppingString }}
+
+                    <!-- {{ this.$store.state.activeToppingsVeggies}} -->
                 </p>
-                    <hr />
+                <hr />
                     <!-- {{ this.$store.state.activeToppingsSpecialty.name }} -->
                     <!-- {{ this.$store.state.activeToppingString }} -->
                 
@@ -39,12 +40,15 @@
                 <div class="row price">
                     <h4 class="col">Tip</h4>
                     <p class="col">Price</p>
+                </div>
+
+
                 </div> -->
-                <!-- <hr /> -->
+
                 <div class="row price">
                     <h3 class="col">Total</h3>
                     <p class="col">{{ this.$store.state.currentCrustPrice }}</p>
-                </div>
+                </div> 
 
                 <button class="submitButton" type="submit" v-on:click="sendOrder()">Confirm and Place Order</button>
 
