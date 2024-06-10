@@ -11,4 +11,10 @@ export default {
     placeOrder(order){
         return axios.post('/order', order);
     },
+    getOrdersByStatus(status){
+        return axios.get(`/order?status=${status}`)
+    },
+    updateOrderStatus(id, status){
+        return axios.put(`/order/${id}/status`, {status})
+    }
 }
