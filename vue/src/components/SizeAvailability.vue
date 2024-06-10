@@ -37,7 +37,7 @@ export default{
       }
     },
     created() {
-    ToppingsService.getSizes().then(
+    ToppingsService.getSize().then(
       (response) => {
         this.sizes = response.data;
         this.availableSizes = this.sizes.forEach(size => {

@@ -8,7 +8,7 @@
               <input type="checkbox" v-bind:name="veggie.name" v-bind:value="veggie.name" 
                 v-bind:checked="veggie.available" @click="updateAvailability(veggie)">
             </label>
-            {{ pizza.name }}
+            {{ veggie.name }}
           </li>
         </ul>
       </div>
@@ -37,10 +37,10 @@ export default{
       }
     },
     created() {
-    ToppingsService.getVeggies().then(
+    ToppingsService.getVeggie().then(
       (response) => {
         this.veggies = response.data;
-        this.availableVeggies = this.veggie.forEach(veggie => {
+        this.availableVeggies = this.veggies.forEach(veggie => {
           if(veggie.available == true){
             this.availableVeggies.push;
           }
