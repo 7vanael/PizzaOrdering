@@ -81,6 +81,7 @@ export default {
             this.showCustomPizzaMenu = !this.showCustomPizzaMenu;
         },
         addNewPizza() {
+
             // Fabulously slick code that will send the newPizza on over to the DB
             const pizza = {
                 name: this.newPizza.pizza_name,
@@ -100,6 +101,7 @@ export default {
                 pizza.toppings.push({name: this.$store.state.activeToppingsVeggies[i]})
             }
             EmployeeService.addPizza(pizza);
+            // console.log("active pizza" + pizza)
             this.clearForm();
         },
         clearForm() {
