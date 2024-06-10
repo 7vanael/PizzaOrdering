@@ -16,11 +16,11 @@
                     <!-- <p class="col"> {{ this.crustCost }}</p> -->
                 </div>
                 <p id="pizzaIngredients">
-                    {{ this.$store.state.activePizza.size }},
-                    {{ this.$store.state.activePizza.crust }},
-                    {{ this.$store.state.activePizza.sauce }},
-                    {{ this.$store.state.activeToppingsCheese }},
-                    {{ this.$store.state.activeToppingString}},
+                    Crust Size: {{ this.$store.state.activePizza.size }},
+                    Crust Type: {{ this.$store.state.activePizza.crust }},
+                    Sauce: {{ this.$store.state.activePizza.sauce }},
+                    {{ this.$store.state.activeToppingsCheese.name }},
+                    {{ this.$store.state.activeToppingString }}
                     <!-- {{ this.$store.state.activeToppingsVeggies}} -->
                 </p>
                 <hr />
