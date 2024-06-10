@@ -22,11 +22,11 @@
                     {{ this.$store.state.activeToppingsCheese }},
                     {{ this.$store.state.activeToppingString}},
                     <!-- {{ this.$store.state.activeToppingsVeggies}} -->
-
+                </p>
                 <!-- <hr /> -->
                     <!-- {{ this.$store.state.activeToppingsSpecialty.name }} -->
                     <!-- {{ this.$store.state.activeToppingString }} -->
-                </p>
+                
 
                 <!-- <div class="row price">
                     <h4 class="col">Subtotal</h4>
@@ -40,7 +40,7 @@
                     <h4 class="col">Tip</h4>
                     <p class="col">Price</p>
                 </div> -->
-                <hr />
+                <!-- <hr /> -->
                 <div class="row price">
                     <h3 class="col">Total</h3>
                     <p class="col">{{ this.$store.state.currentCrustPrice }}</p>
