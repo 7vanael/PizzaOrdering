@@ -84,14 +84,6 @@ const routes = [
       requiresAuth: true
     }
   },
-  {
-    path: "/menu",
-    name: "menu",
-    component: MenuView,
-    meta: {
-      requiresAuth: false
-    }
-  }
 ];
 
 // Create the router
