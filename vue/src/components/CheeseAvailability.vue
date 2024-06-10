@@ -39,7 +39,7 @@ export default{
     created() {
     ToppingsService.getCheese().then(
       (response) => {
-        this.cheese = response.data;
+        this.cheeses = response.data;
         this.availableCheeses = this.cheese.forEach(cheese => {
           if(cheese.available == true){
             this.availableCheeses.push;
