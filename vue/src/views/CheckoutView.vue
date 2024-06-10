@@ -20,13 +20,13 @@
                     {{ this.$store.state.activePizza.crust }},
                     {{ this.$store.state.activePizza.sauce }},
                     {{ this.$store.state.activeToppingsCheese }},
-                    {{ this.$store.state.activeToppingsMeats.join(', ') }},
-                    {{ this.$store.state.activeToppingsVeggies.join(', ') }}
-
-                    <hr />
+                    {{ this.$store.state.activeToppingString}},
+                    <!-- {{ this.$store.state.activeToppingsVeggies}} -->
+                </p>
+                <hr />
                     <!-- {{ this.$store.state.activeToppingsSpecialty.name }} -->
                     <!-- {{ this.$store.state.activeToppingString }} -->
-                </p>
+                
 
                 <!-- <div class="row price">
                     <h4 class="col">Subtotal</h4>
@@ -40,7 +40,10 @@
                     <h4 class="col">Tip</h4>
                     <p class="col">Price</p>
                 </div>
-                <hr /> -->
+
+
+                </div> -->
+
                 <div class="row price">
                     <h3 class="col">Total</h3>
                     <p class="col">{{ this.$store.state.currentCrustPrice }}</p>

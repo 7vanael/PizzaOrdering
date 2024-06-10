@@ -338,7 +338,7 @@ export default {
                 stringToppingList += ' ' + topping.name;
               }
               if (topping.type === "Veggie") {
-                veggies.push(topping.name);
+                veggiesList.push(topping.name);
                 if (stringToppingList.length !== 0) stringToppingList += ',';
                 stringToppingList += ' ' + topping.name;
               }
