@@ -21,6 +21,7 @@
                     Sauce: {{ this.$store.state.activePizza.sauce }},
                     {{ this.$store.state.activeToppingsCheese.name }},
                     {{ this.$store.state.activeToppingString }}
+
                     <!-- {{ this.$store.state.activeToppingsVeggies}} -->
                 </p>
                 <hr />
