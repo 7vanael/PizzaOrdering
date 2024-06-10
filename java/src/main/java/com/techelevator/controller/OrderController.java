@@ -1,6 +1,7 @@
 package com.techelevator.controller;
 
 import com.techelevator.model.Order;
+import com.techelevator.model.Status;
 import com.techelevator.service.OrderService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -36,8 +37,8 @@ public class OrderController {
 
     @PutMapping(path = "/order/{id}/status")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public Order changeOrderStatus(@PathVariable int id, @RequestBody String status){
-        return orderService.changeOrderStatus(id, status);
+    public Order changeOrderStatus(@PathVariable int id, @RequestBody Status status){
+        return orderService.changeOrderStatus(id, status.getStatus());
     }
 
 }
