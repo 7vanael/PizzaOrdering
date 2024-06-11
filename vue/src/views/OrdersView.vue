@@ -1,8 +1,7 @@
 <template>
-<<<<<<< HEAD
-=======
+
     <NavbarEmployee/>
->>>>>>> b97fe893bc31daa4215a90e32c78f6dcbe01ff37
+
 
     <div>
         <div class="container">
@@ -52,10 +51,9 @@
 </template>
 
 <script scoped>
-<<<<<<< HEAD
-=======
+
 import NavbarEmployee from '../components/NavBar.vue';
->>>>>>> b97fe893bc31daa4215a90e32c78f6dcbe01ff37
+
 import OrderService from '../services/OrderService';
 
 export default {
