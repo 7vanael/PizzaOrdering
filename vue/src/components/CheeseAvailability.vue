@@ -1,7 +1,6 @@
 <template>
-    <div>
       <div class="container">
-        <h2>Cheeses</h2>
+        <!-- <h2>Cheeses</h2> -->
         <ul class="cheese">
           <li v-for="cheese in cheeses" v-bind:key="cheese.name" class="list-group-item">
             <label>
@@ -12,7 +11,6 @@
           </li>
         </ul>
       </div>
-    </div>
 </template>
 
 
@@ -40,7 +38,7 @@ export default{
     ToppingsService.getCheese().then(
       (response) => {
         this.cheeses = response.data;
-        this.availableCheeses = this.cheese.forEach(cheese => {
+        this.availableCheeses = this.cheeses.forEach(cheese => {
           if(cheese.available == true){
             this.availableCheeses.push;
           }
@@ -50,7 +48,7 @@ export default{
 }
 </script>
 
-<style>
+<style scoped>
 .container {
   background-color: #F2DC9C;
   border: 2px solid #2892C4;
@@ -66,6 +64,10 @@ input[type="checkbox"] {
   width: 1em;
   height: 1em;
   accent-color: #A4200B;
+}
+li {
+  list-style-type: none;
+  font-size: 20pt;
 }
 
 </style>

@@ -1,68 +1,116 @@
 <template>
-    <Navbar />
+    <NavbarEmployee />
 
     <div class="page-wrapper">
         <div class="container">
             <h1> Welcome, Syntax Slices Employee!</h1>
             <h2> Here you can create a new pizza to add to the menu and adjust toppings availability.</h2>
             <hr />
+            <section>
+                
+
+                    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" id="orders-tab" data-bs-toggle="pill" data-bs-target="#orders" type="button"
+                                role="tab" aria-controls="orders" aria-selected="true">Orders
+                            </a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" id="addPizza-tab" data-bs-toggle="pill" data-bs-target="#addPizza"
+                                type="button" role="tab" aria-controls="addPizza" aria-selected="false">Add New
+                                Pizza
+                            </a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" id="addToppings-tab" data-bs-toggle="pill" data-bs-target="#addToppings"
+                                type="button" role="tab" aria-controls="addToppings" aria-selected="false">Add New Toppings
+                            </a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" id="updatePizzas-tab" data-bs-toggle="pill" data-bs-target="#updatePizzas"
+                                type="button" role="tab" aria-controls="updatePizzas" aria-selected="false">Update Pizzas
+                            </a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" id="updateToppings-tab" data-bs-toggle="pill"
+                                data-bs-target="#updateToppings" type="button" role="tab" aria-controls="updateToppings"
+                                aria-selected="false">Update Toppings
+                            </a>
+                        </li>
+                    </ul>
+
+                    <div class="tab-content" id="pills-tabContent">
+
+                        <div class="tab-pane show active" id="orders" role="tabpanel" aria-labelledby="orders-tab">
+                            <div class="card">
+                                <h3> Review Customer Orders: </h3>
+                                <li id="#orders">
+                                    <OrdersView />
+                                </li>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane" id="addPizza" role="tabpanel" aria-labelledby="addPizza-tab">
+                            <div class="card">
+                                <h3> Add a New Specialty Pizza to the Menu: </h3>
+                                <li id="#addPizza">
+                                    <CustomPizzaMenu />
+                                </li>
+                                <div class="row">
+                                    <div class="col-4">
+                                        <label for="name">Name Your Creation:
+                                            <input type="text" id="name" name="name" v-model="newPizza.pizza_name" required>
+                                        </label>
+                                    </div>
+                                    <div class="col-4">
+                                        <label for="description">Pizza description:
+                                            <input type="text" id="description" name="description"
+                                                v-model="newPizza.pizza_description" required>
+                                        </label>
+                                    </div>
+                                    <div class="col-3">
+                                        <button class="submitButton" type="submit" @click.prevent="addNewPizza">Add
+                                            New Pizza to
+                                            Menu</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane" id="addToppings" role="tabpanel" aria-labelledby="addToppings-tab">
+                            <div class="card">
+                                <h3> Add New Toppings to the Menu: </h3>
+                                <div class="row">
+                                    <li id="#addToppings">
+                                        <!-- insert the page/form for the "Add Toppings" -->
+                                    </li>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane" id="updatePizzas" role="tabpanel" aria-labelledby="updatePizzas-tab">
+                                <h2> Review Specialty Pizza Availability: </h2>
+                                <hr />
+                                <li id="#updatePizzas">
+                                    <PizzaAvailability />
+                                </li>
+                        </div>
+
+                        <div class="tab-pane" id="updateToppings" role="tabpanel" aria-labelledby="updateToppings-tab">
+                            <li id="#updateToppings">
+                                <ToppingsAvailability />
+                                <button class="submitButton" type="submit">Update Toppings Availability
+                                </button>
+                            </li>
+                        </div>
+
+
+                    </div>
+
+                
+            </section>
+
         </div>
-
-        <!-- Specialty Pizza Availability -->
-        <div class="container">
-            <h3> Review Specialty Pizza Availability: </h3>
-            <div class="row">
-                <PizzaAvailability />
-            </div>
-        </div>
-
-        <!-- Add New Specialty Pizza to Menu -->
-        <div class="container">
-            <h3> Add a New Specialty Pizza to the Menu: </h3>
-            <div class="row">
-                <CustomPizzaMenu />
-            </div>
-            <div class="row">
-                <div class="col-4">
-                    <label for="name">Name Your Creation:
-                        <input type="text" id="name" name="name" v-model="newPizza.pizza_name" required>
-                    </label>
-                </div>
-                <div class="col-4">
-                    <label for="description">Pizza description:
-                        <input type="text" id="description" name="description" v-model="newPizza.pizza_description"
-                            required>
-                    </label>
-                </div>
-                <div class="col-3">
-                    <button class="submitButton" type="submit" @click.prevent="addNewPizza">Add New Pizza to Menu</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Toppings Availability -->
-        <div class="container">
-            <h3> Toppings Availability: </h3>
-            <div class="row">
-                <ToppingsAvailability />
-                <div class="col-3">
-                    <button class="submitButton" type="submit">Update Toppings Availability</button>
-                </div>
-                <!-- Pending orders  -- Should this be displaying another component? -->
-            </div>
-        </div>
-    </div>
-
-    <!-- Add New Topping -->
-    <div class="container">
-        <h3> Add New Toppings to the Menu: </h3>
-
-    </div>
-
-
-    <!-- Orders Review Page -->
-    <div class="container">
-        <h3> Review Customer Orders: </h3>
     </div>
 </template>
 
@@ -71,16 +119,19 @@
 import PizzaAvailability from '../components/PizzaAvailability.vue';
 import ToppingsAvailability from '../components/ToppingsAvailability.vue';
 import Navbar from '../components/NavBar.vue';
+import NavbarEmployee from '../components/NavBarEmployee.vue';
 import ToppingsService from '../services/ToppingsService.js';
 import CustomPizzaMenu from '../components/CustomPizzaMenu.vue';
 import EmployeeService from '../services/EmployeeService.js';
+import OrdersView from './OrdersView.vue';
 
 export default {
     components: {
-        Navbar,
+        NavbarEmployee,
         PizzaAvailability,
         ToppingsAvailability,
-        CustomPizzaMenu
+        CustomPizzaMenu,
+        OrdersView
     },
     data() {
         return {
@@ -138,7 +189,16 @@ export default {
 </script>
 
 
-<style>
+<style scoped>
+.page-wrapper {
+    display: flex;
+    min-height: 100dvh;
+    flex-direction: column;
+    align-items: center;
+    background-color: #F7C516;
+    padding: 10px;
+}
+
 h1,
 h2 {
     text-align: center;
@@ -163,26 +223,7 @@ h1 {
 .row {
     display: flex;
     justify-content: center;
-}
-
-button.toggle {
-    background-color: #2892C4;
-    width: 50%;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 10px;
-    font-size: 2em;
-    ;
-}
-
-label,
-input {
-    font-size: 16pt;
-    margin-top: 5px;
-    font-weight: bold;
-    color: #A4200B;
-    letter-spacing: 2px;
+    padding-top: 20px;
 }
 
 .submitButton {
@@ -191,9 +232,13 @@ input {
     border: none;
     border-radius: 5px;
     padding: 10px;
-    font-size: 1.5em;
+    font-size: 1.25em;
     font-weight: bold;
     margin-top: 10px;
     height: 100%;
+}
+li {
+    list-style-type: none;
+    font-size: 20pt;
 }
 </style>

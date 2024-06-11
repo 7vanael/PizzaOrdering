@@ -1,8 +1,7 @@
 <template>
-    <div>
       <div class="container">
-        <h3>Sauce</h3>
-        <ul class="pizzas">
+        <!-- <h2>Sauce</h2> -->
+        <ul class="sauces">
           <li v-for="sauce in sauces" v-bind:key="sauce.name" class="list-group-item">
             <label>
               <input type="checkbox" v-bind:name="sauce.name" v-bind:value="sauce.name" 
@@ -12,7 +11,6 @@
           </li>
         </ul>
       </div>
-    </div>
 </template>
 
 
@@ -50,7 +48,7 @@ export default{
 }
 </script>
 
-<style>
+<style scoped>
 .container {
   background-color: #F2DC9C;
   border: 2px solid #2892C4;
@@ -66,6 +64,10 @@ input[type="checkbox"] {
   width: 1em;
   height: 1em;
   accent-color: #A4200B;
+}
+li {
+  list-style-type: none;
+  font-size: 20pt;
 }
 
 </style>

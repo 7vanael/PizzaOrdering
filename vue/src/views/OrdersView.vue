@@ -1,12 +1,6 @@
 <template>
-    <Navbar />
-
-    <div>
         <div class="container">
-            <h1> Welcome, Syntax Slices Employee!</h1>
-            <h2> Here you can view and update orders.</h2>
-            <hr />
-            <select v-model="orderStatus">
+            <select v-model="orderStatus" class="form-select form-select-lg mb-3" aria-label="Large select example">
                 <option value="">Pending</option>
                 <option value="Received">Received</option>
                 <option value="Ready">Ready</option>
@@ -16,27 +10,24 @@
             </select>
             <button @click="showOrders">Show Orders</button>
             <div v-for="order in orders" v-bind:key="order.id">
-                <div>Order ID: {{ order.id }}</div>
-                <div>Order total: {{ order.total }}</div>
-                <div>Order type: {{ order.type }}</div>
-                <div>Customer name: {{ order.customer.name }}</div>
-                <div>Customer email: {{ order.customer.email }}</div>
-                <div>Customer address: {{ order.customer.address }}, {{ order.customer.city }}, {{ order.customer.state }} {{ order.customer.zip }}</div>
+                <p>Order ID: {{ order.id }}</p>
+                <p>Order total: {{ order.total }}</p>
+                <p>Order type: {{ order.type }}</p>
+                <p>Customer name: {{ order.customer.name }}</p>
+                <p>Customer email: {{ order.customer.email }}</p>
+                <p>Customer address: {{ order.customer.address }}, {{ order.customer.city }}, {{ order.customer.state }} {{ order.customer.zip }}</p>
                 <div v-for="item, index in order.items" v-bind:key = index>
-                    <div>Pizza: {{ item.pizza.name }}</div>
-                    <div>Default Size: {{ item.pizza.size }}</div>
-                    <div>Default Crust: {{ item.pizza.crust }}</div>
-                    <div>Default Sauce: {{ item.pizza.sauce }}</div>
+                    <p>Pizza: {{ item.pizza.name }}</p>
+                    <p>Default Size: {{ item.pizza.size }}</p>
+                    <p>Default Crust: {{ item.pizza.crust }}</p>
+                    <p>Default Sauce: {{ item.pizza.sauce }}</p>
                     <div v-for="topping, index in item.pizza.toppings" v-bind:key="index">
-                        <div>Customize {{ topping.type }}: {{ topping.name }}</div>
+                        <p>Customize {{ topping.type }}: {{ topping.name }}</p>
                     </div>
-
                 </div>
 
-
-
                 <div>Status: {{ order.status }}</div>
-                <select v-model="order.newStatus">
+                <select v-model="order.newStatus" class="form-select form-select-lg mb-3" aria-label="Large select example">
                     <option value="Received">Received</option>
                     <option value="Ready">Ready</option>
                     <option value="Out for Delivery">Out for Delivery</option>
@@ -48,16 +39,17 @@
 
 
         </div>
-    </div>
 </template>
 
 <script scoped>
-import Navbar from '../components/NavBar.vue';
+
+import NavbarEmployee from '../components/NavBar.vue';
+
 import OrderService from '../services/OrderService';
 
 export default {
     components: {
-        Navbar
+        NavbarEmployee
     },
     data() {
         return {
@@ -90,7 +82,7 @@ export default {
 </script>
 
 
-<style>
+<style scoped>
 h1,
 h2 {
     text-align: center;
@@ -114,35 +106,26 @@ h1 {
 
 .row {
     display: flex;
-    justify-content: center;
 }
-
-button.toggle {
-    background-color: #2892C4;
-    width: 50%;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 10px;
-    font-size: 2em;
-    ;
-}
-label, input {
-    font-size: 16pt;
+option {
+    font-size: 30pt;
     margin-top: 5px;
     font-weight: bold;
     color: #A4200B;
     letter-spacing: 2px;
 }
-.submitButton {
+button {
     background-color: #A4200B;
     color: #F7C516;
     border: none;
     border-radius: 5px;
     padding: 10px;
-    font-size: 1.5em;
+    font-size: 2em;
     font-weight: bold;
     margin-top: 10px;
     height: 100%;
+}
+p {
+    font-size: 16pt;
 }
 </style>

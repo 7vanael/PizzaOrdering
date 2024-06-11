@@ -1,7 +1,6 @@
-<template>
-    <div>      
+<template>    
       <div class="container">
-        <h2>Crusts</h2>
+        <!-- <h2>Crusts</h2> -->
         <ul class="crusts">
           <li v-for="crust in crusts" v-bind:key="crust.name" class="list-group-item">
             <label>
@@ -12,7 +11,6 @@
           </li>
         </ul>
       </div>
-    </div>
 </template>
 
 
@@ -51,7 +49,7 @@ export default{
 }
 </script>
 
-<style>
+<style scoped>
 .container {
   background-color: #F2DC9C;
   border: 2px solid #2892C4;
@@ -67,6 +65,10 @@ input[type="checkbox"] {
   width: 1em;
   height: 1em;
   accent-color: #A4200B;
+}
+li {
+  list-style-type: none;
+  font-size: 20pt;
 }
 
 </style>
