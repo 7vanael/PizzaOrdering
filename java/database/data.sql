@@ -54,12 +54,42 @@ INSERT INTO specialty_toppings (pizza_id, topping) VALUES
 (9, 'House Cheese Blend'), (9, 'Italian Sausage'), (9, 'Bacon'), (9, 'Pepperoni'),
 (10, 'House Cheese Blend'), (10, 'Pepperoni'), (10, 'Italian Sausage'), (10, 'Onions'), (10, 'Mushrooms'), (10, 'Green Olives'), (10, 'Banana Peppers')
 ;
-
-INSERT INTO orders (order_total, order_status, order_type)
-VALUES (12.25, 'Received', 'Pick-up');
+--
+--INSERT INTO orders (order_total, order_status, order_type)
+--VALUES (12.25, 'Received', 'Pick-up');
 
 --INSERT INTO aggregate_items SELECT pizza_id, pizza_type FROM specialty_pizzas;
 --INSERT INTO aggregate_items SELECT side_items, side_item_type FROM side_items;
 
+INSERT INTO customers (customer_name, customer_email, customer_street_address, customer_city, customer_state, customer_zip) VALUES
+('Sophia', 'sofi@yahoo.com','1234 N. MyPlace', 'Hometown','PZ','12345');
+INSERT INTO orders (order_total, customer_id, order_type, order_status) VALUES
+(18.25,1,'Delivery', 'Completed');
+INSERT INTO order_items (order_id, item_id) VALUES
+(1,4);
+INSERT INTO order_item_options (item_id, item_option)
+VALUES (4,23), (4,5), (4,4), (4,21), (4,10), (4,3);
+INSERT INTO customers (customer_name, customer_email, customer_street_address, customer_city, customer_state, customer_zip) VALUES
+('Jack','jb_pizza_eater@hotmail.com','76 Home Ave','Hometown','PZ','12458');
+INSERT INTO orders (order_total, customer_id, order_type, order_status) VALUES
+(17.25,2,'Delivery', 'Canceled');
+INSERT INTO order_items (order_id, item_id) VALUES
+(2,6);
+INSERT INTO order_item_options (item_id, item_option)
+VALUES (6,23), (6,14), (6,5), (6,11), (6,27);
+INSERT INTO customers (customer_name, customer_email, customer_street_address, customer_city, customer_state, customer_zip) VALUES
+('Sarah','sarahpie@gmail.com','','','','');
+INSERT INTO orders (order_total, customer_id, order_type, order_status) VALUES
+(14.75,3,'Pick-up', 'Ready');
+INSERT INTO order_items (order_id, item_id) VALUES
+(3,4);
+INSERT INTO order_item_options (item_id, item_option)
+VALUES (4,3), (4,27), (4,1), (4,2), (4,4), (4,10);
+INSERT INTO customers (customer_name, customer_email, customer_street_address, customer_city, customer_state, customer_zip) VALUES
+('Paul','pmpaul@aol.com','145 MomsHouse Ln','Hometown','PZ','12384');
+INSERT INTO orders (order_total, customer_id, order_type, order_status) VALUES
+(9.75,4,'Delivery', 'Out for Delivery');
+INSERT INTO order_items (order_id, item_id) VALUES
+(4,5);
 
 COMMIT TRANSACTION;
