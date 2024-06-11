@@ -1,5 +1,5 @@
 <template>
-    <Navbar />
+    <NavbarEmployee />
 
     <div>
         <div class="container">
@@ -34,7 +34,7 @@
             <div class="row">
                 <ToppingsAvailability  />
                 <div class="col-3">
-                <button class="submitButton" type="submit">Update Toppings Availability</button>
+                <!-- <button class="submitButton" type="submit">Update Toppings Availability</button> -->
             </div>
               
                 <!-- Pending orders  -- Should this be displaying another component? -->
@@ -49,13 +49,14 @@
 import PizzaAvailability from '../components/PizzaAvailability.vue';
 import ToppingsAvailability from '../components/ToppingsAvailability.vue';
 import Navbar from '../components/NavBar.vue';
+import NavbarEmployee from '../components/NavBarEmployee.vue';
 import ToppingsService from '../services/ToppingsService.js';
 import CustomPizzaMenu from '../components/CustomPizzaMenu.vue';
 import EmployeeService from '../services/EmployeeService.js';
 
 export default {
     components: {
-        Navbar,
+        NavbarEmployee,
         PizzaAvailability,
         ToppingsAvailability,
         CustomPizzaMenu

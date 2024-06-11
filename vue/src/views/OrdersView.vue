@@ -1,5 +1,5 @@
 <template>
-    <Navbar />
+    <NavbarEmployee/>
 
     <div>
         <div class="container">
@@ -52,12 +52,12 @@
 </template>
 
 <script scoped>
-import Navbar from '../components/NavBar.vue';
+import NavbarEmployee from '../components/NavBar.vue';
 import OrderService from '../services/OrderService';
 
 export default {
     components: {
-        Navbar
+        NavbarEmployee
     },
     data() {
         return {
