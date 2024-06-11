@@ -7,7 +7,7 @@
 
             <div class="container">
                 <div class="row">
-                    <img src="../../public/images/tomato_basil_pizza.jpeg" alt="pizza image" />
+                    <img :src="getImageSrc(this.$store.state.activePizza.name)" alt="pizza image" />
                 </div>
                 <router-link class="changeOrder" to="/">Change Order</router-link>
                 <div class="row price">
@@ -255,6 +255,19 @@ export default {
                 "Medium": 9.45,
                 "Small": 8.65,
             },
+            images:
+            {
+                'The Front-End': '/images/AI_margherita_pizza.webp',
+                'The Default': '/images/pepperoni_pizza.jpg',
+                'The Back-End': '/images/BBQ_chicken_pizza.jpg',
+                'The Constructor': '/images/classic_cheese_pizza.jpg',
+                'The Polymorph': '/images/custom_pizza.jpeg',
+                'The Framework': '/images/Meat_Lovers.jpg',
+                'The Compiler': '/images/supreme_pizza.webp',
+                'The API': '/images/tomato_basil_pizza.jpeg',
+                'The Debugger': '/images/veggie_pizza.webp',
+                'The Full-Stack': '/images/full_stack_pizza.jpg'
+            },
             pizzas: [],
             currentPizza: {},
             isDelivery: false,
@@ -293,6 +306,12 @@ export default {
         });
     },
     methods: {
+        getImageSrc(pizzaName) {
+            //console.log("reached set active pic");
+            if(pizzaName in this.images){
+                return this.images[pizzaName];
+            }else return '/images/prototype_logo.jpg';
+        },
         setCrustSize() {
             this.crustSize = this.$store.state.activePizza.crust.size;
         },
