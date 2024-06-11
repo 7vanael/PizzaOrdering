@@ -59,7 +59,8 @@
                     <div class="carousel-inner">
                         <div v-for="(pizza, index) in pizzas" :key="pizza.name" v-on:click="setActivePizza(pizza)"
                             :class="['carousel-item', { active: index === 0 }]">
-                            <img :src="images[pizza.name]" class="d-block w-100" :alt="pizza.name">
+                            <img :src="getImageSrc(pizza.name)"  class="d-block w-100"
+                                :alt="pizza.name">
                             <div class="carousel-caption d-none d-md-block">
                                 <h5>{{ pizza.name }}</h5>
                                 <p>{{ pizza.description }}</p>
@@ -117,16 +118,22 @@ export default {
     created() {
         ToppingsService.getPizzas().then(response => {
 
-            this.pizzas = response.data.filter(pizza=>{
+            this.pizzas = response.data.filter(pizza => {
                 return pizza.available == true;
             });
         });
     },
     methods: {
+        getImageSrc(pizzaName) {
+            //console.log("reached set active pic");
+            if(pizzaName in this.images){
+                return this.images[pizzaName];
+            }else return '/images/prototype_logo.jpg';
+        },
         setActivePizza(pizza) {
             //console.log("reached set active pizza");
             let veggies = [];
-            let meats = []; 
+            let meats = [];
             let cheese;
             let stringToppingList = '';
             this.$store.commit("SET_ACTIVE_PIZZA", pizza);
@@ -137,12 +144,12 @@ export default {
                     }
                     if (topping.type === "Meat") {
                         meats.push(topping.name);
-                        if(stringToppingList.length != 0) stringToppingList += ',';
+                        if (stringToppingList.length != 0) stringToppingList += ',';
                         stringToppingList += ' ' + topping.name;
                     }
                     if (topping.type === "Veggie") {
                         veggies.push(topping.name);
-                        if(stringToppingList.length != 0) stringToppingList += ',';
+                        if (stringToppingList.length != 0) stringToppingList += ',';
                         stringToppingList += ' ' + topping.name;
                     }
                 });
@@ -174,6 +181,7 @@ export default {
     min-height: 100%;
     background-color: #2892C4;
 }
+
 .row.menu {
     display: flex;
     flex-direction: row;
