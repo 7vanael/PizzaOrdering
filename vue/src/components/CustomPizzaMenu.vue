@@ -38,7 +38,7 @@
                     <label>
                       <input type="radio" name="pizza-crust-size" v-bind:value="crust.name"
                         v-model="$store.state.activePizza.size" v-on:change="setCurrentPriceByCrustSize()">
-                    </label> {{ crust.name }}<!--- {{ sizes.price }}-->
+                    </label> {{ crust.name }}
                   </li>
                 </ul>
               </div>
@@ -111,9 +111,9 @@
                       <li v-for="meat in meatToppings" v-bind:key="meat.name" class="list-group-item">
                         <label>
                           <input type="checkbox" v-bind:name="meat.name" v-bind:value="meat.name"
-                            v-model="$store.state.activeToppingsMeats">
+                            v-model="$store.state.activeToppingsMeats" v-on:change="setTotalToppingPrice()">
                         </label>
-                        {{ meat.name }}
+                        {{ meat.name }} - ${{ toppingTierPrice[meat.toppingTier] }}
                       </li>
                     </ul>
                   </div>
@@ -144,9 +144,9 @@
                       <li v-for="veggie in veggieToppings" v-bind:key="veggie.name" class="list-group-item">
                         <label>
                           <input type="checkbox" name="non-meat-toppings" v-bind:value="veggie.name"
-                            v-model="$store.state.activeToppingsVeggies">
+                            v-model="$store.state.activeToppingsVeggies" v-on:change="setTotalToppingPrice()">
                         </label>
-                        {{ veggie.name }}
+                        {{ veggie.name }} - ${{ toppingTierPrice[veggie.toppingTier] }}
                       </li>
                     </ul>
                   </div>
@@ -184,6 +184,11 @@ export default {
         { id: 'pills-meat', label: 'Meats' },
         { id: 'pills-veggies', label: 'Veggies' },
       ],
+      toppingTierPrice: {
+        "0": 0.00,
+        "1": 1.00,
+        "2": 2.00,
+      },
       pizzaToppings: [],
       specialtyPizzas: [],
       //activePizza: {},
@@ -214,11 +219,12 @@ export default {
     },
     goToCheckout() {
       //console.log("reached go to checkout method");
+      this.setTotalToppingPrice();
       this.$router.push('/checkout');
 
     },
     setCurrentPriceByCrustSize() {
-      console.log("reached crust size method");
+      //console.log("reached crust size method");
       ToppingsService.getCrustPriceBySize(this.$store.state.activePizza.size).then(
         (response) => {
           this.crustCost = response.data;
@@ -226,10 +232,37 @@ export default {
           console.log("current crust price: " + this.crustCost);
         });
     },
+    setTotalToppingPrice() {
+      let totalPrice = 0;
+      let toppingsMeatListTemp = this.$store.state.activeToppingsMeats;
+      let toppingsVeggieListTemp = this.$store.state.activeToppingsVeggies;
+      this.meatToppings.forEach(
+        (topping) => {
+          toppingsMeatListTemp.forEach(
+            (activeTopping) => {
+              if (topping.name == activeTopping){
+                //console.log("hello");
+                totalPrice += this.toppingTierPrice[topping.toppingTier];
+              }
+            });
+        });
+        this.veggieToppings.forEach(
+        (topping) => {
+          toppingsVeggieListTemp.forEach(
+            (activeTopping) => {
+              if (topping.name == activeTopping){
+                //console.log("hello");
+                totalPrice += this.toppingTierPrice[topping.toppingTier];
+              }
+            });
+        });
+      this.$store.commit("SET_CURRENT_TOTAL_TOPPING_PRICE", totalPrice);
+      //console.log(totalPrice);
+    }
   },
   created() {
     ToppingsService.getToppings().then((response) => {
-      // this.pizzaToppings = response.data;
+      //this.pizzaToppings = response.data;
       this.pizzaToppings.forEach(
         (topping) => {
           if (topping.topping_type === "Meat" && topping.topping_available) {

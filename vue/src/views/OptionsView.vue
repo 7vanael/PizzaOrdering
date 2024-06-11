@@ -1,11 +1,6 @@
 <template>
-    <Navbar />
 
-    <div>
         <div class="container">
-            <h1> Welcome, Syntax Slices Employee!</h1>
-            <h2> Here you can add options for Pizzas.</h2>
-            <hr />
 
             <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                 <li class="nav-item" role="presentation" v-for="(tab, index) in tabs" :key="tab.id">
@@ -146,18 +141,14 @@
 
 
         </div>
-    </div>
+
 </template>
 
 <script scoped>
-import Navbar from '../components/NavBar.vue';
 import EmployeeService from '../services/EmployeeService';
 
 
 export default {
-    components: {
-        Navbar
-    },
     data() {
         return {
         activeTabIndex: 0,

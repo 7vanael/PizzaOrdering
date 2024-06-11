@@ -78,11 +78,12 @@
                         </div>
 
                         <div class="tab-pane" id="addToppings" role="tabpanel" aria-labelledby="addToppings-tab">
-                            <div class="card">
+                            <div>
                                 <h3> Add New Toppings to the Menu: </h3>
                                 <div class="row">
                                     <li id="#addToppings">
                                         <!-- insert the page/form for the "Add Toppings" -->
+                                        <OptionsView />
                                     </li>
                                 </div>
                             </div>
@@ -118,12 +119,11 @@
 
 import PizzaAvailability from '../components/PizzaAvailability.vue';
 import ToppingsAvailability from '../components/ToppingsAvailability.vue';
-import Navbar from '../components/NavBar.vue';
 import NavbarEmployee from '../components/NavBarEmployee.vue';
-import ToppingsService from '../services/ToppingsService.js';
 import CustomPizzaMenu from '../components/CustomPizzaMenu.vue';
 import EmployeeService from '../services/EmployeeService.js';
 import OrdersView from './OrdersView.vue';
+import OptionsView from './OptionsView.vue';
 
 export default {
     components: {
@@ -131,7 +131,8 @@ export default {
         PizzaAvailability,
         ToppingsAvailability,
         CustomPizzaMenu,
-        OrdersView
+        OrdersView,
+        OptionsView
     },
     data() {
         return {
@@ -226,7 +227,7 @@ h1 {
     padding-top: 20px;
 }
 
-.submitButton {
+/* .submitButton {
     background-color: #A4200B;
     color: #F7C516;
     border: none;
@@ -236,7 +237,7 @@ h1 {
     font-weight: bold;
     margin-top: 10px;
     height: 100%;
-}
+} */
 li {
     list-style-type: none;
     font-size: 20pt;
