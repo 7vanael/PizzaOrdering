@@ -123,4 +123,7 @@ button {
 p {
     font-size: 24pt;
 }
+select {
+    font-size: 24pt;
+}
 </style>
