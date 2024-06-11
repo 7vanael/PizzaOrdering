@@ -1,11 +1,7 @@
 <template>
-    <Navbar />
 
     <div>
         <div class="container">
-            <h1> Welcome, Syntax Slices Employee!</h1>
-            <h2> Here you can view and update orders.</h2>
-            <hr />
             <select v-model="orderStatus">
                 <option value="">Pending</option>
                 <option value="Received">Received</option>
@@ -52,7 +48,6 @@
 </template>
 
 <script scoped>
-import Navbar from '../components/NavBar.vue';
 import OrderService from '../services/OrderService';
 
 export default {

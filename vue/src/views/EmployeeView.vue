@@ -7,62 +7,82 @@
             <h2> Here you can create a new pizza to add to the menu and adjust toppings availability.</h2>
             <hr />
         </div>
-
-        <!-- Specialty Pizza Availability -->
-        <div class="container">
-            <h3> Review Specialty Pizza Availability: </h3>
-            <div class="row">
-                <PizzaAvailability />
-            </div>
-        </div>
-
-        <!-- Add New Specialty Pizza to Menu -->
-        <div class="container">
-            <h3> Add a New Specialty Pizza to the Menu: </h3>
-            <div class="row">
-                <CustomPizzaMenu />
-            </div>
-            <div class="row">
-                <div class="col-4">
-                    <label for="name">Name Your Creation:
-                        <input type="text" id="name" name="name" v-model="newPizza.pizza_name" required>
-                    </label>
+        <ul class="nav nav-tabs">
+<!-- Orders Review Page -->
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Orders</a>
+                <div class="container">
+                    <h3> Review Customer Orders: </h3>
+                    <OrdersView />
                 </div>
-                <div class="col-4">
-                    <label for="description">Pizza description:
-                        <input type="text" id="description" name="description" v-model="newPizza.pizza_description"
-                            required>
-                    </label>
+            </li>
+<!-- Add New Specialty Pizza to Menu -->
+            <li class="nav-item">
+                <a class="nav-link" href="#">Add New Pizza</a>
+                <div class="container">
+                    <h3> Add a New Specialty Pizza to the Menu: </h3>
+                    <div class="row">
+                        <CustomPizzaMenu />
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <label for="name">Name Your Creation:
+                                <input type="text" id="name" name="name" v-model="newPizza.pizza_name" required>
+                            </label>
+                        </div>
+                        <div class="col-4">
+                            <label for="description">Pizza description:
+                                <input type="text" id="description" name="description" v-model="newPizza.pizza_description"
+                                    required>
+                            </label>
+                        </div>
+                        <div class="col-3">
+                            <button class="submitButton" type="submit" @click.prevent="addNewPizza">Add New Pizza to
+                                Menu</button>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-3">
-                    <button class="submitButton" type="submit" @click.prevent="addNewPizza">Add New Pizza to Menu</button>
+            </li>
+<!-- Add New Topping -->
+            <li class="nav-item">
+                <a class="nav-link" href="#">Add New Topppings</a>
+                <div class="container">
+                    <h3> Add New Toppings to the Menu: </h3>
                 </div>
-            </div>
-        </div>
-
-        <!-- Toppings Availability -->
-        <div class="container">
-            <h3> Toppings Availability: </h3>
-            <div class="row">
-                <ToppingsAvailability />
-                <div class="col-3">
-                    <button class="submitButton" type="submit">Update Toppings Availability</button>
+            </li>
+<!-- Specialty Pizza Availability -->
+            <li class="nav-item">
+                <a class="nav-link" href="#">Current Stock</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Specialty Pizzas</a>
+                <div class="container">
+                    <h3> Review Specialty Pizza Availability: </h3>
+                    <div class="row">
+                        <PizzaAvailability />
+                    </div>
                 </div>
-                <!-- Pending orders  -- Should this be displaying another component? -->
-            </div>
-        </div>
-    </div>
+            </li>
+            <!-- Toppings Availability -->
+            <li class="nav-item">
+                <a class="nav-link" href="#">Toppings</a>
+                <div class="container">
+                    <h3> Toppings Availability: </h3>
+                    <div class="row">
+                        <ToppingsAvailability />
+                        <div class="col-3">
+                            <button class="submitButton" type="submit">Update Toppings Availability</button>
+                        </div>
+                        <!-- Pending orders  -- Should this be displaying another component? -->
+                    </div>
+                </div>
+            </li>
 
-    <!-- Add New Topping -->
-    <div class="container">
-        <h3> Add New Toppings to the Menu: </h3>
-
-    </div>
 
 
-    <!-- Orders Review Page -->
-    <div class="container">
-        <h3> Review Customer Orders: </h3>
+        </ul>
+
+
     </div>
 </template>
 
@@ -74,13 +94,15 @@ import Navbar from '../components/NavBar.vue';
 import ToppingsService from '../services/ToppingsService.js';
 import CustomPizzaMenu from '../components/CustomPizzaMenu.vue';
 import EmployeeService from '../services/EmployeeService.js';
+import OrdersView from './OrdersView.vue';
 
 export default {
     components: {
         Navbar,
         PizzaAvailability,
         ToppingsAvailability,
-        CustomPizzaMenu
+        CustomPizzaMenu,
+        OrdersView
     },
     data() {
         return {
@@ -139,6 +161,15 @@ export default {
 
 
 <style>
+.page-wrapper {
+    display: flex;
+    min-height: 100dvh;
+    flex-direction: column;
+    align-items: center;
+    background-color: #F7C516;
+    padding: 10px;
+}
+
 h1,
 h2 {
     text-align: center;
