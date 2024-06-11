@@ -48,7 +48,7 @@
 
           <!--Button Start-->
           <div class="card-footer d-flex justify-content-end">
-            <button class="btn btn-primary" @click="goToNextTab">Sauce & Cheese ></button>
+            <button class="btn btn-primary" @click="goToNextTab">Sauce & Cheese</button>
           </div>
 
 

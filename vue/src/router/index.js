@@ -10,7 +10,7 @@ import CheckoutView from '../views/CheckoutView.vue';
 import LocationView from '../views/LocationView.vue';
 import ComingSoonView from '../views/ComingSoonView.vue';
 import EmployeeView from '../views/EmployeeView.vue';
-import OrdersView from '../views/OrdersView.vue';
+// import OrdersView from '../views/OrdersView.vue';
 /**
  * The Vue Router is used to "direct" the browser to render a specific view component
  * inside of App.vue depending on the URL.
@@ -85,14 +85,14 @@ const routes = [
       requiresAuth: true
     }
   },
-  {
-    path: "/employee/orders",
-    name: "orders",
-    component: OrdersView,
-    meta: {
-      requiresAuth: true
-    }
-  }
+  // {
+  //   path: "/employee/orders",
+  //   name: "orders",
+  //   component: OrdersView,
+  //   meta: {
+  //     requiresAuth: true
+  //   }
+  // }
 ];
 
 // Create the router
