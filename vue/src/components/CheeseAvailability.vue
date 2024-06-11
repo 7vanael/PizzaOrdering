@@ -40,7 +40,7 @@ export default{
     ToppingsService.getCheese().then(
       (response) => {
         this.cheeses = response.data;
-        this.availableCheeses = this.cheese.forEach(cheese => {
+        this.availableCheeses = this.cheeses.forEach(cheese => {
           if(cheese.available == true){
             this.availableCheeses.push;
           }

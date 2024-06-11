@@ -1,5 +1,5 @@
 <template>
-    <Navbar />
+    <NavbarEmployee />
 
     <div class="page-wrapper">
         <div class="container">
@@ -49,6 +49,7 @@
                 <div class="container">
                     <h3> Add New Toppings to the Menu: </h3>
                 </div>
+
             </li>
 <!-- Specialty Pizza Availability -->
             <li class="nav-item">
@@ -80,6 +81,7 @@
 
 
 
+
         </ul>
 
 
@@ -91,6 +93,7 @@
 import PizzaAvailability from '../components/PizzaAvailability.vue';
 import ToppingsAvailability from '../components/ToppingsAvailability.vue';
 import Navbar from '../components/NavBar.vue';
+import NavbarEmployee from '../components/NavBarEmployee.vue';
 import ToppingsService from '../services/ToppingsService.js';
 import CustomPizzaMenu from '../components/CustomPizzaMenu.vue';
 import EmployeeService from '../services/EmployeeService.js';
@@ -98,7 +101,7 @@ import OrdersView from './OrdersView.vue';
 
 export default {
     components: {
-        Navbar,
+        NavbarEmployee,
         PizzaAvailability,
         ToppingsAvailability,
         CustomPizzaMenu,
