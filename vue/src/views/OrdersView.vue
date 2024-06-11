@@ -43,14 +43,9 @@
 
 <script scoped>
 
-import NavbarEmployee from '../components/NavBar.vue';
-
 import OrderService from '../services/OrderService';
 
 export default {
-    components: {
-        NavbarEmployee
-    },
     data() {
         return {
             orders: [],
