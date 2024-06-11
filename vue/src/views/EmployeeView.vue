@@ -1,22 +1,28 @@
 <template>
     <Navbar />
 
-    <div>
+    <div class="page-wrapper">
         <div class="container">
             <h1> Welcome, Syntax Slices Employee!</h1>
             <h2> Here you can create a new pizza to add to the menu and adjust toppings availability.</h2>
             <hr />
+        </div>
+
+        <!-- Specialty Pizza Availability -->
+        <div class="container">
             <h3> Review Specialty Pizza Availability: </h3>
             <div class="row">
                 <PizzaAvailability />
             </div>
-            <hr />
+        </div>
+
+        <!-- Add New Specialty Pizza to Menu -->
+        <div class="container">
             <h3> Add a New Specialty Pizza to the Menu: </h3>
             <div class="row">
-                <CustomPizzaMenu  />
-                
+                <CustomPizzaMenu />
             </div>
-             <div class="row">
+            <div class="row">
                 <div class="col-4">
                     <label for="name">Name Your Creation:
                         <input type="text" id="name" name="name" v-model="newPizza.pizza_name" required>
@@ -24,23 +30,39 @@
                 </div>
                 <div class="col-4">
                     <label for="description">Pizza description:
-                        <input type="text" id="description" name="description" v-model="newPizza.pizza_description" required>
+                        <input type="text" id="description" name="description" v-model="newPizza.pizza_description"
+                            required>
                     </label>
-                </div>                
+                </div>
                 <div class="col-3">
                     <button class="submitButton" type="submit" @click.prevent="addNewPizza">Add New Pizza to Menu</button>
                 </div>
-                </div>
-            <div class="row">
-                <ToppingsAvailability  />
-                <div class="col-3">
-                <button class="submitButton" type="submit">Update Toppings Availability</button>
             </div>
-              
+        </div>
+
+        <!-- Toppings Availability -->
+        <div class="container">
+            <h3> Toppings Availability: </h3>
+            <div class="row">
+                <ToppingsAvailability />
+                <div class="col-3">
+                    <button class="submitButton" type="submit">Update Toppings Availability</button>
+                </div>
                 <!-- Pending orders  -- Should this be displaying another component? -->
             </div>
-
         </div>
+    </div>
+
+    <!-- Add New Topping -->
+    <div class="container">
+        <h3> Add New Toppings to the Menu: </h3>
+
+    </div>
+
+
+    <!-- Orders Review Page -->
+    <div class="container">
+        <h3> Review Customer Orders: </h3>
     </div>
 </template>
 
@@ -90,14 +112,14 @@ export default {
                 available: true,
                 description: this.newPizza.pizza_description,
                 toppings: [
-                    {name: this.$store.state.activeToppingsCheese.name},
+                    { name: this.$store.state.activeToppingsCheese.name },
                 ]
             }
-            for(let i = 0; i < this.$store.state.activeToppingsMeats.length; i++){
-                pizza.toppings.push({name: this.$store.state.activeToppingsMeats[i]})
+            for (let i = 0; i < this.$store.state.activeToppingsMeats.length; i++) {
+                pizza.toppings.push({ name: this.$store.state.activeToppingsMeats[i] })
             }
-            for(let i = 0; i < this.$store.state.activeToppingsVeggies.length; i++){
-                pizza.toppings.push({name: this.$store.state.activeToppingsVeggies[i]})
+            for (let i = 0; i < this.$store.state.activeToppingsVeggies.length; i++) {
+                pizza.toppings.push({ name: this.$store.state.activeToppingsVeggies[i] })
             }
             EmployeeService.addPizza(pizza);
             // console.log("active pizza" + pizza)
@@ -153,13 +175,16 @@ button.toggle {
     font-size: 2em;
     ;
 }
-label, input {
+
+label,
+input {
     font-size: 16pt;
     margin-top: 5px;
     font-weight: bold;
     color: #A4200B;
     letter-spacing: 2px;
 }
+
 .submitButton {
     background-color: #A4200B;
     color: #F7C516;
