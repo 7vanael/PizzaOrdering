@@ -14,6 +14,8 @@ export function createStore(currentToken, currentUser) {
       currentOrder:{},
       availablePizzas: [],
       currentCrustPrice:0,
+      totalToppingPrice:0,
+      totalPizzaPrice:0,
     },
     mutations: {
       SET_AUTH_TOKEN(state, token) {
@@ -52,6 +54,14 @@ export function createStore(currentToken, currentUser) {
       },
       SET_CURRENT_CRUST_PRICE(state, price){
         state.currentCrustPrice = price;
+      }
+      ,
+      SET_CURRENT_TOTAL_TOPPING_PRICE(state, price){
+        state.totalToppingPrice = price;
+      }
+      ,
+      SET_CURRENT_TOTAL_PIZZA_PRICE(state, price){
+        state.totalPizzaPrice = price;
       }
     },
   });

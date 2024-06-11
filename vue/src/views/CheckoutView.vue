@@ -12,7 +12,7 @@
                 <router-link class="changeOrder" to="/">Change Order</router-link>
                 <div class="row price">
                     <h3 class="col"> {{ this.$store.state.activePizza.name }}</h3>
-                    <p class="col">{{ this.$store.state.currentCrustPrice }}</p>
+                    <p class="col">{{( this.$store.state.currentCrustPrice + this.$store.state.totalToppingPrice)}}</p>
                     <!-- <p class="col"> {{ this.crustCost }}</p> -->
                 </div>
                 <p id="pizzaIngredients">
@@ -48,7 +48,7 @@
 
                 <div class="row price">
                     <h3 class="col">Total</h3>
-                    <p class="col">{{ this.$store.state.currentCrustPrice }}</p>
+                    <p class="col">{{( this.$store.state.currentCrustPrice  + this.$store.state.totalToppingPrice )}}</p>
                 </div>
 
                 <button class="submitButton" type="submit" v-on:click="sendOrder()">Confirm and Place Order</button>
@@ -304,6 +304,33 @@ export default {
             this.crustCost = response.data;
             console.log("current crust price: " + this.crustCost);
         });
+    },
+    setTotalToppingPrice() {
+      let totalPrice = 0;
+      let toppingsMeatListTemp = this.$store.state.activeToppingsMeats;
+      let toppingsVeggieListTemp = this.$store.state.activeToppingsVeggies;
+      this.meatToppings.forEach(
+        (topping) => {
+          toppingsMeatListTemp.forEach(
+            (activeTopping) => {
+              if (topping.name == activeTopping){
+                //console.log("hello");
+                totalPrice += this.toppingTierPrice[topping.toppingTier];
+              }
+            });
+        });
+        this.veggieToppings.forEach(
+        (topping) => {
+          toppingsVeggieListTemp.forEach(
+            (activeTopping) => {
+              if (topping.name == activeTopping){
+                //console.log("hello");
+                totalPrice += this.toppingTierPrice[topping.toppingTier];
+              }
+            });
+        });
+      this.$store.commit("SET_CURRENT_TOTAL_TOPPING_PRICE", totalPrice);
+      //console.log(totalPrice);
     },
     methods: {
         getImageSrc(pizzaName) {
