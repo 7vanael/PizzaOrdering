@@ -81,7 +81,7 @@
                           <input type="radio" name="pizza-cheese" v-bind:value="cheese.name"
                             v-model="$store.state.activeToppingsCheese.name">
                         </label>
-                        {{ cheese.name }}
+                        {{ cheese.name }} {{cheese.toppingTier === 0 ? '' : '- $' + toppingTierPrice[cheese.toppingTier]  }}
                       </li>
                     </ul>
                   </div>
@@ -146,7 +146,7 @@
                           <input type="checkbox" name="non-meat-toppings" v-bind:value="veggie.name"
                             v-model="$store.state.activeToppingsVeggies" v-on:change="setTotalToppingPrice()">
                         </label>
-                        {{ veggie.name }} - ${{ toppingTierPrice[veggie.toppingTier] }}
+                        {{ veggie.name }} {{veggie.toppingTier === 0 ? '' : '- $' + toppingTierPrice[veggie.toppingTier]  }}
                       </li>
                     </ul>
                   </div>
