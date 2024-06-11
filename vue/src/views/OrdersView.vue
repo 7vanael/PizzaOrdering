@@ -115,12 +115,12 @@ button {
     border: none;
     border-radius: 5px;
     padding: 10px;
-    font-size: 2em;
+    /* font-size: 2em; */
     font-weight: bold;
     margin-top: 10px;
     height: 100%;
 }
 p {
-    font-size: 16pt;
+    font-size: 24pt;
 }
 </style>
