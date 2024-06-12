@@ -6,13 +6,14 @@
             <h1> Welcome, Syntax Slices Employee!</h1>
             <h2> Here you can create a new pizza to add to the menu and adjust toppings availability.</h2>
             <hr />
+            <br>
             <section>
 
 
                 <ul class="nav nav-pills" id="pills-tab" role="tablist">
                     <li class="nav-item" role="presentation">
                         <a class="nav-link" id="orders-tab" data-bs-toggle="pill" data-bs-target="#orders" type="button"
-                            role="tab" aria-controls="orders" aria-selected="true">Orders
+                            role="tab" aria-controls="orders" aria-selected="false">Orders
                         </a>
                     </li>
                     <li class="nav-item" role="presentation">
@@ -37,10 +38,10 @@
                         </a>
                     </li>
                 </ul>
-
+<br>
                 <div class="tab-content" id="pills-tabContent">
 
-                    <div class="tab-pane show active" id="orders" role="tabpanel" aria-labelledby="orders-tab">
+                    <div class="tab-pane" id="orders" role="tabpanel" aria-labelledby="orders-tab">
                         <br>
                         <h2>Review Customer Orders</h2>
                         <hr />
@@ -51,7 +52,6 @@
                     </div>
 
                     <div class="tab-pane" id="addPizza" role="tabpanel" aria-labelledby="addPizza-tab">
-                        <div class="card">
                             <h2>Add a New Specialty Pizza to the Menu</h2>
                             <hr />
                             <li id="#addPizza">
@@ -77,7 +77,7 @@
                                         Menu</button>
                                 </div>
                             </div>
-                        </div>
+                        <br>
                     </div>
 
                     <div class="tab-pane" id="addToppings" role="tabpanel" aria-labelledby="addToppings-tab">
@@ -91,6 +91,7 @@
                                 </li>
                             </div>
                         </div>
+                        <br>
                     </div>
 
                     <div class="tab-pane" id="updatePizzas" role="tabpanel" aria-labelledby="updatePizzas-tab">
