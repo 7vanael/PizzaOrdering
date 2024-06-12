@@ -1,136 +1,159 @@
 <template>
     <NavBar />
-
-    <div>
-        <h1>Review Your Order and Checkout</h1>
-
-
+    <div class="page-wrapper">
         <div class="container">
-            <div>
-                <img :src="getImageSrc(this.$store.state.activePizza.name)" alt="pizza image" />
-            </div>
-            <router-link class="changeOrder" to="/">Change Order</router-link>
-            <div class="row price">
-                <h2 class="col"> {{ this.$store.state.activePizza.name }}</h2>
-                <p class="col">{{ (this.$store.state.currentCrustPrice + this.$store.state.totalToppingPrice) }}</p>
-                <!-- <p class="col"> {{ this.crustCost }}</p> -->
-            </div>
-            <p id="pizzaIngredients">
-                Crust Size: {{ this.$store.state.activePizza.size }},
-                Crust Type: {{ this.$store.state.activePizza.crust }},
-                Sauce: {{ this.$store.state.activePizza.sauce }},
-                {{ this.$store.state.activeToppingsCheese.name }},
-                {{ this.$store.state.activeToppingsMeats.join(', ') }}
-                {{ this.$store.state.activeToppingsVeggies.join(', ') }}
-            </p>
-            <hr />
-            <div class="row price">
-                <h2 class="col">Total</h2>
-                <p class="col">{{ (this.$store.state.currentCrustPrice + this.$store.state.totalToppingPrice) }}</p>
-            </div>
-        </div>
+            <div class="review-order row">
+                <h1>Review Your Order and Checkout</h1>
+
+                <div class="order col left">
+
+                    <div class="container">
+                        <div class="row">
+                            <img :src="getImageSrc(this.$store.state.activePizza.name)" alt="pizza image" />
+                        </div>
+                        <router-link class="changeOrder" to="/">Change Order</router-link>
+                        <div class="row price">
+                            <h2 class="col"> {{ this.$store.state.activePizza.name }}</h2>
+                            <p class="col">{{ (this.$store.state.currentCrustPrice + this.$store.state.totalToppingPrice) }}
+                            </p>
+                            <!-- <p class="col"> {{ this.crustCost }}</p> -->
+                        </div>
+                        <div class="row">
+                            <p id="pizzaIngredients">
+                                Crust Size: {{ this.$store.state.activePizza.size }},
+                                Crust Type: {{ this.$store.state.activePizza.crust }},
+                                Sauce: {{ this.$store.state.activePizza.sauce }},
+                                {{ this.$store.state.activeToppingsCheese.name }},
+                                {{ this.$store.state.activeToppingsMeats.join(', ') }}
+                                {{ this.$store.state.activeToppingsVeggies.join(', ') }}
+                            </p>
+                        </div>
+                        <hr />
+                        <div class="row price">
+                            <h2 class="col">Total</h2>
+                            <p class="col">{{ (this.$store.state.currentCrustPrice + this.$store.state.totalToppingPrice) }}
+                            </p>
+                        </div>
+                        <button class="submitButton" type="submit" v-on:click="sendOrder()">Confirm and Place Order</button>
+                    </div>
+                </div>
+
+                <div class="order col right">
+                    <form v-on:submit.prevent="sendOrder">
+                        <div class="container pickup" v-show="!isDelivery">
+                            <div class="row">
+                                <h5 class="col">Pick-up In Store</h5>
+                                <p class="col toggle" v-on:click="toggleDelivery"> Change to Delivery</p>
+                            </div>
+                            <div class="row">
+                                <div class="form-element">
+                                    <label class="pickup address" for="streetAddress">Street Address: 1234 Pizza Place,
+                                        Pizza
+                                        City, PZ 91224</label>
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="row">
+                                <div class="form-element">
+                                    <label class="pickup address" for="customerName">Customer Name:
+                                        <input type="text" id="customerName" placeholder="First and Last Name"
+                                            v-model="customerInfo.name" />
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-element">
+                                    <label class="pickup address" for="customerEmail">Email:
+                                        <input type="email" id="email" placeholder="email@gmail.com"
+                                            v-model="customerInfo.email" />
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container delivery" v-show="isDelivery">
+                            <div class="row">
+                                <h3 class="col">Delivery Address</h3>
+                                <p class="col toggle" v-on:click="toggleDelivery"> Change to Pickup</p>
+                            </div>
+                            <hr />
+                            <p class="row">
+                                <label class="delivery address" for="customerName">Customer Name:
+                                    <input type="text" id="customerName" placeholder="First and Last Name"
+                                        v-model="customerInfo.name" />
+                                </label>
+                            </p>
+                            <p class="row">
+                                <label class="delivery address" for="customerEmail">Email:
+                                    <input type="text" id="email" placeholder="email@email.com"
+                                        v-model="customerInfo.email" />
+                                </label>
+                            </p>
+                            <p class="row">
+                                <label class="delivery address" for="streetAddress">Street Address:
+                                    <input type="text" id="streetAddress" placeholder="123 Pizza Rd"
+                                        v-model="customerInfo.streetAddress" />
+                                </label>
+                            </p>
+                            <div class="row">
+                                <p class="col">
+                                    <label for="city">City:
+                                        <input type="text" id="city" placeholder="Pizza City" v-model="customerInfo.city" />
+                                    </label>
+                                </p>
+                                <p class="col">
+                                    <label for="state">State:
+                                        <input type="text" id="streetAddress" placeholder="PZ"
+                                            v-model="customerInfo.state" />
+                                    </label>
+                                </p>
+                                <p class="col">
+                                    <label for="zip">Zip Code:
+                                        <input type="text" id="zip" placeholder="12345" v-model="customerInfo.zip" />
+                                    </label>
+                                </p>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="container payment" v-show="isDelivery">
+                                <div class="row">
+                                    <h3> Payment Info </h3>
+                                </div>
+                                <hr />
+                                <div class="row">
+                                    <p class="col">
+                                        <label for="ccNumber">Credit Card Number:
+                                            <input type="text" id="ccNumber" placeholder="1234 1234 1234 1234"
+                                                v-model="ccInfo.ccNumber" />
+                                        </label>
+                                    </p>
+                                    <p class="col">
+                                        <label for="ccExp">Expiration:
+                                            <input type="text" id="ccExp" placeholder="MM/YY" v-model="ccInfo.ccExp" />
+                                        </label>
+                                    </p>
+                                </div>
+                                <div class="row">
+
+                                    <p class="col">
+                                        <label for="ccCode">CCV:
+                                            <input type="text" id="ccCode" placeholder="123" v-model="ccInfo.ccCode" />
+                                        </label>
+                                    </p>
 
 
-        <div class="container pickup" v-show="!isDelivery">
-            <div class="row">
-                <h5 class="col">Pick-up In Store</h5>
-                <p class="col toggle" v-on:click="toggleDelivery"> Change to Delivery</p>
-            </div>
-            <div class="row">
-                <div class="form-element">
-                    <label class="pickup address" for="streetAddress">Street Address: 1234 Pizza Place, Pizza
-                        City, PZ 91224</label>
-                </div>
-            </div>
-            <hr />
-            <div class="row">
-                <div class="form-element">
-                    <label class="pickup address" for="customerName">Customer Name:
-                        <input type="text" id="customerName" placeholder="First and Last Name"
-                            v-model="customerInfo.name" />
-                    </label>
-                </div>
-            </div>
-            <div class="row">
-                <div class="form-element">
-                    <label class="pickup address" for="customerEmail">Email:
-                        <input type="email" id="email" placeholder="email@gmail.com" v-model="customerInfo.email" />
-                    </label>
-                </div>
-            </div>
-        </div>
-        <div class="container delivery" v-show="isDelivery">
-            <div class="row">
-                <h3 class="col">Delivery Address</h3>
-                <p class="col toggle" v-on:click="toggleDelivery"> Change to Pickup</p>
-            </div>
-            <hr />
-            <p class="row">
-                <label class="delivery address" for="customerName">Customer Name:
-                    <input type="text" id="customerName" placeholder="First and Last Name" v-model="customerInfo.name" />
-                </label>
-            </p>
-            <p class="row">
-                <label class="delivery address" for="customerEmail">Email:
-                    <input type="text" id="email" placeholder="email@email.com" v-model="customerInfo.email" />
-                </label>
-            </p>
-            <p class="row">
-                <label class="delivery address" for="streetAddress">Street Address:
-                    <input type="text" id="streetAddress" placeholder="123 Pizza Rd" v-model="customerInfo.streetAddress" />
-                </label>
-            </p>
-            <div class="row">
-                <p class="col">
-                    <label for="city">City:
-                        <input type="text" id="city" placeholder="Pizza City" v-model="customerInfo.city" />
-                    </label>
-                </p>
-                <p class="col">
-                    <label for="state">State:
-                        <input type="text" id="streetAddress" placeholder="PZ" v-model="customerInfo.state" />
-                    </label>
-                </p>
-                <p class="col">
-                    <label for="zip">Zip Code:
-                        <input type="text" id="zip" placeholder="12345" v-model="customerInfo.zip" />
-                    </label>
-                </p>
-            </div>
-        </div>
-        <div>
-            <div class="container payment" v-show="isDelivery">
-                <div class="row">
-                    <h3> Payment Info </h3>
-                </div>
-                <hr />
-                <div class="row">
-                    <p class="col">
-                        <label for="ccNumber">Credit Card Number:
-                            <input type="text" id="ccNumber" placeholder="1234 1234 1234 1234" v-model="ccInfo.ccNumber" />
-                        </label>
-                    </p>
-                    <p class="col">
-                        <label for="ccExp">Expiration:
-                            <input type="text" id="ccExp" placeholder="MM/YY" v-model="ccInfo.ccExp" />
-                        </label>
-                    </p>
-                </div>
-                <div class="row">
-                    <p class="col">
-                        <label for="ccCode">CCV:
-                            <input type="text" id="ccCode" placeholder="123" v-model="ccInfo.ccCode" />
-                        </label>
-                    </p>
-                    <p class="col"><label for="zip">Zip Code:
-                            <input type="text" id="zip" placeholder="12345" v-model="customerInfo.zip" />
-                        </label>
-                    </p>
-                </div>
-            </div>
-        </div>
+                                    <p class="col"><label for="zip">Zip Code:
+                                            <input type="text" id="zip" placeholder="12345" v-model="customerInfo.zip" />
+                                        </label>
+                                    </p>
 
-        <button class="submitButton" type="submit" v-on:click="sendOrder()">Confirm and Place Order</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
     </div>
 </template>
 
@@ -295,6 +318,25 @@ export default {
 </script>
 
 <style scoped>
+.page-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2em;
+}
+.container {
+    margin-top: 2rem;
+    padding: 1rem;
+    border: 2px solid #2892C4;
+    background-color: #F2DC9C;
+    border-radius: 5px;
+    margin: 1em 2em 0 2em;
+}
+.review-order.row {
+    background-color: none;
+}
+
 h1 {
     text-align: justify;
     text-decoration: underline;
@@ -304,13 +346,8 @@ h1 {
 }
 
 h2 {
-    /* text-align: center; */
     color: #2892C4;
-    /* font-size: 40pt; */
     font-weight: bold;
-    /* margin-top: 1em; */
-    /* margin-bottom: 1em; */
-
 }
 
 img {
@@ -319,9 +356,6 @@ img {
 
 .row>img {
     display: flex;
-    /* max-height: 700px; */
-    /* width: 100%; */
-
 }
 
 .changeOrder {
@@ -380,15 +414,6 @@ input {
     width: 100%;
 }
 
-.container {
-    margin-top: 2rem;
-    padding: 1rem;
-    border: 2px solid #2892C4;
-    background-color: #F2DC9C;
-    border-radius: 5px;
-    margin: 1em 2em 0 2em;
-}
-
 .container.delivery {
     background-color: #F2DC9C;
     border: 2px solid #2892C4;
@@ -436,5 +461,4 @@ p {
 .pizzaDescription {
     font-size: 20pt;
     color: #2892C4;
-}
-</style>
+}</style>
