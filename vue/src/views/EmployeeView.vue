@@ -7,109 +7,116 @@
             <h2> Here you can create a new pizza to add to the menu and adjust toppings availability.</h2>
             <hr />
             <section>
-                
 
-                    <ul class="nav nav-pills" id="pills-tab" role="tablist">
-                        <li class="nav-item" role="presentation">
-                            <a class="nav-link" id="orders-tab" data-bs-toggle="pill" data-bs-target="#orders" type="button"
-                                role="tab" aria-controls="orders" aria-selected="true">Orders
-                            </a>
+
+                <ul class="nav nav-pills" id="pills-tab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" id="orders-tab" data-bs-toggle="pill" data-bs-target="#orders" type="button"
+                            role="tab" aria-controls="orders" aria-selected="true">Orders
+                        </a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" id="addPizza-tab" data-bs-toggle="pill" data-bs-target="#addPizza" type="button"
+                            role="tab" aria-controls="addPizza" aria-selected="false">Add New
+                            Pizza
+                        </a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" id="addToppings-tab" data-bs-toggle="pill" data-bs-target="#addToppings"
+                            type="button" role="tab" aria-controls="addToppings" aria-selected="false">Add New Toppings
+                        </a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" id="updatePizzas-tab" data-bs-toggle="pill" data-bs-target="#updatePizzas"
+                            type="button" role="tab" aria-controls="updatePizzas" aria-selected="false">Update Pizzas
+                        </a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" id="updateToppings-tab" data-bs-toggle="pill" data-bs-target="#updateToppings"
+                            type="button" role="tab" aria-controls="updateToppings" aria-selected="false">Update Toppings
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="tab-content" id="pills-tabContent">
+
+                    <div class="tab-pane show active" id="orders" role="tabpanel" aria-labelledby="orders-tab">
+                        <br>
+                        <h2>Review Customer Orders</h2>
+                        <hr />
+                        <br>
+                        <li id="#orders">
+                            <OrdersView />
                         </li>
-                        <li class="nav-item" role="presentation">
-                            <a class="nav-link" id="addPizza-tab" data-bs-toggle="pill" data-bs-target="#addPizza"
-                                type="button" role="tab" aria-controls="addPizza" aria-selected="false">Add New
-                                Pizza
-                            </a>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <a class="nav-link" id="addToppings-tab" data-bs-toggle="pill" data-bs-target="#addToppings"
-                                type="button" role="tab" aria-controls="addToppings" aria-selected="false">Add New Toppings
-                            </a>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <a class="nav-link" id="updatePizzas-tab" data-bs-toggle="pill" data-bs-target="#updatePizzas"
-                                type="button" role="tab" aria-controls="updatePizzas" aria-selected="false">Update Pizzas
-                            </a>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <a class="nav-link" id="updateToppings-tab" data-bs-toggle="pill"
-                                data-bs-target="#updateToppings" type="button" role="tab" aria-controls="updateToppings"
-                                aria-selected="false">Update Toppings
-                            </a>
-                        </li>
-                    </ul>
-
-                    <div class="tab-content" id="pills-tabContent">
-
-                        <div class="tab-pane show active" id="orders" role="tabpanel" aria-labelledby="orders-tab">
-                            <!-- <div class="card"> -->
-                                <h2> Review Customer Orders: </h2>
-                                <hr />
-                                <li id="#orders">
-                                    <OrdersView />
-                                </li>
-                            <!-- </div> -->
-                        </div>
-
-                        <div class="tab-pane" id="addPizza" role="tabpanel" aria-labelledby="addPizza-tab">
-                            <div class="card">
-                                <h2> Add a New Specialty Pizza to the Menu: </h2>
-                                <li id="#addPizza">
-                                    <CustomPizzaMenu />
-                                </li>
-                                <div class="row">
-                                    <div class="col-4">
-                                        <label for="name"><h3>Name Your Creation:</h3>
-                                            <input type="text" id="name" name="name" v-model="newPizza.pizza_name" required>
-                                        </label>
-                                    </div>
-                                    <div class="col-4">
-                                        <label for="description"><h3>Pizza description:</h3>
-                                            <input type="text" id="description" name="description"
-                                                v-model="newPizza.pizza_description" required>
-                                        </label>
-                                    </div>
-                                    <div class="col-3">
-                                        <button class="addPizzaButton" type="submit" @click.prevent="addNewPizza">Add
-                                            New Pizza to
-                                            Menu</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="tab-pane" id="addToppings" role="tabpanel" aria-labelledby="addToppings-tab">
-                            <div>
-                                <h2> Add New Toppings to the Menu: </h2>
-                                <div class="row">
-                                    <li id="#addToppings">
-                                        <OptionsView />
-                                    </li>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="tab-pane" id="updatePizzas" role="tabpanel" aria-labelledby="updatePizzas-tab">
-                                <h2> Review Specialty Pizza Availability: </h2>
-                                <hr />
-                                <li id="#updatePizzas">
-                                    <PizzaAvailability />
-                                </li>
-                        </div>
-
-                        <div class="tab-pane" id="updateToppings" role="tabpanel" aria-labelledby="updateToppings-tab">
-                            <li id="#updateToppings">
-                                <h2></h2>
-                                <ToppingsAvailability />
-                                <button class="submitButton" type="submit">Update Toppings Availability
-                                </button>
-                            </li>
-                        </div>
-
-
                     </div>
 
-                
+                    <div class="tab-pane" id="addPizza" role="tabpanel" aria-labelledby="addPizza-tab">
+                        <div class="card">
+                            <h2>Add a New Specialty Pizza to the Menu</h2>
+                            <hr />
+                            <li id="#addPizza">
+                                <CustomPizzaMenu />
+                            </li>
+                            <div class="row">
+                                <div class="col-4">
+                                    <label for="name">
+                                        <h3>Name Your Creation:</h3>
+                                        <input type="text" id="name" name="name" v-model="newPizza.pizza_name" required>
+                                    </label>
+                                </div>
+                                <div class="col-4">
+                                    <label for="description">
+                                        <h3>Pizza description:</h3>
+                                        <input type="textarea" id="description" name="description"
+                                            v-model="newPizza.pizza_description" required>
+                                    </label>
+                                </div>
+                                <div class="col-3">
+                                    <button class="addPizzaButton" type="submit" @click.prevent="addNewPizza">Add
+                                        New Pizza to
+                                        Menu</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane" id="addToppings" role="tabpanel" aria-labelledby="addToppings-tab">
+                        <div>
+                            <br>
+                            <h2>Add New Toppings to the Menu</h2>
+                            <hr />
+                            <div class="row">
+                                <li id="#addToppings">
+                                    <OptionsView />
+                                </li>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane" id="updatePizzas" role="tabpanel" aria-labelledby="updatePizzas-tab">
+                        <br>
+                        <h2>Deselect to remove Specialty Pizza availability</h2>
+                        <hr />
+                        <br>
+                        <li id="#updatePizzas">
+                            <PizzaAvailability />
+                        </li>
+                    </div>
+
+                    <div class="tab-pane" id="updateToppings" role="tabpanel" aria-labelledby="updateToppings-tab">
+                        <li id="#updateToppings">
+                            <br>
+                            <h2>Deselect to remove topping availability</h2>
+                            <hr />
+                            <br>
+                            <ToppingsAvailability />
+                        </li>
+                    </div>
+
+
+                </div>
+
+
             </section>
 
         </div>
@@ -200,9 +207,11 @@ export default {
     background-color: #F7C516;
     padding: 10px;
 }
+
 a {
     border: none;
 }
+
 h1,
 h2 {
     text-align: center;
@@ -230,21 +239,11 @@ h1 {
     padding-top: 20px;
 }
 
-/* .submitButton {
-    background-color: #A4200B;
-    color: #F7C516;
-    border: none;
-    border-radius: 5px;
-    padding: 10px;
-    font-size: 1.25em;
-    font-weight: bold;
-    margin-top: 10px;
-    height: 100%;
-} */
 li {
     list-style-type: none;
     font-size: 20pt;
 }
+
 .addPizzaButton {
     background-color: #A4200B;
     color: #F7C516;

@@ -1,238 +1,136 @@
 <template>
     <NavBar />
 
-    <div class="review-order row">
+    <div>
         <h1>Review Your Order and Checkout</h1>
-        <div class="order col">
-
-            <div class="container">
-                <div class="row">
-                    <img :src="getImageSrc(this.$store.state.activePizza.name)" alt="pizza image" />
-                </div>
-                <router-link class="changeOrder" to="/">Change Order</router-link>
-                <div class="row price">
-                    <h3 class="col"> {{ this.$store.state.activePizza.name }}</h3>
-                    <p class="col">{{( this.$store.state.currentCrustPrice + this.$store.state.totalToppingPrice)}}</p>
-                    <!-- <p class="col"> {{ this.crustCost }}</p> -->
-                </div>
-                <p id="pizzaIngredients">
-                    Crust Size: {{ this.$store.state.activePizza.size }},
-                    Crust Type: {{ this.$store.state.activePizza.crust }},
-                    Sauce: {{ this.$store.state.activePizza.sauce }},
-                    {{ this.$store.state.activeToppingsCheese.name }},
-                    <!-- {{ this.$store.state.activeToppingString }} -->
-
-                    {{ this.$store.state.activeToppingsMeats.join(', ') }}
-                    {{ this.$store.state.activeToppingsVeggies.join(', ') }}
-                </p>
-                <hr />
-                <!-- {{ this.$store.state.activeToppingsSpecialty.name }} -->
-                <!-- {{ this.$store.state.activeToppingString }} -->
 
 
-                <!-- <div class="row price">
-                    <h4 class="col">Subtotal</h4>
-                    <p class="col">Price</p>
-                </div>
-                <div class="row price">
-                    <h4 class="col">Taxes & Fees</h4>
-                    <p class="col">Price</p>
-                </div>
-                <div class="row price">
-                    <h4 class="col">Tip</h4>
-                    <p class="col">Price</p>
-                </div>
-
-
-                </div> -->
-
-                <div class="row price">
-                    <h3 class="col">Total</h3>
-                    <p class="col">{{( this.$store.state.currentCrustPrice  + this.$store.state.totalToppingPrice )}}</p>
-                </div>
-
-                <button class="submitButton" type="submit" v-on:click="sendOrder()">Confirm and Place Order</button>
-
+        <div class="container">
+            <div>
+                <img :src="getImageSrc(this.$store.state.activePizza.name)" alt="pizza image" />
+            </div>
+            <router-link class="changeOrder" to="/">Change Order</router-link>
+            <div class="row price">
+                <h2 class="col"> {{ this.$store.state.activePizza.name }}</h2>
+                <p class="col">{{ (this.$store.state.currentCrustPrice + this.$store.state.totalToppingPrice) }}</p>
+                <!-- <p class="col"> {{ this.crustCost }}</p> -->
+            </div>
+            <p id="pizzaIngredients">
+                Crust Size: {{ this.$store.state.activePizza.size }},
+                Crust Type: {{ this.$store.state.activePizza.crust }},
+                Sauce: {{ this.$store.state.activePizza.sauce }},
+                {{ this.$store.state.activeToppingsCheese.name }},
+                {{ this.$store.state.activeToppingsMeats.join(', ') }}
+                {{ this.$store.state.activeToppingsVeggies.join(', ') }}
+            </p>
+            <hr />
+            <div class="row price">
+                <h2 class="col">Total</h2>
+                <p class="col">{{ (this.$store.state.currentCrustPrice + this.$store.state.totalToppingPrice) }}</p>
             </div>
         </div>
-        <div class="col">
-            <form v-on:submit.prevent="sendOrder">
 
 
-                <div class="container pickup" v-show="!isDelivery">
-                    <div class="row">
-                        <h5 class="col">Pick-up In Store</h5>
-                        <p class="col toggle" v-on:click="toggleDelivery"> Change to Delivery</p>
-                    </div>
-                    <div class="row">
-                        <div class="form-element">
-                            <label class="pickup address" for="streetAddress">Street Address: 1234 Pizza Place, Pizza
-                                City, PZ 91224</label>
-                        </div>
-                    </div>
+        <div class="container pickup" v-show="!isDelivery">
+            <div class="row">
+                <h5 class="col">Pick-up In Store</h5>
+                <p class="col toggle" v-on:click="toggleDelivery"> Change to Delivery</p>
+            </div>
+            <div class="row">
+                <div class="form-element">
+                    <label class="pickup address" for="streetAddress">Street Address: 1234 Pizza Place, Pizza
+                        City, PZ 91224</label>
                 </div>
-                    <hr />
-
-                <div class="container email">
-                    <div class="row">
-                        <div class="form-element">
-                            <label class="pickup address" for="customerName">Customer Name: </label>
-                        </div>
-                    </div>
-                
-                    <div class="row">
-                        <div class="form-element, col">
-                            <input type="text" id="customerNamePickup" placeholder="First and Last Name"
-                                v-model="customerInfo.name" />
-                        </div>
-                        <div class="row">
-                            <div class="form-element">
-                                <label class="pickup address" for="customerEmail">Email: </label>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-element, col">
-                                <input type="text" id="emailPickup" placeholder="email@email.com"
-                                    v-model="customerInfo.email" />
-                            </div>
-                        </div>
-                    </div>
+            </div>
+            <hr />
+            <div class="row">
+                <div class="form-element">
+                    <label class="pickup address" for="customerName">Customer Name:
+                        <input type="text" id="customerName" placeholder="First and Last Name"
+                            v-model="customerInfo.name" />
+                    </label>
                 </div>
-                <div class="container delivery" v-show="isDelivery">
-                    <div class="row">
-                        <h5 class="col">Delivery Address</h5>
-                        <p class="col toggle" v-on:click="toggleDelivery"> Change to Pickup</p>
-                    </div>
-                    <hr />
-                    <div class="row">
-                        <div class="form-element">
-                            <label class="delivery address" for="customerName">Customer Name: </label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-element, col">
-                            <input type="text" id="customerName" placeholder="First and Last Name"
-                                v-model="customerInfo.name" />
-                        </div>
-                        <div class="row">
-                            <div class="form-element">
-                                <label class="delivery address" for="customerEmail">Email: </label>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-element, col">
-                                <input type="text" id="email" placeholder="email@email.com"
-                                    v-model="customerInfo.email" />
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-element">
-                                <label class="delivery address" for="streetAddress">Street Address: </label>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-element">
-                                <input type="text" id="streetAddress" placeholder="123 Pizza Rd"
-                                    v-model="customerInfo.streetAddress" />
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <label for="city">City: </label>
-                            </div>
-                            <div class="col">
-                                <label for="state">State: </label>
-                            </div>
-                            <div class="col">
-                                <label for="zip">Zip Code: </label>
-                            </div>
-                        </div>
-                        <div class="form-element, col">
-                            <input type="text" id="city" placeholder="Pizza City" v-model="customerInfo.city" />
-                        </div>
-                        <div class="form-element, col">
-                            <input type="text" id="streetAddress" placeholder="PZ" v-model="customerInfo.state" />
-                        </div>
-                        <div class="form-element, col">
-                            <input type="text" id="zip" placeholder="12345" v-model="customerInfo.zip" />
-                        </div>
-                    </div>
+            </div>
+            <div class="row">
+                <div class="form-element">
+                    <label class="pickup address" for="customerEmail">Email:
+                        <input type="email" id="email" placeholder="email@gmail.com" v-model="customerInfo.email" />
+                    </label>
                 </div>
-                <!-- <div class="container tip">
-                    <div class="row">
-                        <h2> Add Tip:</h2>
-                    </div>
-                    <hr />
-                    <div class="row">
-                        <p class="col"> Tip Amount: </p>
-                    </div>
-                    <div class="row tip">
-                        <div class="col-2">
-                            <button class="tip" name="tip" id="1">None</button>
-                        </div>
-                        <div class="col-2">
-                            <button class="tip" name="tip" id="1.1">10%</button>
-                        </div>
-                        <div class="col-2">
-                            <button class="tip" name="tip" id="1.15">15%</button>
-                        </div>
-                        <div class="col-2">
-                            <button class="tip" name="tip" id="1.2">20%</button>
-                        </div>
-                        <div class="col-4">
-                            <div class="row">
-                                <button class="tip col" name="tip" id="custom">Custom</button>
-                                <input class="col" type="number" id="custom_tip">
-                            </div>
-                        </div>
-
-                    </div>
-
-                </div> -->
-                <div class="container payment" v-show="isDelivery">
-                    <div class="row">
-                        <h2> Payment Info: </h2>
-                    </div>
-                    <hr />
-                    <div class="row">
-                        <h3 class="col"> Credit Card Info:</h3>
-                    </div>
-                    <div class="row">
-
-                    </div>
-                    <div class="row">
-                        <p class="col">
-                            <label for="ccNumber">Credit Card Number: </label>
-                        </p>
-                        <p class="col">
-                            <label for="ccExp">Expiration: </label>
-                        </p>
-                    </div>
-                    <div class="row">
-                        <div class="form-element, col">
+            </div>
+        </div>
+        <div class="container delivery" v-show="isDelivery">
+            <div class="row">
+                <h3 class="col">Delivery Address</h3>
+                <p class="col toggle" v-on:click="toggleDelivery"> Change to Pickup</p>
+            </div>
+            <hr />
+            <p class="row">
+                <label class="delivery address" for="customerName">Customer Name:
+                    <input type="text" id="customerName" placeholder="First and Last Name" v-model="customerInfo.name" />
+                </label>
+            </p>
+            <p class="row">
+                <label class="delivery address" for="customerEmail">Email:
+                    <input type="text" id="email" placeholder="email@email.com" v-model="customerInfo.email" />
+                </label>
+            </p>
+            <p class="row">
+                <label class="delivery address" for="streetAddress">Street Address:
+                    <input type="text" id="streetAddress" placeholder="123 Pizza Rd" v-model="customerInfo.streetAddress" />
+                </label>
+            </p>
+            <div class="row">
+                <p class="col">
+                    <label for="city">City:
+                        <input type="text" id="city" placeholder="Pizza City" v-model="customerInfo.city" />
+                    </label>
+                </p>
+                <p class="col">
+                    <label for="state">State:
+                        <input type="text" id="streetAddress" placeholder="PZ" v-model="customerInfo.state" />
+                    </label>
+                </p>
+                <p class="col">
+                    <label for="zip">Zip Code:
+                        <input type="text" id="zip" placeholder="12345" v-model="customerInfo.zip" />
+                    </label>
+                </p>
+            </div>
+        </div>
+        <div>
+            <div class="container payment" v-show="isDelivery">
+                <div class="row">
+                    <h3> Payment Info </h3>
+                </div>
+                <hr />
+                <div class="row">
+                    <p class="col">
+                        <label for="ccNumber">Credit Card Number:
                             <input type="text" id="ccNumber" placeholder="1234 1234 1234 1234" v-model="ccInfo.ccNumber" />
-                        </div>
-                        <div class="form-element, col">
+                        </label>
+                    </p>
+                    <p class="col">
+                        <label for="ccExp">Expiration:
                             <input type="text" id="ccExp" placeholder="MM/YY" v-model="ccInfo.ccExp" />
-                        </div>
-                    </div>
-                    <div class="row">
-                        <p class="col"> <label for="ccCode">CCV: </label></p>
-                        <p class="col"><label for="zip">Zip Code: </label></p>
-                    </div>
-                    <div class="row">
-                        <div class="form-element, col">
-                            <input type="text" id="ccCode" placeholder="123" v-model="ccInfo.ccCode" />
-                        </div>
-                        <div class="form-element, col">
-                            <input type="text" id="zip" placeholder="12345" v-model="customerInfo.zip" />
-                        </div>
-                    </div>
+                        </label>
+                    </p>
                 </div>
-            </form>
+                <div class="row">
+                    <p class="col">
+                        <label for="ccCode">CCV:
+                            <input type="text" id="ccCode" placeholder="123" v-model="ccInfo.ccCode" />
+                        </label>
+                    </p>
+                    <p class="col"><label for="zip">Zip Code:
+                            <input type="text" id="zip" placeholder="12345" v-model="customerInfo.zip" />
+                        </label>
+                    </p>
+                </div>
+            </div>
         </div>
 
-
+        <button class="submitButton" type="submit" v-on:click="sendOrder()">Confirm and Place Order</button>
     </div>
 </template>
 
@@ -306,38 +204,38 @@ export default {
         });
     },
     setTotalToppingPrice() {
-      let totalPrice = 0;
-      let toppingsMeatListTemp = this.$store.state.activeToppingsMeats;
-      let toppingsVeggieListTemp = this.$store.state.activeToppingsVeggies;
-      this.meatToppings.forEach(
-        (topping) => {
-          toppingsMeatListTemp.forEach(
-            (activeTopping) => {
-              if (topping.name == activeTopping){
-                //console.log("hello");
-                totalPrice += this.toppingTierPrice[topping.toppingTier];
-              }
+        let totalPrice = 0;
+        let toppingsMeatListTemp = this.$store.state.activeToppingsMeats;
+        let toppingsVeggieListTemp = this.$store.state.activeToppingsVeggies;
+        this.meatToppings.forEach(
+            (topping) => {
+                toppingsMeatListTemp.forEach(
+                    (activeTopping) => {
+                        if (topping.name == activeTopping) {
+                            //console.log("hello");
+                            totalPrice += this.toppingTierPrice[topping.toppingTier];
+                        }
+                    });
             });
-        });
         this.veggieToppings.forEach(
-        (topping) => {
-          toppingsVeggieListTemp.forEach(
-            (activeTopping) => {
-              if (topping.name == activeTopping){
-                //console.log("hello");
-                totalPrice += this.toppingTierPrice[topping.toppingTier];
-              }
+            (topping) => {
+                toppingsVeggieListTemp.forEach(
+                    (activeTopping) => {
+                        if (topping.name == activeTopping) {
+                            //console.log("hello");
+                            totalPrice += this.toppingTierPrice[topping.toppingTier];
+                        }
+                    });
             });
-        });
-      this.$store.commit("SET_CURRENT_TOTAL_TOPPING_PRICE", totalPrice);
-      //console.log(totalPrice);
+        this.$store.commit("SET_CURRENT_TOTAL_TOPPING_PRICE", totalPrice);
+        //console.log(totalPrice);
     },
     methods: {
         getImageSrc(pizzaName) {
             //console.log("reached set active pic");
-            if(pizzaName in this.images){
+            if (pizzaName in this.images) {
                 return this.images[pizzaName];
-            }else return '/images/prototype_logo.jpg';
+            } else return '/images/prototype_logo.jpg';
         },
         setCrustSize() {
             this.crustSize = this.$store.state.activePizza.crust.size;
@@ -372,23 +270,23 @@ export default {
                 }).catch((error) => {
                     console.log('Error placing order', error);
                 });
-            
+
             this.clearForm();
         },
         goToCustomPizzaMenu() {
             this.$router.push('/');
         },
-        clearForm(){
-            this.customerInfo.name= '',
-            this.customerInfo.email = '',
-            this.customerInfo.phone = '',
-            this.customerInfo.streetAddress = '',
-            this.customerInfo.city ='',
-            this.customerInfo.state = '',
-            this.customerInfo.zip = '',
-            this.ccInfo.ccCode = '',
-            this.ccInfo.ccExp = '',
-            this.ccInfo.ccNumber = ''
+        clearForm() {
+            this.customerInfo.name = '',
+                this.customerInfo.email = '',
+                this.customerInfo.phone = '',
+                this.customerInfo.streetAddress = '',
+                this.customerInfo.city = '',
+                this.customerInfo.state = '',
+                this.customerInfo.zip = '',
+                this.ccInfo.ccCode = '',
+                this.ccInfo.ccExp = '',
+                this.ccInfo.ccNumber = ''
         }
     }
 
@@ -403,6 +301,16 @@ h1 {
     color: #2892C4;
     margin-top: 2em;
     margin-left: 1em;
+}
+
+h2 {
+    /* text-align: center; */
+    color: #2892C4;
+    /* font-size: 40pt; */
+    font-weight: bold;
+    /* margin-top: 1em; */
+    /* margin-bottom: 1em; */
+
 }
 
 img {
@@ -451,22 +359,6 @@ form {
     font-weight: bold;
 }
 
-button.tip {
-    background-color: #A4200B;
-    color: #F7C516;
-    border-radius: 5px;
-    padding: 10px;
-    margin-top: 1rem;
-    font-size: 24pt;
-}
-
-.row.tip {
-    display: flex;
-    flex-direction: row;
-    padding: none;
-    margin: none;
-}
-
 .toggle {
     text-decoration: underline;
     color: #A4200B;
@@ -481,13 +373,8 @@ button.tip {
     color: #A4200B;
 }
 
-label {
-    font-size: 20pt;
-}
-
 input {
     padding: 10px;
-    margin-top: 1rem;
     border-radius: 5px;
     border: 1px solid #A4200B;
     width: 100%;
@@ -522,6 +409,7 @@ h5 {
 p {
     font-size: 24pt;
     color: #A4200B;
+    font-weight: bold;
 }
 
 .row.price>p.col {
