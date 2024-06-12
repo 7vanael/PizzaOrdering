@@ -21,9 +21,9 @@
         <label for="password">Password</label>
         <input type="password" id="password" v-model="user.password" required />
       </div>
-      <div class="row">
+      <p>
         <button @click="goToEmployeePage" type="submit">Sign in</button>
-      </div>
+      </p>
       <p>
         <router-link v-bind:to="{ name: 'register' }">Need an account? Sign up.</router-link>
       </p>

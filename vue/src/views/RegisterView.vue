@@ -10,20 +10,20 @@
       <div role="alert" v-if="registrationErrors">
         {{ registrationErrorMsg }}
       </div>
-      <div class="row">
-        <div class="col-4 form-input-group">
+      <p>
+        <div>
           <label for="username">Username</label>
           <input type="text" id="username" v-model="user.username" required autofocus />
         </div>
-        <div class="col-4 form-input-group">
+        <div>
           <label for="password">Password</label>
           <input type="password" id="password" v-model="user.password" required />
         </div>
-        <div class="col-4 form-input-group">
+        <div>
           <label for="confirmPassword">Confirm Password</label>
           <input type="password" id="confirmPassword" v-model="user.confirmPassword" required />
         </div>
-      </div>
+      </p>
       <button type="submit">Create Account</button>
       <p><router-link v-bind:to="{ name: 'login' }">Already have an account? Log in.</router-link></p>
     </form>
@@ -127,7 +127,9 @@ h1 {
 }
 
 label {
-  font-size: 20pt;
+  font-size: 26pt;
+  font-weight: bold;
+  margin-top: 1em;
   color: #A4200B;
 }
 
