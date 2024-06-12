@@ -152,4 +152,59 @@ p {
   margin-top: 20px;
   font-size: 20pt;
   color: #A4200B;
-}</style>
+}
+/* // Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) { 
+  .form-input-group {
+    display: flex;
+    flex-direction: row;
+    columns: 2;
+    padding: 20px;
+    justify-content: space-between;
+  }
+ }
+
+/* // Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) { 
+  .form-input-group {
+    display: flex;
+    flex-direction: row;
+    columns: 2;
+    padding: 20px;
+    justify-content: space-between;
+  }
+ }
+
+/* // Large devices (desktops, 992px and up) */
+@media (min-width: 992px) { 
+  .form-input-group {
+    display: flex;
+    flex-direction: row;
+    columns: 2;
+    padding: 20px;
+    justify-content: space-between;
+  }
+ }
+
+/* // X-Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) { 
+  .form-input-group {
+    display: flex;
+    flex-direction: row;
+    columns: 2;
+    padding: 20px;
+    justify-content: space-between;
+  }
+}
+
+/* // XX-Large devices (larger desktops, 1400px and up) */
+@media (min-width: 1400px) { 
+  .form-input-group {
+    display: flex;
+    flex-direction: row;
+    columns: 2;
+    padding: 20px;
+    justify-content: space-between;
+ }
+}
+</style>

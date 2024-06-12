@@ -1,15 +1,17 @@
 <template>
     <NavBar />
     <div class="page-wrapper">
-        <div class="container">
+        <div class="container-fluid">
             <div class="review-order row">
                 <h1>Review Your Order and Checkout</h1>
 
                 <div class="order col left">
 
                     <div class="container">
-                        <div class="row">
+                        <div class="row image">
+                            <div class="col">
                             <img :src="getImageSrc(this.$store.state.activePizza.name)" alt="pizza image" />
+                            </div>
                         </div>
                         <router-link class="changeOrder" to="/">Change Order</router-link>
                         <div class="row price">
@@ -20,10 +22,10 @@
                         </div>
                         <div class="row">
                             <p id="pizzaIngredients">
-                                Crust Size: {{ this.$store.state.activePizza.size }},
-                                Crust Type: {{ this.$store.state.activePizza.crust }},
-                                Sauce: {{ this.$store.state.activePizza.sauce }},
-                                {{ this.$store.state.activeToppingsCheese.name }},
+                                <span>Size:</span> {{ this.$store.state.activePizza.size }}<br >
+                                <span>Crust:</span> {{ this.$store.state.activePizza.crust }}<br>
+                                <span>Sauce:</span> {{ this.$store.state.activePizza.sauce }}<br>
+                                <span>Toppings:</span> {{ this.$store.state.activeToppingsCheese.name }},
                                 {{ this.$store.state.activeToppingsMeats.join(', ') }}
                                 {{ this.$store.state.activeToppingsVeggies.join(', ') }}
                             </p>
@@ -34,7 +36,9 @@
                             <p class="col">{{ (this.$store.state.currentCrustPrice + this.$store.state.totalToppingPrice) }}
                             </p>
                         </div>
+                        <div class="row">
                         <button class="submitButton" type="submit" v-on:click="sendOrder()">Confirm and Place Order</button>
+                    </div>
                     </div>
                 </div>
 
@@ -42,38 +46,27 @@
                     <form v-on:submit.prevent="sendOrder">
                         <div class="container pickup" v-show="!isDelivery">
                             <div class="row">
-                                <h5 class="col">Pick-up In Store</h5>
-                                <p class="col toggle" v-on:click="toggleDelivery"> Change to Delivery</p>
-                            </div>
-                            <div class="row">
-                                <div class="form-element">
-                                    <label class="pickup address" for="streetAddress">Street Address: 1234 Pizza Place,
-                                        Pizza
-                                        City, PZ 91224</label>
-                                </div>
+                                <h2 class="col store-pickup">Pick-up In Store</h2>
+                                <p class="col changePickup" v-on:click="toggleDelivery"> Change to Delivery</p>
                             </div>
                             <hr />
-                            <div class="row">
-                                <div class="form-element">
-                                    <label class="pickup address" for="customerName">Customer Name:
-                                        <input type="text" id="customerName" placeholder="First and Last Name"
-                                            v-model="customerInfo.name" />
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="form-element">
-                                    <label class="pickup address" for="customerEmail">Email:
-                                        <input type="email" id="email" placeholder="email@gmail.com"
-                                            v-model="customerInfo.email" />
-                                    </label>
-                                </div>
-                            </div>
+                            <p class="row">
+                                <label class="delivery address" for="customerName">Customer Name:
+                                    <input type="text" id="customerName" placeholder="First and Last Name"
+                                        v-model="customerInfo.name" />
+                                </label>
+                            </p>
+                            <p class="row">
+                                <label class="delivery address" for="customerEmail">Email:
+                                    <input type="text" id="email" placeholder="email@email.com"
+                                        v-model="customerInfo.email" />
+                                </label>
+                            </p>
                         </div>
                         <div class="container delivery" v-show="isDelivery">
                             <div class="row">
-                                <h3 class="col">Delivery Address</h3>
-                                <p class="col toggle" v-on:click="toggleDelivery"> Change to Pickup</p>
+                                <h2 class="col delivery-addy">Delivery Address</h2>
+                                <p class="col changePickup" v-on:click="toggleDelivery"> Change to Pickup</p>
                             </div>
                             <hr />
                             <p class="row">
@@ -116,7 +109,7 @@
                         <div>
                             <div class="container payment" v-show="isDelivery">
                                 <div class="row">
-                                    <h3> Payment Info </h3>
+                                    <h2 class="pay-info"> Payment Info </h2>
                                 </div>
                                 <hr />
                                 <div class="row">
@@ -318,53 +311,63 @@ export default {
 </script>
 
 <style scoped>
-.page-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin-top: 2em;
-}
+/* .page-wrapper { */
+    /* display: flex; */
+    /* flex-direction: column; */
+    /* align-items: center; */
+    /* justify-content: center; */
+    /* margin-top: 2em; */
+/* } */
 .container {
     margin-top: 2rem;
     padding: 1rem;
-    border: 2px solid #2892C4;
+    border: 3px solid #2892C4;
     background-color: #F2DC9C;
     border-radius: 5px;
     margin: 1em 2em 0 2em;
 }
 .review-order.row {
     background-color: none;
+    padding-bottom: 10px;
+    margin: 10px;
 }
-
+span {
+    font-weight: bold;
+    color: #A4200B;
+}
 h1 {
     text-align: justify;
     text-decoration: underline;
     color: #2892C4;
-    margin-top: 2em;
-    margin-left: 1em;
+    margin: 1em 0 1.5em 0;
+    padding-left: 1em;;
 }
 
 h2 {
     color: #2892C4;
     font-weight: bold;
 }
-
-img {
+.store-pickup, .delivery-addy, .pay-info {
+    font-size: 32pt;
+}
+#pizzaIngredients {
+    font-size: 20pt;
+    color: #2892C4;
+    font-weight: bold;
+    
+}
+.row.image {
+    flex-grow: 1;
+    display: flex;
     width: 50%;
 }
-
-.row>img {
-    display: flex;
-}
-
-.changeOrder {
+.changeOrder, .changePickup {
     display: flex;
     justify-content: flex-end;
     font-size: 20pt;
     font-weight: bold;
     text-decoration: underline;
-    color: #A4200B;
+    color: #FA8A0D;
     margin-top: 20px;
     margin-bottom: 20px;
 }
@@ -383,7 +386,8 @@ form {
     border-radius: 5px;
     padding: 10px;
     margin-top: 2rem;
-    font-size: 20pt;
+    font-size: 24pt;
+    font-weight: bold;
     justify-content: center;
 }
 
@@ -392,12 +396,6 @@ form {
     color: #2892C4;
     font-weight: bold;
 }
-
-.toggle {
-    text-decoration: underline;
-    color: #A4200B;
-}
-
 .col.toggle {
     display: flex;
     justify-content: flex-end;
