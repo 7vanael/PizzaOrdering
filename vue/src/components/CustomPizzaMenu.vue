@@ -38,7 +38,7 @@
                     <label>
                       <input type="radio" name="pizza-crust-size" v-bind:value="crust.name"
                         v-model="$store.state.activePizza.size" v-on:change="setCurrentPriceByCrustSize()">
-                    </label> {{ crust.name }}
+                    </label> {{ crust.name }} + $ {{ this.crustSizeToPrice[crust.name] }}
                   </li>
                 </ul>
               </div>
@@ -81,7 +81,8 @@
                           <input type="radio" name="pizza-cheese" v-bind:value="cheese.name"
                             v-model="$store.state.activeToppingsCheese.name">
                         </label>
-                        {{ cheese.name }} {{cheese.toppingTier === 0 ? '' : '- $' + toppingTierPrice[cheese.toppingTier]  }}
+                        {{ cheese.name }} {{ cheese.toppingTier === 0 ? '' : '+ $' + toppingTierPrice[cheese.toppingTier]
+                        }}
                       </li>
                     </ul>
                   </div>
@@ -113,7 +114,7 @@
                           <input type="checkbox" v-bind:name="meat.name" v-bind:value="meat.name"
                             v-model="$store.state.activeToppingsMeats" v-on:change="setTotalToppingPrice()">
                         </label>
-                        {{ meat.name }} - ${{ toppingTierPrice[meat.toppingTier] }}
+                        {{ meat.name }} {{ meat.toppingTier === 0 ? '' : '+ $' + toppingTierPrice[meat.toppingTier] }}
                       </li>
                     </ul>
                   </div>
@@ -146,7 +147,8 @@
                           <input type="checkbox" name="non-meat-toppings" v-bind:value="veggie.name"
                             v-model="$store.state.activeToppingsVeggies" v-on:change="setTotalToppingPrice()">
                         </label>
-                        {{ veggie.name }} {{veggie.toppingTier === 0 ? '' : '- $' + toppingTierPrice[veggie.toppingTier]  }}
+                        {{ veggie.name }} {{ veggie.toppingTier === 0 ? '' : '+ $' + toppingTierPrice[veggie.toppingTier]
+                        }}
                       </li>
                     </ul>
                   </div>
@@ -197,6 +199,11 @@ export default {
       veggieToppings: [],
       cheeseToppings: [],
       crustTypes: [],
+      crustSizeToPrice: { 
+        'Large': 12.25, 
+        'Medium':  9.75,
+        'Small': 6.75,
+      },
       sauces: [],
       crustSizes: [],
     }
@@ -229,32 +236,52 @@ export default {
         (response) => {
           this.crustCost = response.data;
           this.$store.commit("SET_CURRENT_CRUST_PRICE", this.crustCost);
-          console.log("current crust price: " + this.crustCost);
+          //console.log("current crust price: " + this.crustCost);
         });
     },
+    // setCrustPrices() {
+    //   //console.log("reached crust size method");
+    //   this.crustSizes.forEach(
+    //     (crustSize)=>{
+    //       ToppingsService.getCrustPriceBySize(crustSize).then(
+    //     (response) => {
+    //       console.log("crust being loaded into object " + crustSize.name);
+    //       this.crustSizeToPrice[crustSize.name] = response.data;
+    //       console.log("current crust price conversion: " + this.crustSizeToPrice[crustSize.name]);
+    //     });
+    //     }
+    //   )
+    // },
     setTotalToppingPrice() {
       let totalPrice = 0;
       let toppingsMeatListTemp = this.$store.state.activeToppingsMeats;
       let toppingsVeggieListTemp = this.$store.state.activeToppingsVeggies;
+      let toppingsCheeseTemp = this.$store.state.activeToppingsCheese;
       this.meatToppings.forEach(
         (topping) => {
           toppingsMeatListTemp.forEach(
             (activeTopping) => {
-              if (topping.name == activeTopping){
+              if (topping.name == activeTopping) {
                 //console.log("hello");
                 totalPrice += this.toppingTierPrice[topping.toppingTier];
               }
             });
         });
-        this.veggieToppings.forEach(
+      this.veggieToppings.forEach(
         (topping) => {
           toppingsVeggieListTemp.forEach(
             (activeTopping) => {
-              if (topping.name == activeTopping){
+              if (topping.name == activeTopping) {
                 //console.log("hello");
                 totalPrice += this.toppingTierPrice[topping.toppingTier];
               }
             });
+        });
+        this.cheeseToppings.forEach(
+        (topping) => {
+              if (topping.name == toppingsCheeseTemp.name) {
+                totalPrice += this.toppingTierPrice[topping.toppingTier];
+              }
         });
       this.$store.commit("SET_CURRENT_TOTAL_TOPPING_PRICE", totalPrice);
       //console.log(totalPrice);
@@ -320,11 +347,13 @@ export default {
       (response) => {
         // this.crustTypes = response.data;
         let crustList;
+
         crustList = response.data;
         crustList.forEach(
           (typesLoop) => {
             if (typesLoop.available) {
               this.crustTypes.push(typesLoop);
+
             }
           });
       });
@@ -349,8 +378,10 @@ export default {
           (sizeLoop) => {
             if (sizeLoop.available) {
               this.crustSizes.push(sizeLoop);
+              //console.log("size stored: " + sizeLoop.name)
             }
           });
+          
       });
     ToppingsService.getPizzas().then((response) => {
       this.specialtyPizzas = response.data.filter(pizza => {
@@ -391,10 +422,11 @@ export default {
       ToppingsService.getCrustPriceBySize(this.$store.state.activePizza.size).then((response) => {
         this.crustCost = response.data;
         this.$store.commit("SET_CURRENT_CRUST_PRICE", this.crustCost);
-        console.log("current crust price: " + this.crustCost);
+        // console.log("current crust price: " + this.crustCost);
+        // console.log("active pizza size to get price by "+this.$store.state.activePizza.size);
       });
     });
-
+    
 
   },
 
