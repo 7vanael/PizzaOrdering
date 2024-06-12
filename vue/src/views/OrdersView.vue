@@ -1,5 +1,4 @@
 <template>
-        <div class="container">
             <select v-model="orderStatus" class="form-select form-select-lg mb-3" aria-label="Large select example">
                 <option value="">Pending</option>
                 <option value="Received">Received</option>
@@ -9,7 +8,9 @@
                 <option value="Canceled">Canceled</option>
             </select>
             <button @click="showOrders">Show Orders</button>
+        
             <div v-for="order in orders" v-bind:key="order.id">
+                <hr />
                 <p>Order ID: {{ order.id }}</p>
                 <p>Order total: {{ order.total }}</p>
                 <p>Order type: {{ order.type }}</p>
@@ -26,7 +27,7 @@
                     </div>
                 </div>
 
-                <div>Status: {{ order.status }}</div>
+                <p class="status">Status: {{ order.status }}</p>
                 <select v-model="order.newStatus" class="form-select form-select-lg mb-3" aria-label="Large select example">
                     <option value="Received">Received</option>
                     <option value="Ready">Ready</option>
@@ -36,9 +37,6 @@
                 </select>
                 <button @click="updateOrderStatus(order.id, order.newStatus)">Update status</button>
             </div>
-
-
-        </div>
 </template>
 
 <script scoped>
@@ -103,7 +101,7 @@ h1 {
     display: flex;
 }
 option {
-    font-size: 30pt;
+    font-size: 26pt;
     margin-top: 5px;
     font-weight: bold;
     color: #A4200B;
@@ -125,5 +123,10 @@ p {
 }
 select {
     font-size: 24pt;
+}
+.status {
+    font-weight: bold;
+    background-color: #FA8A0D;
+    color: #2892C4;
 }
 </style>

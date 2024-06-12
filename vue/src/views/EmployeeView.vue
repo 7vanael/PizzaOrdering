@@ -9,7 +9,7 @@
             <section>
                 
 
-                    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                    <ul class="nav nav-pills" id="pills-tab" role="tablist">
                         <li class="nav-item" role="presentation">
                             <a class="nav-link" id="orders-tab" data-bs-toggle="pill" data-bs-target="#orders" type="button"
                                 role="tab" aria-controls="orders" aria-selected="true">Orders
@@ -42,34 +42,35 @@
                     <div class="tab-content" id="pills-tabContent">
 
                         <div class="tab-pane show active" id="orders" role="tabpanel" aria-labelledby="orders-tab">
-                            <div class="card">
-                                <h3> Review Customer Orders: </h3>
+                            <!-- <div class="card"> -->
+                                <h2> Review Customer Orders: </h2>
+                                <hr />
                                 <li id="#orders">
                                     <OrdersView />
                                 </li>
-                            </div>
+                            <!-- </div> -->
                         </div>
 
                         <div class="tab-pane" id="addPizza" role="tabpanel" aria-labelledby="addPizza-tab">
                             <div class="card">
-                                <h3> Add a New Specialty Pizza to the Menu: </h3>
+                                <h2> Add a New Specialty Pizza to the Menu: </h2>
                                 <li id="#addPizza">
                                     <CustomPizzaMenu />
                                 </li>
                                 <div class="row">
                                     <div class="col-4">
-                                        <label for="name">Name Your Creation:
+                                        <label for="name"><h3>Name Your Creation:</h3>
                                             <input type="text" id="name" name="name" v-model="newPizza.pizza_name" required>
                                         </label>
                                     </div>
                                     <div class="col-4">
-                                        <label for="description">Pizza description:
+                                        <label for="description"><h3>Pizza description:</h3>
                                             <input type="text" id="description" name="description"
                                                 v-model="newPizza.pizza_description" required>
                                         </label>
                                     </div>
                                     <div class="col-3">
-                                        <button class="submitButton" type="submit" @click.prevent="addNewPizza">Add
+                                        <button class="addPizzaButton" type="submit" @click.prevent="addNewPizza">Add
                                             New Pizza to
                                             Menu</button>
                                     </div>
@@ -79,10 +80,9 @@
 
                         <div class="tab-pane" id="addToppings" role="tabpanel" aria-labelledby="addToppings-tab">
                             <div>
-                                <h3> Add New Toppings to the Menu: </h3>
+                                <h2> Add New Toppings to the Menu: </h2>
                                 <div class="row">
                                     <li id="#addToppings">
-                                        <!-- insert the page/form for the "Add Toppings" -->
                                         <OptionsView />
                                     </li>
                                 </div>
@@ -99,6 +99,7 @@
 
                         <div class="tab-pane" id="updateToppings" role="tabpanel" aria-labelledby="updateToppings-tab">
                             <li id="#updateToppings">
+                                <h2></h2>
                                 <ToppingsAvailability />
                                 <button class="submitButton" type="submit">Update Toppings Availability
                                 </button>
@@ -199,7 +200,9 @@ export default {
     background-color: #F7C516;
     padding: 10px;
 }
-
+a {
+    border: none;
+}
 h1,
 h2 {
     text-align: center;
@@ -241,5 +244,15 @@ h1 {
 li {
     list-style-type: none;
     font-size: 20pt;
+}
+.addPizzaButton {
+    background-color: #A4200B;
+    color: #F7C516;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-top: 10px;
 }
 </style>

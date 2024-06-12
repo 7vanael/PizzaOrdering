@@ -1,8 +1,6 @@
 <template>
 
-        <div class="container">
-
-            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+            <ul class="nav nav-pills" id="pills-tab" role="tablist">
                 <li class="nav-item" role="presentation" v-for="(tab, index) in tabs" :key="tab.id">
                     <a class="nav-link" :id="tab.id + '-tab'" data-bs-toggle="pill" :data-bs-target="'#' + tab.id" type="button"
                     role="tab" :aria-controls="tab.id" :aria-selected="activeTabIndex === index"
@@ -18,21 +16,20 @@
                 :aria-labelledby="tab.id + '-tab'">
                 <!-- Crust and Size-->
                 <div v-if="tab.id === 'pills-size'" class="card">
-                    <form>
-                        <div>
+                    <form class="row">
+                        <div class="col">
                         <label for="size-name">Name</label>
                         <input type="text" id="size-name" v-model="size.name">
                         </div>
-                        <div>
+                        <div class="col">
                         <label for="size-price">Price</label>
                         <input type="text" id="size-price" v-model="size.price">
                         </div>
                     </form>
-
-
                 <!--Button Start-->
-                <div class="card-footer d-flex justify-content-between mt-3">
-                    <button class="btn btn-primary" @click="addPizzaSize">Submit Size</button>
+                <div>
+                    <button class="addButton" @click="addPizzaSize">Submit Size
+                    </button>
                 </div>
                 
 
@@ -43,15 +40,15 @@
                 <div class="tab-pane" id="pills-sauce-cheese" role="tabpanel" aria-labelledby="pills-sauce-cheese-tab">
                     <form>
                         <div>
-                        <label for="crust-name">Name</label>
+                        <label for="crust-name">Name </label>
                         <input type="text" id="crust-name" v-model="crust.name">
                         </div>
                         <div>
-                        <label for="crust-price">Price Modifier</label>
+                        <label for="crust-price">Price Modifier </label>
                         <input type="text" id="crust-price" v-model="crust.price">
                         </div>
                         <div>
-                        <label for="crust-description">Description</label>
+                        <label for="crust-description">Description </label>
                         <input type="text" id="crust-description" v-model="crust.description">
                         </div>
                     </form>
@@ -138,9 +135,6 @@
             </div>
             </div>
 
-
-
-        </div>
 
 </template>
 
@@ -261,7 +255,7 @@ export default {
 </script>
 
 
-<style>
+<style scoped>
 h1,
 h2 {
     text-align: center;
@@ -273,7 +267,14 @@ h2 {
 h1 {
     font-weight: bold;
 }
+.nav-pills {
+    /* padding: 20px; */
+    background-color: #2892C4;
+    color: #F7C516;
+    border-radius: 5px;
+    margin-top: 10px;
 
+}
 .container {
     display: flex;
     flex-direction: column;
@@ -288,30 +289,20 @@ h1 {
     justify-content: center;
 }
 
-button.toggle {
-    background-color: #2892C4;
-    width: 50%;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 10px;
-    font-size: 2em;
-    ;
-}
 label, input {
     font-size: 16pt;
-    margin-top: 5px;
+    margin: 10px;
+    padding: 10px;
     font-weight: bold;
     color: #A4200B;
-    letter-spacing: 2px;
+    letter-spacing: 3px;
 }
-.submitButton {
-    background-color: #A4200B;
+.addButton {
+    background-color: #2892C4;
     color: #F7C516;
     border: none;
     border-radius: 5px;
     padding: 10px;
-    font-size: 1.5em;
     font-weight: bold;
     margin-top: 10px;
     height: 100%;
