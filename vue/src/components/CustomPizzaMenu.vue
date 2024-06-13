@@ -161,7 +161,7 @@
           <!--Button Start-->
           <div class="card-footer d-flex justify-content-between mt-3">
             <button class="btn btn-secondary" @click="goToPreviousTab" v-if="index > 0">Meat Toppings</button>
-            <button class="btn btn-danger" @click="goToCheckout">Review Order</button>
+            <button v-if="showReviewButton" class="btn btn-danger" @click="goToCheckout">Review Order</button>
           </div>
 
 
@@ -172,21 +172,21 @@
 </template>
 
 
-<script>
+<script scoped>
 import ToppingsService from '../services/ToppingsService.js';
 
 
 export default {
-
-  data() {
-    return {
-      name: 'CustomPizzaMenu',
+    name: 'CustomPizzaMenu',
       props: {
-        showButton: {
+        showReviewButton: {
           type: Boolean,
           default: true
         },
       },
+  data() {
+    return {
+      
         activeTabIndex: 0,
         tabs: [
           { id: 'pills-crust', label: 'Crust and Size' },
@@ -201,7 +201,6 @@ export default {
         },
         pizzaToppings: [],
         specialtyPizzas: [],
-        //activePizza: {},
         meatToppings: [],
         activeMeatToppings: [],
         veggieToppings: [],
@@ -227,7 +226,6 @@ export default {
       this.activeTabIndex--;
     },
     goToCheckout() {
-      //console.log("reached go to checkout method");
       this.setTotalToppingPrice();
       this.$router.push('/checkout');
 

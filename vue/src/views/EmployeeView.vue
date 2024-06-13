@@ -38,7 +38,7 @@
                         </a>
                     </li>
                 </ul>
-<br>
+                <br>
                 <div class="tab-content" id="pills-tabContent">
 
                     <div class="tab-pane" id="orders" role="tabpanel" aria-labelledby="orders-tab">
@@ -52,31 +52,31 @@
                     </div>
 
                     <div class="tab-pane" id="addPizza" role="tabpanel" aria-labelledby="addPizza-tab">
-                            <h2>Add a New Specialty Pizza to the Menu</h2>
-                            <hr />
-                            <li id="#addPizza">
-                                <CustomPizzaMenu :showButton="false"/>
-                            </li>
-                            <div class="row">
-                                <div class="col-4">
-                                    <label for="name">
-                                        <h3>Name Your Creation:</h3>
-                                        <input type="text" id="name" name="name" v-model="newPizza.pizza_name" required>
-                                    </label>
-                                </div>
-                                <div class="col-4">
-                                    <label for="description">
-                                        <h3>Pizza description:</h3>
-                                        <input type="textarea" id="description" name="description"
-                                            v-model="newPizza.pizza_description" required>
-                                    </label>
-                                </div>
-                                <div class="col-3">
-                                    <button class="addPizzaButton" type="submit" @click.prevent="addNewPizza">Add
-                                        New Pizza to
-                                        Menu</button>
-                                </div>
+                        <h2>Add a New Specialty Pizza to the Menu</h2>
+                        <hr />
+                        <li id="#addPizza">
+                            <CustomPizzaMenu :showReviewButton="false" />
+                        </li>
+                        <div class="row">
+                            <div class="col-4">
+                                <label for="name">
+                                    <h3>Name Your Creation:</h3>
+                                    <input type="text" id="name" name="name" v-model="newPizza.pizza_name" required>
+                                </label>
                             </div>
+                            <div class="col-4">
+                                <label for="description">
+                                    <h3>Pizza description:</h3>
+                                    <input type="textarea" id="description" name="description"
+                                        v-model="newPizza.pizza_description" required>
+                                </label>
+                            </div>
+                            <div class="col-3">
+                                <button class="addPizzaButton" type="submit" @click.prevent="addNewPizza">Add
+                                    New Pizza to
+                                    Menu</button>
+                            </div>
+                        </div>
                         <br>
                     </div>
 
@@ -146,25 +146,15 @@ export default {
     data() {
         return {
             showCustomPizzaMenu: true,
-            // showPizzaForm: false,
             newPizza: {
                 pizza_name: '',
                 pizza_description: ''
-            }
+            },
         }
     },
-    computed: {
-        // buttonText() {
-        //     return this.showCustomPizzaMenu ? 'Toppings Availability Menu' : 'Add Specialty Pizza';
-        // }
-    },
-    methods: {
-        // toggleComponent() {
-        //     this.showCustomPizzaMenu = !this.showCustomPizzaMenu;
-        // },
-        addNewPizza() {
 
-            // Fabulously slick code that will send the newPizza on over to the DB
+    methods: {
+        addNewPizza() {
             const pizza = {
                 name: this.newPizza.pizza_name,
                 size: this.$store.state.activePizza.size,
@@ -183,7 +173,6 @@ export default {
                 pizza.toppings.push({ name: this.$store.state.activeToppingsVeggies[i] })
             }
             EmployeeService.addPizza(pizza);
-            // console.log("active pizza" + pizza)
             this.clearForm();
         },
         clearForm() {
