@@ -8,11 +8,11 @@
                 <div class="order col left">
 
                     <div class="container">
-                        <div class="row image">
-                            <div class="col">
+                        <!-- <div class="row image"> -->
+                            <!-- <div class="col"> -->
                             <img :src="getImageSrc(this.$store.state.activePizza.name)" alt="pizza image" />
-                            </div>
-                        </div>
+                            <!-- </div> -->
+                        <!-- </div> -->
                         <router-link class="changeOrder" to="/">Change Order</router-link>
                         <div class="row price">
                             <h2 class="col"> {{ this.$store.state.activePizza.name }}</h2>
@@ -311,13 +311,6 @@ export default {
 </script>
 
 <style scoped>
-/* .page-wrapper { */
-    /* display: flex; */
-    /* flex-direction: column; */
-    /* align-items: center; */
-    /* justify-content: center; */
-    /* margin-top: 2em; */
-/* } */
 .container {
     margin-top: 2rem;
     padding: 1rem;
@@ -325,6 +318,9 @@ export default {
     background-color: #F2DC9C;
     border-radius: 5px;
     margin: 1em 2em 0 2em;
+}
+.container>img {
+    width: 100%;
 }
 .review-order.row {
     background-color: none;

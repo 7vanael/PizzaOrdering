@@ -55,7 +55,7 @@
                             <h2>Add a New Specialty Pizza to the Menu</h2>
                             <hr />
                             <li id="#addPizza">
-                                <CustomPizzaMenu />
+                                <CustomPizzaMenu :showButton="false"/>
                             </li>
                             <div class="row">
                                 <div class="col-4">
