@@ -209,7 +209,6 @@ export default {
 
 img {
     height: 500px;
-    /* width: 100%; */
     object-fit: cover;
 }
 
@@ -232,6 +231,7 @@ img {
 h5,
 p {
     color: #F7C516;
+    font-size: 18pt;
 }
 
 .carousel-caption {

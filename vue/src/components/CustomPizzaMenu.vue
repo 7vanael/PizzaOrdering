@@ -132,7 +132,6 @@
           </div>
         </div>
         <!-- Veggies-->
-        <!--="tab.id === 'pills-veggies'"-->
         <div v-else class="card">
           <div class="tab-pane" id="pills-veggies" role="tabpanel" aria-labelledby="pills-veggies-tab">
             <div class="card">
@@ -177,45 +176,45 @@ import ToppingsService from '../services/ToppingsService.js';
 
 
 export default {
-    name: 'CustomPizzaMenu',
-      props: {
-        showReviewButton: {
-          type: Boolean,
-          default: true
-        },
-      },
+  name: 'CustomPizzaMenu',
+  props: {
+    showReviewButton: {
+      type: Boolean,
+      default: true
+    },
+  },
   data() {
     return {
-      
-        activeTabIndex: 0,
-        tabs: [
-          { id: 'pills-crust', label: 'Crust and Size' },
-          { id: 'pills-sauce-cheese', label: 'Sauce and Cheese' },
-          { id: 'pills-meat', label: 'Meats' },
-          { id: 'pills-veggies', label: 'Veggies' },
-        ],
-        toppingTierPrice: {
-          "0": 0.00,
-          "1": 1.00,
-          "2": 2.00,
-        },
-        pizzaToppings: [],
-        specialtyPizzas: [],
-        meatToppings: [],
-        activeMeatToppings: [],
-        veggieToppings: [],
-        cheeseToppings: [],
-        crustTypes: [],
-        crustSizeToPrice: {
-          'Large': 12.25,
-          'Medium': 9.75,
-          'Small': 6.75,
-        },
-        sauces: [],
-        crustSizes: [],
+
+      activeTabIndex: 0,
+      tabs: [
+        { id: 'pills-crust', label: 'Crust and Size' },
+        { id: 'pills-sauce-cheese', label: 'Sauce and Cheese' },
+        { id: 'pills-meat', label: 'Meats' },
+        { id: 'pills-veggies', label: 'Veggies' },
+      ],
+      toppingTierPrice: {
+        "0": 0.00,
+        "1": 1.00,
+        "2": 2.00,
+      },
+      pizzaToppings: [],
+      specialtyPizzas: [],
+      meatToppings: [],
+      activeMeatToppings: [],
+      veggieToppings: [],
+      cheeseToppings: [],
+      crustTypes: [],
+      crustSizeToPrice: {
+        'Large': 12.25,
+        'Medium': 9.75,
+        'Small': 6.75,
+      },
+      sauces: [],
+      crustSizes: [],
     }
   },
-    methods: {
+  methods: {
     setActiveTab(index) {
       this.activeTabIndex = index;
     },
@@ -270,132 +269,132 @@ export default {
       this.$store.commit("SET_CURRENT_TOTAL_TOPPING_PRICE", totalPrice);
     }
   },
-    created() {
-      ToppingsService.getToppings().then((response) => {
-        this.pizzaToppings.forEach(
-          (topping) => {
-            if (topping.topping_type === "Meat" && topping.topping_available) {
-              this.meatToppings.push(topping);
-            }
-            if (topping.topping_type === "Veggie" && topping.topping_available) {
-              this.veggieToppings.push(topping);
-            }
-            if (topping.topping_type === "Cheese" && topping.topping_available) {
-              this.cheeseToppings.push(topping);
+  created() {
+    ToppingsService.getToppings().then((response) => {
+      this.pizzaToppings.forEach(
+        (topping) => {
+          if (topping.topping_type === "Meat" && topping.topping_available) {
+            this.meatToppings.push(topping);
+          }
+          if (topping.topping_type === "Veggie" && topping.topping_available) {
+            this.veggieToppings.push(topping);
+          }
+          if (topping.topping_type === "Cheese" && topping.topping_available) {
+            this.cheeseToppings.push(topping);
+          }
+        });
+    });
+    ToppingsService.getCheese().then(
+      (response) => {
+        let cheeseList;
+        cheeseList = response.data;
+        cheeseList.forEach(
+          (cheeseLoop) => {
+            if (cheeseLoop.available) {
+              this.cheeseToppings.push(cheeseLoop);
             }
           });
       });
-      ToppingsService.getCheese().then(
-        (response) => {
-          let cheeseList;
-          cheeseList = response.data;
-          cheeseList.forEach(
-            (cheeseLoop) => {
-              if (cheeseLoop.available) {
-                this.cheeseToppings.push(cheeseLoop);
-              }
-            });
-        });
-      ToppingsService.getMeat().then(
-        (response) => {
-          let meatList;
-          meatList = response.data;
-          meatList.forEach(
-            (toppingLoop) => {
-              if (toppingLoop.available) {
-                this.meatToppings.push(toppingLoop);
-              }
-            });
-        });
-      ToppingsService.getSauce().then(
-        (response) => {
-          let sauceList;
-          sauceList = response.data;
-          sauceList.forEach(
-            (toppingLoop) => {
-              if (toppingLoop.available) {
-                this.sauces.push(toppingLoop);
-              }
-            });
-        });
-      ToppingsService.getCrust().then(
-        (response) => {
-          let crustList;
-          crustList = response.data;
-          crustList.forEach(
-            (typesLoop) => {
-              if (typesLoop.available) {
-                this.crustTypes.push(typesLoop);
-              }
-            });
-        });
-      ToppingsService.getVeggie().then(
-        (response) => {
-          let veggieList;
-          veggieList = response.data;
-          veggieList.forEach(
-            (toppingLoop) => {
-              if (toppingLoop.available) {
-                this.veggieToppings.push(toppingLoop);
-              }
-            });
-        });
-      ToppingsService.getSize().then(
-        (response) => {
-          this.crustSizes = [];
-          let sizesList = response.data;
-          sizesList.forEach(
-            (sizeLoop) => {
-              if (sizeLoop.available) {
-                this.crustSizes.push(sizeLoop);
-              }
-            });
-
-        });
-      ToppingsService.getPizzas().then((response) => {
-        this.specialtyPizzas = response.data.filter(pizza => {
-          return pizza.available == true;
-        });
-        let pizzaList = this.specialtyPizzas;
-        let veggiesList = [];
-        let meats = [];
-        let cheese;
-        let stringToppingList = '';
-
-        pizzaList.forEach((pizzaLoop) => {
-          if (pizzaLoop.name === "The Polymorph") {
-            this.$store.commit("SET_ACTIVE_PIZZA", pizzaLoop);
-            pizzaLoop.toppings.forEach((topping) => {
-              if (topping.type === "Cheese") {
-                cheese = topping;
-              }
-              if (topping.type === "Meat") {
-                meats.push(topping.name);
-                if (stringToppingList.length !== 0) stringToppingList += ',';
-                stringToppingList += ' ' + topping.name;
-              }
-              if (topping.type === "Veggie") {
-                veggiesList.push(topping.name);
-                if (stringToppingList.length !== 0) stringToppingList += ',';
-                stringToppingList += ' ' + topping.name;
-              }
-            });
-            this.$store.commit("SET_ACTIVE_CHEESE", cheese);
-            this.$store.commit("SET_ACTIVE_MEATS", meats);
-            this.$store.commit("SET_ACTIVE_VEGGIES", veggiesList);
-            this.$store.commit("SET_ACTIVE_TOPPING_STRING", stringToppingList);
-
-          }
-        });
-
-        ToppingsService.getCrustPriceBySize(this.$store.state.activePizza.size).then((response) => {
-          this.crustCost = response.data;
-          this.$store.commit("SET_CURRENT_CRUST_PRICE", this.crustCost);
-        });
+    ToppingsService.getMeat().then(
+      (response) => {
+        let meatList;
+        meatList = response.data;
+        meatList.forEach(
+          (toppingLoop) => {
+            if (toppingLoop.available) {
+              this.meatToppings.push(toppingLoop);
+            }
+          });
       });
-    }
+    ToppingsService.getSauce().then(
+      (response) => {
+        let sauceList;
+        sauceList = response.data;
+        sauceList.forEach(
+          (toppingLoop) => {
+            if (toppingLoop.available) {
+              this.sauces.push(toppingLoop);
+            }
+          });
+      });
+    ToppingsService.getCrust().then(
+      (response) => {
+        let crustList;
+        crustList = response.data;
+        crustList.forEach(
+          (typesLoop) => {
+            if (typesLoop.available) {
+              this.crustTypes.push(typesLoop);
+            }
+          });
+      });
+    ToppingsService.getVeggie().then(
+      (response) => {
+        let veggieList;
+        veggieList = response.data;
+        veggieList.forEach(
+          (toppingLoop) => {
+            if (toppingLoop.available) {
+              this.veggieToppings.push(toppingLoop);
+            }
+          });
+      });
+    ToppingsService.getSize().then(
+      (response) => {
+        this.crustSizes = [];
+        let sizesList = response.data;
+        sizesList.forEach(
+          (sizeLoop) => {
+            if (sizeLoop.available) {
+              this.crustSizes.push(sizeLoop);
+            }
+          });
 
+      });
+    ToppingsService.getPizzas().then((response) => {
+      this.specialtyPizzas = response.data.filter(pizza => {
+        return pizza.available == true;
+      });
+      let pizzaList = this.specialtyPizzas;
+      let veggiesList = [];
+      let meats = [];
+      let cheese;
+      let stringToppingList = '';
+
+      pizzaList.forEach((pizzaLoop) => {
+        if (pizzaLoop.name === "The Polymorph") {
+          this.$store.commit("SET_ACTIVE_PIZZA", pizzaLoop);
+          pizzaLoop.toppings.forEach((topping) => {
+            if (topping.type === "Cheese") {
+              cheese = topping;
+            }
+            if (topping.type === "Meat") {
+              meats.push(topping.name);
+              if (stringToppingList.length !== 0) stringToppingList += ',';
+              stringToppingList += ' ' + topping.name;
+            }
+            if (topping.type === "Veggie") {
+              veggiesList.push(topping.name);
+              if (stringToppingList.length !== 0) stringToppingList += ',';
+              stringToppingList += ' ' + topping.name;
+            }
+          });
+          this.$store.commit("SET_ACTIVE_CHEESE", cheese);
+          this.$store.commit("SET_ACTIVE_MEATS", meats);
+          this.$store.commit("SET_ACTIVE_VEGGIES", veggiesList);
+          this.$store.commit("SET_ACTIVE_TOPPING_STRING", stringToppingList);
+
+        }
+      });
+
+      ToppingsService.getCrustPriceBySize(this.$store.state.activePizza.size).then((response) => {
+        this.crustCost = response.data;
+        this.$store.commit("SET_CURRENT_CRUST_PRICE", this.crustCost);
+      });
+    });
   }
+
+}
 </script>
 
 
@@ -406,15 +405,12 @@ export default {
   border: 2px solid #2892C4;
   border-radius: 5px;
   padding: 20px;
-
 }
 
 #pills-tab {
   background-color: #F7C516;
   border: 2px solid #2892C4;
   border-radius: 5px;
-
-
 }
 
 .nav-pills .nav-link {
@@ -422,7 +418,6 @@ export default {
   background-color: #A4200B;
   border: 2px solid #F7C516;
   border-radius: 5px;
-  /* padding: 20px; */
 }
 
 .nav-pills .nav-link.active {
@@ -435,6 +430,9 @@ export default {
   align-content: center;
 }
 
+li {
+  font-size: 16pt;
+}
 .card {
   background-color: #F2DC9C;
   border: 2px solid #2892C4;
@@ -443,9 +441,7 @@ export default {
 }
 
 .tab-pane {
-  /* display: none; */
   background-color: #F2DC9C;
-
 }
 
 .cheese-sauce,

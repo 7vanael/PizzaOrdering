@@ -8,17 +8,12 @@
                 <div class="order col left">
 
                     <div class="container">
-                        <!-- <div class="row image"> -->
-                            <!-- <div class="col"> -->
                             <img :src="getImageSrc(this.$store.state.activePizza.name)" alt="pizza image" />
-                            <!-- </div> -->
-                        <!-- </div> -->
                         <router-link class="changeOrder" to="/">Change Order</router-link>
                         <div class="row price">
                             <h2 class="col"> {{ this.$store.state.activePizza.name }}</h2>
                             <p class="col">{{ (this.$store.state.currentCrustPrice + this.$store.state.totalToppingPrice) }}
                             </p>
-                            <!-- <p class="col"> {{ this.crustCost }}</p> -->
                         </div>
                         <div class="row">
                             <p id="pizzaIngredients">
@@ -320,7 +315,7 @@ export default {
     margin: 1em 2em 0 2em;
 }
 .container>img {
-    width: 100%;
+    width: 60%;
 }
 .review-order.row {
     background-color: none;

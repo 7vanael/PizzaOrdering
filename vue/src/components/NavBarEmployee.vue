@@ -41,9 +41,11 @@
 
 .navbar-brand {
   color: #F2DC9C;
+  font-size: 24pt;
 }
 .nav-link {
   color: #FA8A0D;
+  font-size: 18pt;
 }
 
 .nav-link.active {
